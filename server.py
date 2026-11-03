@@ -107,6 +107,7 @@ def now_vn() -> datetime.datetime:
 RATE_LIMIT_LOCK = threading.Lock()
 _RATE_BUCKETS: dict[str, list[float]] = {}
 _AUTH_FAILURES: dict[str, dict] = {}
+_DDOS_BANS: dict[str, float] = {}
 
 
 def get_real_client_ip(handler) -> str:
@@ -117,6 +118,39 @@ def get_real_client_ip(handler) -> str:
         if cf_ip and len(cf_ip) <= 45 and re.match(r"^[0-9a-fA-F:.]+$", cf_ip):
             return cf_ip
     return peer_ip or "0.0.0.0"
+
+
+def check_ddos_shield(ip: str) -> bool:
+    """Lá chắn chống DDoS tầng L7 (HTTP Flood & Burst Shield):
+    - Nếu IP đang trong danh sách đen (_DDOS_BANS): chặn tức thì (0 đọc đĩa / 0 đọc SQLite).
+    - Nếu IP bắn > 60 request / 5 giây (Burst Flood) hoặc > 240 request / 60 giây: tự động khóa IP 10 phút (600s).
+    """
+    if ip in ("127.0.0.1", "::1", "localhost"):
+        return True
+    now_ts = time.time()
+    key = f"ddos_l7:{ip}"
+    with RATE_LIMIT_LOCK:
+        ban_until = _DDOS_BANS.get(ip, 0.0)
+        if ban_until > now_ts:
+            return False
+        if ban_until > 0:
+            _DDOS_BANS.pop(ip, None)
+        if len(_DDOS_BANS) > 5000:
+            expired = [k for k, v in _DDOS_BANS.items() if v <= now_ts]
+            for k in expired:
+                _DDOS_BANS.pop(k, None)
+        arr = _RATE_BUCKETS.get(key, [])
+        cutoff_60 = now_ts - 60.0
+        arr = [t for t in arr if t > cutoff_60]
+        cutoff_5 = now_ts - 5.0
+        burst_5s = sum(1 for t in arr if t > cutoff_5)
+        if burst_5s >= 60 or len(arr) >= 240:
+            _DDOS_BANS[ip] = now_ts + 600.0  # Tự động cấm IP 10 phút
+            _RATE_BUCKETS.pop(key, None)
+            return False
+        arr.append(now_ts)
+        _RATE_BUCKETS[key] = arr
+        return True
 
 
 def check_rate_limit(ip: str, bucket: str, max_req: int, window_sec: float = 60.0) -> bool:
@@ -2222,13 +2256,16 @@ class DetaHandler(BaseHTTPRequestHandler):
             return {}
 
     def do_GET(self) -> None:
+        client_ip = get_real_client_ip(self)
+        if not check_ddos_shield(client_ip):
+            self.send_json({"ok": False, "loi": "Phát hiện lưu lượng bất thường (DDoS Shield). IP tạm khóa 10 phút."}, 429)
+            return
         parsed = urllib.parse.urlparse(self.path)
         path = urllib.parse.unquote(parsed.path or "/")
         if ".." in path or "\x00" in path or path.startswith("/."):
             self.send_json({"loi": "Đường dẫn không hợp lệ"}, 403)
             return
         qs = urllib.parse.parse_qs(parsed.query)
-        client_ip = get_real_client_ip(self)
         if path.startswith("/api/") and not check_rate_limit(client_ip, "global_get", 180, 60.0):
             self.send_json({"ok": False, "loi": "Tốc độ truy cập quá nhanh, vui lòng thử lại sau ít giây."}, 429)
             return
@@ -2997,9 +3034,12 @@ class DetaHandler(BaseHTTPRequestHandler):
         self.send_json({"loi": "Không tìm thấy đường dẫn"}, 404)
 
     def do_POST(self) -> None:
+        client_ip = get_real_client_ip(self)
+        if not check_ddos_shield(client_ip):
+            self.send_json({"ok": False, "loi": "Phát hiện lưu lượng bất thường (DDoS Shield). IP tạm khóa 10 phút."}, 429)
+            return
         parsed = urllib.parse.urlparse(self.path)
         path = urllib.parse.unquote(parsed.path or "/")
-        client_ip = get_real_client_ip(self)
 
         if not check_rate_limit(client_ip, "global_post", 120, 60.0):
             self.send_json({"ok": False, "loi": "Bạn thao tác quá nhanh, vui lòng chờ ít giây rồi thử lại."}, 429)
@@ -3665,6 +3705,39 @@ def background_scheduler_loop() -> None:
         time.sleep(30)
 
 
+class BoundedThreadingHTTPServer(ThreadingHTTPServer):
+    """HTTP Server giới hạn tối đa 64 luồng xử lý đồng thời (Semaphore) để chống tấn công DDoS làm tràn RAM/OS Threads."""
+
+    request_queue_size = 128
+    daemon_threads = True
+
+    def __init__(self, server_address, RequestHandlerClass, max_workers: int = 64):
+        super().__init__(server_address, RequestHandlerClass)
+        self._worker_sem = threading.BoundedSemaphore(max_workers)
+
+    def process_request_thread(self, request, client_address) -> None:
+        try:
+            super().process_request_thread(request, client_address)
+        finally:
+            try:
+                self._worker_sem.release()
+            except ValueError:
+                pass
+
+    def process_request(self, request, client_address) -> None:
+        if not self._worker_sem.acquire(timeout=2.0):
+            self.close_request(request)
+            return
+        try:
+            super().process_request(request, client_address)
+        except Exception:
+            try:
+                self._worker_sem.release()
+            except ValueError:
+                pass
+            raise
+
+
 if __name__ == "__main__":
     init_db()
     # Xuất bản sẵn bộ trang hướng dẫn SEO và sitemap.xml ngay lần khởi động đầu tiên
@@ -3676,6 +3749,6 @@ if __name__ == "__main__":
 
     host = os.environ.get("HOST", "127.0.0.1")
     port = int(os.environ.get("PORT", "8080"))
-    server = ThreadingHTTPServer((host, port), DetaHandler)
+    server = BoundedThreadingHTTPServer((host, port), DetaHandler, max_workers=64)
     print(f"[Deta AI Server] Đang chạy tại http://{host}:{port} (kiemtien.deta.vn)")
     server.serve_forever()
