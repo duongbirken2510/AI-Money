@@ -840,6 +840,7 @@ def scan_tracked_posts_and_reply(max_replies_per_run: int = 15) -> dict:
         except Exception:
             pass
         cdp.close()
+        sa.close_bot_browser()
 
 
 # Giữ tên hàm tương thích ngược với các script gọi cũ
