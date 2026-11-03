@@ -335,6 +335,8 @@ body{{margin:0;background:var(--giay);color:var(--muc);font:400 16.5px/1.68 "Be 
     # Cập nhật sitemap.xml
     urls = [
         f"{site_url}/",
+        f"{site_url}/gioi-thieu",
+        f"{site_url}/chua-online",
         f"{site_url}/cong-cu/than-so-hoc",
         f"{site_url}/cong-cu/tao-cv-ats",
         f"{site_url}/cong-cu/lich-30-ngay",
