@@ -2282,6 +2282,16 @@ class DetaHandler(BaseHTTPRequestHandler):
         if path in ("/deta-chat.js", "/copee-chat.js"):
             self.send_file(os.path.join(PUBLIC_DIR, "deta-chat.js"), "application/javascript; charset=utf-8")
             return
+        if path in (
+            "/gioi-thieu",
+            "/gioi-thieu/",
+            "/ai-money",
+            "/ai-money/",
+            "/kien-truc",
+            "/kien-truc/",
+        ):
+            self.send_file(os.path.join(PUBLIC_DIR, "gioi-thieu.html"))
+            return
         if path in ("/cong-cu/than-so-hoc", "/cong-cu/than-so-hoc/"):
             self.send_file(os.path.join(PUBLIC_DIR, "than-so-hoc.html"))
             return
