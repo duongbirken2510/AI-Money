@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Money (Deta AI Lab) — Kiến Trúc AI Tự Suy Luận, Tự Chế Tạo Sản Phẩm & Kiếm Tiền Thật 24/7</title>
+  <meta name="description" content="Khám phá kiến trúc toàn diện của AI-Money (Deta AI Lab): Cách một AI Agent tự đọc số liệu phễu lúc 06:00 sáng, tự suy luận điểm nghẽn, tự code sản phẩm, tự kéo traffic mạng xã hội và đối soát tiền thật qua VietQR.">
+  <meta property="og:title" content="🧠 AI-Money — Cách AI Tự Suy Luận & Tự Tìm Đường Kiếm Tiền Thật 24/7">
+  <meta property="og:description" content="100% Python thuần (26.6MB RAM) · Vòng lặp Tự vấn 06:00 sáng · 9+ Công cụ AI Miễn phí · Chùa Online 3D · Tự động hóa Chrome CDP & Bảo mật 5 lớp chống DDoS.">
+  <meta property="og:image" content="https://kiemtien.deta.vn/mau-landing/assets/spotlight-github-architecture.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #060B16;
+      --bg-card: rgba(15, 23, 42, 0.72);
+      --bg-card-hover: rgba(22, 33, 58, 0.88);
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-subtle: rgba(255, 255, 255, 0.10);
+      --border-glow: rgba(16, 185, 129, 0.42);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-soft: #CBD5E1;
+      --emerald: #10B981;
+      --cyan: #38BDF8;
+      --amber: #F59E0B;
+      --violet: #8B5CF6;
+      --rose: #F43F5E;
+      --grad-brand: linear-gradient(135deg, #10B981 0%, #38BDF8 55%, #8B5CF6 100%);
+      --grad-gold: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #FDE68A 100%);
+      --shadow-lg: 0 24px 60px -15px rgba(0, 0, 0, 0.7);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(circle at 14% 8%, rgba(16, 185, 129, 0.16) 0%, transparent 38%),
+        radial-gradient(circle at 86% 12%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 58%, rgba(139, 92, 246, 0.10) 0%, transparent 48%);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* 1. STICKY FROSTED TOPBAR */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 11, 22, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.12rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--grad-brand);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.4);
+    }
+
+    .brand-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34D399;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #38BDF8;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #04130D;
+      box-shadow: 0 10px 28px -6px rgba(16, 185, 129, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -6px rgba(16, 185, 129, 0.75);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.14);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    /* 2. SPLIT ASYMMETRIC HERO */
+    .hero {
+      padding: 64px 0 56px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34D399;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGlow 1.8s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 9px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 4.4vw, 52px);
+      font-weight: 900;
+      line-height: 1.13;
+      letter-spacing: -0.028em;
+      margin-bottom: 20px;
+    }
+
+    .grad-text {
+      background: var(--grad-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-text {
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-lead {
+      font-size: 1.06rem;
+      color: var(--text-soft);
+      margin-bottom: 26px;
+      max-width: 620px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .stat-item {
+      padding: 4px 8px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #34D399;
+      display: block;
+    }
+
+    .stat-lbl {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .visual-frame {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: 26px;
+      padding: 14px;
+      box-shadow: var(--shadow-lg), 0 0 50px rgba(16, 185, 129, 0.14);
+      position: relative;
+    }
+
+    .visual-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .v-tab {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .v-tab.active {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #34D399;
+    }
+
+    .visual-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      aspect-ratio: 16 / 10;
+      background: #020617;
+    }
+
+    .visual-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .floating-stamp {
+      position: absolute;
+      left: -16px;
+      bottom: -18px;
+      background: rgba(6, 14, 28, 0.95);
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .stamp-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.18);
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+    }
+
+    .stamp-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #F8FAFC;
+    }
+
+    .stamp-sub {
+      font-size: 0.74rem;
+      color: #34D399;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* SECTION HEADERS */
+    section {
+      padding: 72px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .sec-head {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 48px;
+    }
+
+    .sec-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+      color: #38BDF8;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+
+    .sec-head h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .sec-head p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* 3. HOW AI REASONS & MAKES MONEY (5-PHASE CLOSED LOOP) */
+    .brain-loop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .phase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phase-card {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.22s ease;
+      position: relative;
+    }
+
+    .phase-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .phase-card.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.92) 100%);
+      border-color: var(--emerald);
+      box-shadow: 0 12px 32px -10px rgba(16, 185, 129, 0.35);
+    }
+
+    .phase-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .phase-step {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #34D399;
+      background: rgba(16, 185, 129, 0.14);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .phase-file {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #38BDF8;
+    }
+
+    .phase-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .phase-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .inspector-box {
+      background: #091020;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 92px;
+    }
+
+    .inspector-bar {
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .win-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .win-dots span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .inspector-body {
+      padding: 24px;
+    }
+
+    .inspector-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #FBBF24;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .inspector-h3 {
+      font-size: 1.32rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #F8FAFC;
+    }
+
+    .inspector-text {
+      font-size: 0.94rem;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+
+    .code-terminal {
+      background: #030711;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #A7F3D0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .live-strategy-card {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .live-strategy-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #FBBF24;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 4. 4 STREAMS OF MONETIZATION */
+    .money-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .money-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .money-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(16, 185, 129, 0.45);
+    }
+
+    .money-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #34D399;
+      margin: 10px 0 8px;
+    }
+
+    .money-role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.14);
+      color: #38BDF8;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* 5. ECOSYSTEM FEATURES BENTO SHOWCASE */
+    .feature-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .f-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+
+    .f-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .f-thumb {
+      aspect-ratio: 16 / 10;
+      background: #020617;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .f-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .f-card:hover .f-thumb img {
+      transform: scale(1.04);
+    }
+
+    .f-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(6, 11, 22, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #34D399;
+    }
+
+    .f-body {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .f-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .f-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .f-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #38BDF8;
+    }
+
+    /* 6. 6 SUPERIORITY ADVANTAGES + COMPARISON TABLE */
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 44px;
+    }
+
+    .adv-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .adv-Card-featured {
+      border-color: rgba(16, 185, 129, 0.5);
+      background: linear-gradient(160deg, rgba(16, 185, 129, 0.10) 0%, rgba(15, 23, 42, 0.85) 100%);
+    }
+
+    .adv-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+    }
+
+    .adv-card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .adv-card p {
+      font-size: 0.89rem;
+      color: var(--text-muted);
+    }
+
+    .comp-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      overflow-x: auto;
+    }
+
+    table.comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    .comp-table th, .comp-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .comp-table th {
+      background: rgba(255, 255, 255, 0.03);
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .comp-table td.good {
+      color: #34D399;
+      font-weight: 700;
+    }
+
+    .comp-table td.bad {
+      color: #94A3B8;
+    }
+
+    /* 7. 3 STEPS CLONE & DEPLOY + FAQ */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #04130D;
+      background: #10B981;
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .faq-list {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details.faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 18px 22px;
+    }
+
+    details.faq-item summary {
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.faq-item summary::after {
+      content: "＋";
+      color: #10B981;
+      font-weight: 800;
+    }
+
+    details.faq-item[open] summary::after {
+      content: "－";
+    }
+
+    details.faq-item p {
+      margin-top: 12px;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
+    /* 8. FOOTER CTA & FLOATING PILL */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(56, 189, 248, 0.14) 55%, rgba(139, 92, 246, 0.16) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      border-radius: 28px;
+      padding: 48px 36px;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .floating-cta {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #04130D;
+      font-weight: 800;
+      font-size: 0.88rem;
+      box-shadow: 0 14px 34px rgba(16, 185, 129, 0.55);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .brain-loop-grid,
+      .feature-bento,
+      .adv-grid,
+      .money-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .floating-stamp {
+        position: static;
+        margin-top: 12px;
+      }
+      .inspector-box {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. STICKY FROSTED TOPBAR -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="/" class="brand">
+        <div class="brand-mark">🧠</div>
+        <span>AI-Money</span>
+        <span class="brand-tag">Deta AI Lab</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#vong-lap-tu-duy">Cơ chế AI tự suy luận</a>
+        <a href="#mo-hinh-kiem-tien">4 Dòng tiền</a>
+        <a href="#tinh-nang">Hệ sinh thái 6 trụ cột</a>
+        <a href="#diem-vuot-troi">Điểm vượt trội</a>
+        <a href="#bat-dau">Tự cài đặt 10p</a>
+      </nav>
+      <div class="topbar-actions">
+        <a href="https://github.com/duongbirken2510/AI-Money" target="_blank" rel="noopener" class="btn btn-ghost">⭐ GitHub Repo</a>
+        <a href="/" class="btn btn-primary">🚀 Mở Trạm Chỉ Huy</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. SPLIT ASYMMETRIC HERO -->
+  <section class="hero" style="border-top:none;">
+    <div class="container hero-grid">
+      <div>
+        <div class="kicker">
+          <span class="pulse-dot"></span>
+          <span>MÃ NGUỒN MỞ 100% · THỬ THÁCH 20 NGÀY AI TỰ SINH TỒN</span>
+        </div>
+        <h1>
+          Khi AI Không Chỉ Trả Lời Câu Hỏi, Mà <span class="grad-text">Tự Suy Luận, Tự Code Sản Phẩm</span> &amp; <span class="gold-text">Kiếm Tiền Thật 24/7</span>
+        </h1>
+        <p class="hero-lead">
+          <strong>AI-Money (Deta AI Lab)</strong> là hệ thống Autonomous AI Indie Hacker đầu tiên tại Việt Nam vận hành hoàn toàn bằng <strong>Python thuần (26.6 MB RAM)</strong>: mỗi 06:00 sáng tự đọc số liệu phễu chuyển đổi từ SQLite, tự chẩn đoán điểm nghẽn, tự chế tạo công cụ miễn phí kéo khách, tự đăng bài mạng xã hội qua Chrome CDP và đối soát tiền thật qua Webhook VietQR.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#vong-lap-tu-duy" class="btn btn-primary">🔍 Xem Cách AI Tự Suy Luận Kiếm Tiền</a>
+          <a href="https://github.com/duongbirken2510/AI-Money" target="_blank" rel="noopener" class="btn btn-ghost">📦 Clone Mã Nguồn (MIT)</a>
+          <a href="/chua-online" class="btn btn-ghost">🪷 Trải Nghiệm Chùa Online 3D</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-val" id="live-revenue">93.686đ</span>
+            <span class="stat-lbl">Tiền thật qua Webhook</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val" id="live-day">Ngày 7/20</span>
+            <span class="stat-lbl">Hành trình sinh tồn</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">26.6 MB</span>
+            <span class="stat-lbl">RAM tiêu thụ (0 npm)</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">5 Lớp</span>
+            <span class="stat-lbl">Bảo mật &amp; Chống DDoS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-frame">
+          <div class="visual-tabs">
+            <button class="v-tab active" onclick="switchHeroImg('/mau-landing/assets/spotlight-github-architecture.png', this)">📐 Sơ Đồ Kiến Trúc Tự Hành</button>
+            <button class="v-tab" onclick="switchHeroImg('/mau-landing/assets/spotlight-github-open-source.png', this)">🚀 Hệ Sinh Thái AI-Money</button>
+            <button class="v-tab" onclick="switchHeroImg('/mau-landing/assets/readme-home.png', this)">📊 Trạm Chỉ Huy Live</button>
+          </div>
+          <div class="visual-img-wrap">
+            <img id="hero-main-img" src="/mau-landing/assets/spotlight-github-architecture.png" alt="Kiến trúc AI-Money Deta AI Lab">
+          </div>
+        </div>
+        <div class="floating-stamp">
+          <div class="stamp-icon">🛡️</div>
+          <div>
+            <div class="stamp-title">Sổ Cái Trung Thực Tuyệt Đối (Strict Honest Ledger)</div>
+            <div class="stamp-sub">Chỉ cộng tiền khi ngân hàng bắn Webhook thực · 0đ tiền ảo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CORE DEEP DIVE: HOW THE AI REASONS & FINDS WAYS TO MAKE MONEY -->
+  <section id="vong-lap-tu-duy">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">🧠 Giải Phẫu Bộ Não Tự Hành (Autonomous Reasoning Loop)</span>
+        <h2>Làm Sao Một Con AI Tự Suy Luận Và Tìm Ra Cách Kiếm Tiền Mà Không Cần Người Nhắc Việc?</h2>
+        <p>
+          Khác với chatbot thông thường phải đợi người gõ lệnh, <strong>AI-Money</strong> vận hành theo một <strong>Vòng Lặp Phản Hồi Khép Kín 5 Pha (Closed-Loop Feedback Cycle)</strong> chạy tự động suốt 24 giờ mỗi ngày. Bấm vào từng pha bên dưới để xem mã nguồn &amp; suy luận thực tế:
+        </p>
+      </div>
+
+      <div class="brain-loop-grid">
+        <div class="phase-list">
+          <div class="phase-card active" onclick="selectPhase(0, this)">
+            <div class="phase-top">
+              <span class="phase-step">PHA 01 · 06:00 SÁNG</span>
+              <span class="phase-file">agent_worker.py :: run_morning_strategy()</span>
+            </div>
+            <div class="phase-title">🌅 Đọc Số Liệu Phễu Thật &amp; Tự Vấn Điểm Nghẽn Chuyển Đổi</div>
+            <div class="phase-desc">
+              Đúng 06:00 sáng, AI tự truy vấn SQLite: đếm số người vào web, số lượt chạy từng công cụ, số lần khách bấm mở mã VietQR nhưng bỏ dở, và các tính năng đang "đói người dùng" (&lt;3 lượt).
+            </div>
+          </div>
+
+          <div class="phase-card" onclick="selectPhase(1, this)">
+            <div class="phase-top">
+              <span class="phase-step">PHA 02 · CHẨN ĐOÁN &amp; RA QUYẾT ĐỊNH</span>
+              <span class="phase-file">Chiến thuật Pivot: Traffic-First Funnel</span>
+            </div>
+            <div class="phase-title">💡 Tự Xoay Trục Chiến Lược Khi Thấy Khách Ngại Trả Phí Trước</div>
+            <div class="phase-desc">
+              Khi phát hiện khách dùng thử rất đông nhưng ngại trả tiền mở khóa file lẻ, AI tự suy luận: "Mở khóa MIỄN PHÍ 100% toàn bộ 9 công cụ để lấy lòng tin &amp; kéo viral trước; thu tiền từ B2B, Cẩm nang chuyên sâu &amp; Gieo duyên tự nguyện".
+            </div>
+          </div>
+
+          <div class="phase-card" onclick="selectPhase(2, this)">
+            <div class="phase-top">
+              <span class="phase-step">PHA 03 · MỖI 2 TIẾNG (:45)</span>
+              <span class="phase-file">agent_worker.py :: run_autonomous_turn()</span>
+            </div>
+            <div class="phase-title">🛠️ Tự Bốc Việc Trong Hàng Đợi, Trả Lời Gợi Ý &amp; Chế Tạo Sản Phẩm</div>
+            <div class="phase-desc">
+              Ba bước hành động từ phiên họp 06:00 sáng được tự động đẩy vào đầu bảng việc chờ (<code>bang_viec.cho</code>). Mỗi 2 tiếng, AI tự đọc góp ý của độc giả, biến ý tưởng hay thành tính năng chạy thật và viết bài chuẩn SEO.
+            </div>
+          </div>
+
+          <div class="phase-card" onclick="selectPhase(3, this)">
+            <div class="phase-top">
+              <span class="phase-step">PHA 04 · PHÂN PHỐI ĐA KÊNH</span>
+              <span class="phase-file">social_autopilot.py + numerology_comment_bot.py</span>
+            </div>
+            <div class="phase-title">📣 Tự Động Kéo Traffic Qua Chrome CDP (Chiến Thuật 0 Link + Ảnh Thật)</div>
+            <div class="phase-desc">
+              Điều khiển Chrome qua cổng WebSocket CDP <code>9225</code>: đăng bài kèm ảnh chụp có watermark tên miền (không chèn link text để vượt bộ lọc Group), định kỳ 4h/lần tự quét bình luận để vẽ Bản đồ Thần Số Học trả lời từng người!
+            </div>
+          </div>
+
+          <div class="phase-card" onclick="selectPhase(4, this)">
+            <div class="phase-top">
+              <span class="phase-step">PHA 05 · ĐỐI SOÁT &amp; BÁO CÁO 20:30</span>
+              <span class="phase-file">server.py :: /api/webhook/bank</span>
+            </div>
+            <div class="phase-title">💳 Khớp Lệnh Ngân Hàng Tự Động 1–3 Giây &amp; Tổng Kết Cuối Ngày</div>
+            <div class="phase-desc">
+              Khách quét mã VietQR chuyển khoản → SePay/Casso gọi Webhook → Kiểm tra HMAC/Bearer &amp; chống trùng mã <code>tx_ref</code> → Tự động mở khóa tài liệu / thắp sáng Đèn Hoa Đăng Đại Cát và cộng vào <code>tien_that</code>.
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE INSPECTOR -->
+        <div class="inspector-box">
+          <div class="inspector-bar">
+            <div class="win-dots">
+              <span style="background:#EF4444;"></span>
+              <span style="background:#F59E0B;"></span>
+              <span style="background:#10B981;"></span>
+            </div>
+            <span id="insp-file" style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:#94A3B8;">agent_worker.py :: collect_funnel_metrics()</span>
+          </div>
+          <div class="inspector-body">
+            <span class="inspector-tag" id="insp-tag">⚡ BÊN TRONG BỘ NÃO AI LÚC 06:00 SÁNG</span>
+            <h3 class="inspector-h3" id="insp-title">Cách AI đọc dữ liệu thật từ SQLite để không "ảo tưởng"</h3>
+            <p class="inspector-text" id="insp-desc">
+              Trước khi đưa ra bất kỳ kế hoạch kiếm tiền nào, hàm <code>collect_funnel_metrics()</code> ép AI phải nhìn thẳng vào bảng số liệu phễu chuyển đổi thực tế trong 24 giờ qua:
+            </p>
+            <div class="code-terminal" id="insp-code">{
+  "luong_truy_cap": "Đếm từ bảng events (loai='xem') theo ngày & tổng lũy kế",
+  "ty_le_chuyen_doi_qr": "So sánh số đơn tạo mã VietQR (qr_opened) vs số đơn đã thanh toán (qr_paid)",
+  "tinh_nang_doi_khach": "Tự phát hiện công cụ có < 3 lượt dùng để ưu tiên kéo traffic",
+  "yeu_cau_json_bat_buoc": {
+    "cau_hoi": "Chỉ thẳng vào nút thắt vì sao khách vào web nhưng chưa xuống tiền",
+    "chan_doan": "Phân tích tâm lý hành vi người dùng từ số liệu thực",
+    "giai_phap": "1 mũi nhọn phân phối & tối ưu chuyển đổi có xác suất nổ đơn cao nhất",
+    "cach_thuc_hien": ["Bước 1...", "Bước 2...", "Bước 3... -> Tự nạp vào bang_viec.cho"]
+  }
+}</div>
+
+            <div class="live-strategy-card">
+              <div class="live-strategy-title">
+                <span>📡 TRÍCH XUẤT TRỰC TIẾP TỪ /du-lieu.json HÔM NAY</span>
+              </div>
+              <div id="live-strategy-content" style="font-size:0.88rem;color:#F8FAFC;">
+                Đang tải bản ghi tự vấn 06:00 sáng mới nhất của AI...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 STREAMS OF MONETIZATION -->
+      <div id="mo-hinh-kiem-tien" class="money-grid">
+        <div class="money-card">
+          <div>
+            <span class="money-role">1. Phễu Niềm Tin &amp; Tiếp Sức</span>
+            <div class="money-price">5.000đ – 50.000đ</div>
+            <h3 style="font-size:1.02rem;margin-bottom:8px;">Mở Khóa Free 100% + Gieo Duyên Tự Nguyện</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Cho khách tải miễn phí Landing Page, CV ATS, Bản đồ Thần Số Học &amp; thả hoa đăng Chùa Online. Khi nhận giá trị vượt kỳ vọng, khách tự nguyện đãi Bánh Tiêu nuôi server hoặc thỉnh Đèn Đại Cát.
+            </p>
+          </div>
+          <div style="margin-top:14px;font-size:0.78rem;color:#34D399;font-family:'JetBrains Mono',monospace;">✓ Đã chứng minh nổ đơn thực tế</div>
+        </div>
+
+        <div class="money-card">
+          <div>
+            <span class="money-role">2. Sản Phẩm Số (Micro-Product)</span>
+            <div class="money-price">39.000đ / trọn bộ</div>
+            <h3 style="font-size:1.02rem;margin-bottom:8px;">Cẩm Nang 12 Bài Chatbot Đa Kênh &amp; Prompt</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Mở sẵn 5 bài học đầu miễn phí để chứng minh chất lượng. Khách chuyển khoản 39k qua VietQR sẽ được Webhook tự động mở khóa toàn bộ 12 bài + kho System Prompt và kiến trúc CDP.
+            </p>
+          </div>
+          <div style="margin-top:14px;font-size:0.78rem;color:#38BDF8;font-family:'JetBrains Mono',monospace;">⚡ Giao tự động 100% sau 2 giây</div>
+        </div>
+
+        <div class="money-card">
+          <div>
+            <span class="money-role">3. Quảng Cáo Tự Động (Ad-Tech)</span>
+            <div class="money-price">Từ 10.000đ+</div>
+            <h3 style="font-size:1.02rem;margin-bottom:8px;">Đấu Giá "Banner Đỉnh" Đầu Trang Tự Duyệt</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Khi lượng truy cập đạt hàng trăm người/ngày, chủ shop/dự án có thể đặt treo Banner ở vị trí cao nhất trang chủ. Hệ thống tự lọc nội dung an toàn và tự ghim lên đầu trang ngay khi nhận chuyển khoản.
+            </p>
+          </div>
+          <div style="margin-top:14px;font-size:0.78rem;color:#FBBF24;font-family:'JetBrains Mono',monospace;">👑 Tự động kiểm duyệt &amp; lên sóng</div>
+        </div>
+
+        <div class="money-card">
+          <div>
+            <span class="money-role">4. Dịch Vụ Giá Trị Cao (High-Ticket B2B)</span>
+            <div class="money-price">990.000đ / gói</div>
+            <h3 style="font-size:1.02rem;margin-bottom:8px;">Deta Studio — Thiết Kế Landing Page B2B 24h</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Khách dùng thử công cụ tạo Landing Page miễn phí thấy ưng ý nhưng muốn đội ngũ làm trọn gói A–Z (viết copy chốt đơn, chụp ảnh AI, gắn tên miền &amp; chatbot) sẽ để lại Lead B2B.
+            </p>
+          </div>
+          <div style="margin-top:14px;font-size:0.78rem;color:#A78BFA;font-family:'JetBrains Mono',monospace;">🚀 Biên lợi nhuận cao nhất</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FULL ECOSYSTEM FEATURES SHOWCASE -->
+  <section id="tinh-nang">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">🏛️ Hệ Sinh Thái 6 Trụ Cột Hoàn Chỉnh</span>
+        <h2>Toàn Bộ Tính Năng Đã Được AI Tự Xây Dựng Trong 1 Codebase</h2>
+        <p>Mỗi tính năng dưới đây đều đang chạy trực tiếp trên <code>kiemtien.deta.vn</code> và nằm trọn trong mã nguồn mở <code>AI-Money</code>:</p>
+      </div>
+
+      <div class="feature-bento">
+        <div class="f-card">
+          <div class="f-thumb">
+            <span class="f-badge">📊 Trạm Chỉ Huy Live</span>
+            <img src="/mau-landing/assets/readme-home.png" alt="Trang chủ Trạm Chỉ Huy Deta AI" loading="lazy">
+          </div>
+          <div class="f-body">
+            <div>
+              <div class="f-title">1. Bảng Điều Khiển Minh Bạch &amp; Nhật Ký Thời Gian Thực</div>
+              <p class="f-desc">
+                Hiển thị công khai từng đồng doanh thu thật, chi phí AI, câu hỏi tự vấn 06:00 sáng, bảng việc đang làm/chờ làm, phòng chat cộng đồng và bảng xếp hạng nhà hảo tâm.
+              </p>
+            </div>
+            <a href="/" class="f-link">Mở Trang Chủ Live →</a>
+          </div>
+        </div>
+
+        <div class="f-card">
+          <div class="f-thumb">
+            <span class="f-badge">🪷 WebGL / Canvas + Web Audio</span>
+            <img src="/mau-landing/assets/readme-chua-online.png" alt="Chùa Online Liên Hoa Các" loading="lazy">
+          </div>
+          <div class="f-body">
+            <div>
+              <div class="f-title">2. Chùa Online "Liên Hoa Các" &amp; Hồ Sen Đêm Trăng</div>
+              <p class="f-desc">
+                Không gian tĩnh tâm trực tuyến: thắp hương, gõ mõ tụng kinh (tổng hợp âm thanh chuông đồng/mõ gỗ bằng Web Audio API), thả đèn hoa đăng đồng bộ thời gian thực và xin xăm Quan Âm AI luận giải.
+              </p>
+            </div>
+            <a href="/chua-online" class="f-link">Bước Vào Liên Hoa Các →</a>
+          </div>
+        </div>
+
+        <div class="f-card">
+          <div class="f-thumb">
+            <span class="f-badge">🔮 Thuật Toán Pythagoras + SVG/PNG</span>
+            <img src="/mau-landing/assets/spotlight-than-so-hoc.png" alt="Thần Số Học Pythagoras" loading="lazy">
+          </div>
+          <div class="f-body">
+            <div>
+              <div class="f-title">3. Chuyên Trang Thần Số Học Pythagoras Chuyên Sâu</div>
+              <p class="f-desc">
+                Tính chính xác 8 chỉ số cốt lõi, Ma trận ngày sinh 3×3, các mũi tên cá tính và 4 Đỉnh cao đời người. Tự động vẽ thẻ đồ họa Mandala SVG/PNG nét cao và bài luận 3.000 từ miễn phí.
+              </p>
+            </div>
+            <a href="/cong-cu/than-so-hoc" class="f-link">Tra Cứu Thần Số Học →</a>
+          </div>
+        </div>
+
+        <div class="f-card">
+          <div class="f-thumb">
+            <span class="f-badge">⚡ 9+ Công Cụ AI Miễn Phí 100%</span>
+            <img src="/mau-landing/assets/spotlight-landing-page.png" alt="9 Công Cụ AI Thực Chiến" loading="lazy">
+          </div>
+          <div class="f-body">
+            <div>
+              <div class="f-title">4. Bộ 3 Siêu Công Cụ Xuất File Sạch (.HTML, PDF A4, .CSV)</div>
+              <p class="f-desc">
+                AI tự code trọn bộ Landing Page bán hàng 1 file <code>index.html</code> chuẩn 8 khối; chuẩn hóa CV ATS Harvard XYZ (Việt/Anh/Song ngữ) xuất PDF A4; và lập lịch 30 ngày nội dung bán hàng xuất file Excel <code>.CSV</code>.
+              </p>
+            </div>
+            <a href="/cong-cu/tao-landing-page" class="f-link">Dùng Bộ Công Cụ AI →</a>
+          </div>
+        </div>
+
+        <div class="f-card">
+          <div class="f-thumb">
+            <span class="f-badge">📘 Tài Liệu Thực Chiến</span>
+            <img src="/mau-landing/assets/readme-chatbot-guide.png" alt="Cẩm nang 12 Bài Chatbot Chốt Đơn" loading="lazy">
+          </div>
+          <div class="f-body">
+            <div>
+              <div class="f-title">5. Cẩm Nang 12 Bài Xây Chatbot AI Đa Kênh &amp; B2B Studio</div>
+              <p class="f-desc">
+                Đúc kết toàn bộ bí quyết thiết kế kịch bản chốt đơn Zalo/Messenger/Web, chống AI bịa giá (anti-hallucination), kèm trang dịch vụ thiết kế trọn gói B2B 24h.
+              </p>
+            </div>
+            <a href="/tai-lieu/chatbot-chot-don" class="f-link">Đọc Cẩm Nang 12 Bài →</a>
+          </div>
+        </div>
+
+        <div class="f-card">
+          <div class="f-thumb">
+            <span class="f-badge">🤖 3 AI Agent Skills + Chrome CDP</span>
+            <img src="/mau-landing/assets/spotlight-github-open-source.png" alt="Bộ 3 AI Agent Skills" loading="lazy">
+          </div>
+          <div class="f-body">
+            <div>
+              <div class="f-title">6. Bộ 3 AI Agent Skills (<code>.agents/skills/</code>) &amp; Autopilot</div>
+              <p class="f-desc">
+                Đóng gói sẵn 3 bộ kỹ năng chuẩn hóa cho AI Agent: <code>landing-page-craft</code>, <code>threejs-3d-vietnam-craft</code> và <code>facebook-group-posting</code> (runbook điều khiển Chrome CDP không dính gậy).
+              </p>
+            </div>
+            <a href="https://github.com/duongbirken2510/AI-Money" target="_blank" rel="noopener" class="f-link">Xem Thư Mục .agents/skills →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 6 TECHNICAL SUPERIORITIES & COMPARISON -->
+  <section id="diem-vuot-troi">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">🏆 6 Điểm Vượt Trội Cốt Lõi</span>
+        <h2>Vì Sao Kiến Trúc AI-Money Vượt Trội Hơn Các Boilerplate AI Thông Thường?</h2>
+        <p>Được thiết kế theo triết lý <strong>Tối giản phụ thuộc — Tối đa tự chủ — Bảo mật thực chiến</strong>:</p>
+      </div>
+
+      <div class="adv-grid">
+        <div class="adv-card adv-Card-featured">
+          <div class="adv-icon">🪶</div>
+          <h3>1. Zero Framework — Chỉ 26.6 MB RAM</h3>
+          <p>
+            Không phụ thuộc <code>node_modules</code> nặng hàng GB hay chuỗi thư viện rối rắm. Toàn bộ Web Server, SQLite, SVG Engine và WebSocket CDP được viết bằng <strong>Python 3 Standard Library thuần</strong>, khởi động trong 0.3 giây.
+          </p>
+        </div>
+
+        <div class="adv-card adv-Card-featured">
+          <div class="adv-icon">🛡️</div>
+          <h3>2. Phòng Thủ 5 Lớp &amp; Chống DDoS 3 Tầng</h3>
+          <p>
+            Ẩn IP gốc 100% sau <strong>Cloudflare Zero-Trust Tunnel</strong> (0 mở port router), kết hợp <code>BoundedThreadingHTTPServer</code> (tối đa 64 luồng) và <strong>L7 DDoS Auto-Ban Shield</strong> tự động cấm IP 10 phút nếu bắn flood &gt;60 req/5s.
+          </p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">⚡</div>
+          <h3>3. Raw WebSocket CDP + Tự Giải Phóng RAM</h3>
+          <p>
+            Giao tiếp trực tiếp với Chrome qua giao thức CDP cổng <code>9225</code> mà không cần Selenium/Playwright. Tự động đính kèm ảnh qua <code>DOM.setFileInputFiles</code> và tự đóng trình duyệt ngay sau khi đăng xong để tiết kiệm 2–3 GB RAM.
+          </p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">💎</div>
+          <h3>4. Sổ Cái Bất Biến (Strict Honest Ledger)</h3>
+          <p>
+            Tuyệt đối không dùng số liệu giả. Biến <code>tien_that</code> chỉ tăng duy nhất khi cổng <code>/api/webhook/bank</code> xác thực chữ ký HMAC/Bearer hợp lệ từ ngân hàng và kiểm tra chống cộng trùng mã giao dịch <code>tx_ref</code>.
+          </p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">🧩</div>
+          <h3>5. Tích Hợp Sẵn Bộ 3 AI Agent Skills</h3>
+          <p>
+            Đi kèm thư mục <code>.agents/skills/</code> giúp bất kỳ AI Coding Agent nào (Antigravity, Cursor, Claude Code) đọc hiểu ngay tiêu chuẩn thiết kế giao diện Việt Nam, đồ họa 3D Chùa Việt và quy tắc đăng bài mạng xã hội.
+          </p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">🔄</div>
+          <h3>6. Tự Chữa Lành &amp; Chạy Ngầm Systemd</h3>
+          <p>
+            Toàn bộ Web Server, Cloudflare Tunnel, lịch họp 06:00 sáng, lịch trả lời comment 4h/lần và báo cáo 20:30 tối đều được quản lý bởi <code>systemd --user</code> tự khởi động lại trong 3 giây nếu có sự cố.
+          </p>
+        </div>
+      </div>
+
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Tiêu chí kỹ thuật &amp; vận hành</th>
+              <th>Các dự án AI Wrapper / Boilerplate thông thường</th>
+              <th>🔥 Dự án AI-Money (Deta AI Lab)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tư duy chiến lược</strong></td>
+              <td class="bad">Thụ động — chỉ chạy khi người dùng bấm nút gọi API</td>
+              <td class="good">Tự vấn lúc 06:00 sáng từ số liệu SQLite thật &amp; tự lên việc mỗi 2 giờ</td>
+            </tr>
+            <tr>
+              <td><strong>Tiêu thụ tài nguyên &amp; Cài đặt</strong></td>
+              <td class="bad">Cần Node.js, Docker, Redis, Postgres (~1.5 GB – 4 GB RAM)</td>
+              <td class="good">Python 3 thuần + SQLite tích hợp sẵn (~26.6 MB RAM, chạy ngay)</td>
+            </tr>
+            <tr>
+              <td><strong>Kéo Traffic &amp; Marketing</strong></td>
+              <td class="bad">Phải tự đi đăng bài tay hoặc tốn tiền chạy quảng cáo</td>
+              <td class="good">Tự động đăng Group/FB/Threads kèm ảnh &amp; tự trả lời comment mỗi 4h</td>
+            </tr>
+            <tr>
+              <td><strong>Thu tiền &amp; Giao sản phẩm tại VN</strong></td>
+              <td class="bad">Phụ thuộc cổng quốc tế (Stripe khó mở tại VN) hoặc duyệt tay</td>
+              <td class="good">VietQR động + Webhook SePay/Casso khớp lệnh tự động trong 1–3 giây</td>
+            </tr>
+            <tr>
+              <td><strong>An toàn mạng &amp; Chống DDoS</strong></td>
+              <td class="bad">Phơi IP VPS và mở port 80/443 trực tiếp ra Internet</td>
+              <td class="good">0 mở port (Cloudflare Tunnel) + L7 Auto-Ban Shield + Brute-force Lockout</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 3-STEP QUICK START & FAQ -->
+  <section id="bat-dau">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">🚀 Tự Triển Khai Trong 10 Phút</span>
+        <h2>3 Bước Để Tự Clone Và Chạy Hệ Thống AI Kiếm Tiền Của Riêng Bạn</h2>
+        <p>Đã có hướng dẫn chi tiết từng dòng lệnh trên GitHub cho cả người mới bắt đầu:</p>
+      </div>
+
+      <div class="steps-grid" style="margin-bottom:56px;">
+        <div class="step-box">
+          <span class="step-num">BƯỚC 01 · 2 PHÚT</span>
+          <h3 style="margin-bottom:8px;">Clone Mã Nguồn &amp; Tạo File Cấu Hình</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">
+            Tải repo về máy, copy <code>config.example.json</code> thành <code>config.json</code> và điền Gemini API Key miễn phí + số tài khoản nhận VietQR.
+          </p>
+          <div class="code-terminal" style="margin-bottom:0;">git clone https://github.com/duongbirken2510/AI-Money.git
+cd AI-Money
+cp config.example.json config.json
+python3 server.py</div>
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">BƯỚC 02 · 5 PHÚT</span>
+          <h3 style="margin-bottom:8px;">Nối Tên Miền Qua Cloudflare Tunnel</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">
+            Tạo đường hầm bảo mật từ máy cá nhân/VPS thẳng lên tên miền riêng của bạn có sẵn HTTPS và chống DDoS mà không cần mở port modem.
+          </p>
+          <div class="code-terminal" style="margin-bottom:0;">./bin/cloudflared tunnel login
+./bin/cloudflared tunnel create ai-money
+./bin/cloudflared tunnel route dns ai-money tenmien.vn</div>
+        </div>
+
+        <div class="step-box">
+          <span class="step-num">BƯỚC 03 · 3 PHÚT</span>
+          <h3 style="margin-bottom:8px;">Kích Hoạt Chế Độ Tự Hành 24/7</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">
+            Chạy <code>./start.sh</code> và gắn URL Webhook SePay/Casso để hệ thống tự họp chiến lược 06:00 sáng, tự kéo khách và tự khớp đơn chuyển khoản!
+          </p>
+          <div class="code-terminal" style="margin-bottom:0;">chmod +x start.sh
+./start.sh
+# Kiểm tra tại: http://127.0.0.1:8080/admin</div>
+        </div>
+      </div>
+
+      <div class="sec-head" style="margin-bottom:28px;">
+        <h2>Câu Hỏi Thường Gặp (FAQ)</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>1. Máy tính cấu hình thấp hoặc không có GPU rời có chạy được dự án này không?</summary>
+          <p>
+            Hoàn toàn chạy mượt! Toàn bộ tiến trình <code>server.py</code> chỉ tiêu thụ khoảng <strong>26.6 MB RAM</strong> vì dùng Python chuẩn kết hợp SQLite và gọi suy luận qua Gemini API. Trình duyệt Chrome của Bot mạng xã hội cũng đã được tối ưu tự động đóng ngay sau mỗi lượt đăng bài để trả lại 100% RAM cho máy.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>2. Làm sao AI biết cách thay đổi chiến lược khi một tính năng không có người dùng?</summary>
+          <p>
+            Trong hàm <code>collect_funnel_metrics()</code> của <code>agent_worker.py</code>, hệ thống tự động thống kê những tính năng có dưới 3 lượt chạy (<code>hungry_features</code>) và tỷ lệ rơi rụng ở bước mở mã VietQR, sau đó nạp trực tiếp vào Prompt họp chiến lược 06:00 sáng để AI tự đề xuất 3 hành động khắc phục cụ thể trong ngày.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>3. Khi đưa mã nguồn lên mạng hoặc mở web công khai thì khóa API và mật khẩu Admin có an toàn không?</summary>
+          <p>
+            Hệ thống đã trải qua <strong>5 vòng kiểm thử bảo mật &amp; chống tấn công</strong>: tệp <code>config.json</code> và <code>data/deta.db</code> được phân quyền <code>0600</code> và loại trừ khỏi Git; mật khẩu Admin/Webhook được so sánh chống timing-attack (<code>hmac.compare_digest</code>) kèm khóa IP 15 phút nếu nhập sai quá 5 lần; và toàn bộ lưu lượng đều đi qua lá chắn DDoS 3 tầng.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FINAL CTA BANNER -->
+  <div class="container">
+    <div class="cta-banner">
+      <div class="kicker" style="margin-bottom:14px;">🌟 MÃ NGUỒN MỞ DÀNH CHO CỘNG ĐỒNG AI &amp; INDIE HACKER VIỆT NAM</div>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(24px,3.2vw,36px);font-weight:900;margin-bottom:12px;">
+        Sẵn Sàng Khám Phá Hoặc Tự Vận Hành Trạm AI Kiếm Tiền Của Riêng Bạn?
+      </h2>
+      <p style="color:var(--text-soft);max-width:660px;margin:0 auto 24px;">
+        Trải nghiệm trực tiếp toàn bộ các công cụ miễn phí ngay trên <code>kiemtien.deta.vn</code> hoặc tặng 1 Star ⭐ trên GitHub để ủng hộ hành trình 20 ngày sinh tồn của Deta AI Lab!
+      </p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;">
+        <a href="https://github.com/duongbirken2510/AI-Money" target="_blank" rel="noopener" class="btn btn-primary">⭐ Tặng 1 Star &amp; Clone Trên GitHub</a>
+        <a href="/" class="btn btn-ghost">📊 Xem Trạm Chỉ Huy &amp; Doanh Thu Thật</a>
+        <a href="/dich-vu/thiet-ke-tron-goi" class="btn btn-ghost">💎 Đặt Thiết Kế Landing Page B2B</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING ACTION PILL -->
+  <a href="https://github.com/duongbirken2510/AI-Money" target="_blank" rel="noopener" class="floating-cta">
+    <span>⭐</span>
+    <span>Mã Nguồn AI-Money</span>
+  </a>
+
+  <script>
+    function switchHeroImg(src, btn) {
+      document.getElementById('hero-main-img').src = src;
+      document.querySelectorAll('.v-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    const PHASES = [
+      {
+        file: "agent_worker.py :: collect_funnel_metrics() & run_morning_strategy()",
+        tag: "⚡ PHA 01 · TỰ VẤN CHIẾN LƯỢC 06:00 SÁNG",
+        title: "Cách AI đọc dữ liệu thật từ SQLite để tự tìm điểm nghẽn",
+        desc: "Đúng 06:00 sáng mỗi ngày, systemd timer kích hoạt phiên tự vấn. AI tự đọc số liệu phễu thật từ SQLite và ép trả về JSON chiến lược hành động:",
+        code: `{\n  "luong_truy_cap": "Đếm từ bảng events (loai='xem') theo ngày & tổng lũy kế",\n  "ty_le_chuyen_doi_qr": "So sánh số đơn tạo mã VietQR (qr_opened) vs số đơn đã thanh toán (qr_paid)",\n  "tinh_nang_doi_khach": "Tự phát hiện công cụ có < 3 lượt dùng để ưu tiên kéo traffic",\n  "yeu_cau_json_bat_buoc": {\n    "cau_hoi": "Chỉ thẳng vào nút thắt vì sao khách vào web nhưng chưa xuống tiền",\n    "chan_doan": "Phân tích tâm lý hành vi người dùng từ số liệu thực",\n    "giai_phap": "1 mũi nhọn phân phối & tối ưu chuyển đổi có xác suất nổ đơn cao nhất",\n    "cach_thuc_hien": ["Bước 1...", "Bước 2...", "Bước 3... -> Tự nạp vào bang_viec.cho"]\n  }\n}`
+      },
+      {
+        file: "Chiến thuật Traffic-First Funnel (Mở khóa Free 100% -> Upsell & Gieo duyên)",
+        tag: "💡 PHA 02 · TỰ XOAY TRỤC MÔ HÌNH KIẾM TIỀN",
+        title: "Từ 'Thu phí lẻ từng công cụ' sang 'Phễu Miễn Phí 100% + Đa Dòng Tiền'",
+        desc: "Khi thấy khách vào dùng thử công cụ rất đông nhưng ngần ngại quét QR trả tiền trước cho một con AI mới lạ, hệ thống tự động xoay trục sang chiến lược Traffic-First:",
+        code: `1. MỞ KHÓA MIỄN PHÍ 100% (0đ):\n   - Tải ngay file index.html Landing Page sạch, PDF CV ATS A4, lịch 30 ngày .CSV & Bản đồ Thần Số Học.\n   - Xóa bỏ hoàn toàn rào cản lòng tin -> Tăng vọt lượt chia sẻ truyền miệng.\n\n2. THU TIỀN TỪ 4 ĐIỂM CHẠM CHUYỂN ĐỔI CAO:\n   - Gieo duyên tự nguyện (Bánh tiêu 5k / Đèn Đại Cát Chùa Online)\n   - Mở khóa trọn bộ Cẩm nang 12 bài Chatbot thực chiến (39.000đ)\n   - Thuê vị trí Banner Đỉnh đầu trang chủ (từ 10.000đ)\n   - Dịch vụ thiết kế trọn gói Deta Studio B2B (990.000đ)`
+      },
+      {
+        file: "agent_worker.py :: run_autonomous_turn() (Mỗi 2 tiếng vào phút :45)",
+        tag: "🛠️ PHA 03 · THỰC THI TỰ ĐỘNG MỖI 2 GIỜ",
+        title: "Biến kế hoạch 06:00 sáng & gợi ý của độc giả thành tính năng sống",
+        desc: "Cứ mỗi 2 tiếng, luồng chạy nền tự động quét hòm thư góp ý của khách truy cập, chấm điểm tính khả thi và thực thi từng bước trong bảng việc chờ:",
+        code: `def run_autonomous_turn() -> str:\n    # 1. Đọc gợi ý mới trong bảng suggestions (SQLite)\n    #    Nếu gợi ý khả thi -> Tự đẩy vào đầu bang_viec.cho\n    # 2. Lấy 1 việc đầu bảng trong bang_viec.cho ra thực thi\n    # 3. Tự động tái tạo bộ bài viết hướng dẫn SEO & sitemap.xml\n    # 4. Ghi nhật ký minh bạch theo khung giờ thực tế vào du-lieu.json`
+      },
+      {
+        file: "social_autopilot.py & numerology_comment_bot.py (Cổng CDP 9225)",
+        tag: "📣 PHA 04 · TỰ ĐỘNG HÓA MẠNG XÃ HỘI KHÔNG DÍNH GẬY",
+        title: "Chiến thuật '0 Link Text + Ảnh Watermark + Tự trả lời bình luận'",
+        desc: "Thay vì rải link spam dễ bị Admin Assist chặn, AI dùng giao thức WebSocket CDP gốc để đăng bài chia sẻ kiến thức kèm ảnh chụp nét cao và tự chăm sóc bình luận:",
+        code: `• Đăng bài Facebook Group / Cá nhân / Threads:\n  - 0 chèn link text trong bài viết (vượt 100% bộ lọc chống spam).\n  - Đính kèm ảnh trực tiếp qua lệnh CDP DOM.setFileInputFiles (chân ảnh in sẵn kiemtien.deta.vn).\n\n• Tự động quét & trả lời bình luận mỗi 4 giờ (02h, 06h, 10h, 14h, 18h, 22h):\n  - Phát hiện độc giả để lại Họ tên + Ngày sinh dưới bài đăng.\n  - Tự động tính Thần Số Học, kết xuất ảnh PNG Mandala riêng cho người đó và gắn ảnh trả lời ngay dưới comment!\n  - Tự động gọi close_bot_browser() đóng Chrome giải phóng RAM ngay khi xong việc.`
+      },
+      {
+        file: "server.py :: do_POST('/api/webhook/bank') -> complete_order()",
+        tag: "💳 PHA 05 · ĐỐI SOÁT NGÂN HÀNG & BÁO CÁO 20:30 TỐI",
+        title: "Khớp lệnh chuyển khoản thật trong 1–3 giây & Báo cáo minh bạch",
+        desc: "Mỗi giao dịch đều gắn mã đơn DETAxxxxxx trên VietQR. Ngay khi khách chuyển khoản, Webhook ngân hàng tự động kích hoạt quy trình mở khóa và ghi sổ cái:",
+        code: `1. Xác thực chữ ký bảo mật Webhook (HMAC-SHA256 / Bearer Token) & khóa IP nếu sai quá 5 lần.\n2. Kiểm tra chống cộng trùng mã giao dịch ngân hàng (tx_ref).\n3. Khớp mã DETAxxxxxx (hoặc từ khóa KIEMTIEN / BANH TIEU / DETA AI):\n   -> Mở khóa ngay tài liệu / Cấp vé Chat VIP / Thắp sáng Đèn Hoa Đăng Đại Cát trên hồ sen.\n   -> Cộng số tiền thực nhận vào tien_that trong du-lieu.json.\n4. Đúng 20:30 tối: Tự tổng hợp số liệu thật đăng báo cáo tổng kết ngày lên Facebook & Threads.`
+      }
+    ];
+
+    function selectPhase(idx, el) {
+      document.querySelectorAll('.phase-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      const p = PHASES[idx];
+      document.getElementById('insp-file').textContent = p.file;
+      document.getElementById('insp-tag').textContent = p.tag;
+      document.getElementById('insp-title').textContent = p.title;
+      document.getElementById('insp-desc').textContent = p.desc;
+      document.getElementById('insp-code').textContent = p.code;
+    }
+
+    // Đồng bộ số liệu thật & bản tự vấn 06:00 sáng trực tiếp từ /du-lieu.json
+    fetch('/du-lieu.json', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(d => {
+        if (typeof d.tien_that === 'number') {
+          document.getElementById('live-revenue').textContent = d.tien_that.toLocaleString('vi-VN') + 'đ';
+        }
+        if (Array.isArray(d.ngay) && d.ngay.length > 0) {
+          document.getElementById('live-day').textContent = 'Ngày ' + d.ngay.length + '/20';
+        }
+        const cls = d.chien_luoc_sang || (d.ngay && d.ngay[0] && d.ngay[0].chien_luoc_sang);
+        if (cls && cls.cau_hoi) {
+          const box = document.getElementById('live-strategy-content');
+          box.textContent = '';
+          const qDiv = document.createElement('div');
+          qDiv.style.marginBottom = '6px';
+          qDiv.innerHTML = '<strong>❓ Câu hỏi tự vấn (' + (cls.ngay || 'Hôm nay') + '):</strong> ';
+          const qSpan = document.createElement('span');
+          qSpan.textContent = cls.cau_hoi;
+          qDiv.appendChild(qSpan);
+
+          const sDiv = document.createElement('div');
+          sDiv.style.color = '#A7F3D0';
+          sDiv.innerHTML = '<strong>💡 Giải pháp AI chốt:</strong> ';
+          const sSpan = document.createElement('span');
+          sSpan.textContent = cls.giai_phap || '';
+          sDiv.appendChild(sSpan);
+
+          box.appendChild(qDiv);
+          box.appendChild(sDiv);
+        }
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>
