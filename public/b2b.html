@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dịch Vụ Thiết Kế Landing Page Chốt Đơn &amp; Trợ Lý AI Trọn Gói 24h | Deta Studio B2B</title>
+<meta name="description" content="Dịch vụ Done-For-You trọn gói từ Deta AI Lab: Thiết kế Landing Page 8 khối chuẩn Studio tải dưới 0.5s, 0đ phí hosting hàng tháng, gắn tên miền riêng, Pixel quảng cáo & tích hợp trợ lý AI/VietQR tự động trong 24h.">
+<meta property="og:title" content="Deta Studio B2B — Thiết Kế Landing Page Chốt Đơn & Trợ Lý AI Bàn Giao Trong 24h">
+<meta property="og:description" content="Không cần rành kỹ thuật: Đội ngũ Deta thiết kế riêng theo ảnh thật của Shop, trỏ tên miền .vn/.com, miễn phí hosting trọn đời & bàn giao trong 24h. Trọn gói từ 490.000đ.">
+<meta property="og:image" content="https://kiemtien.deta.vn/mau-landing/assets/og-tao-landing-page.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060C18;
+  --bg-alt:#0A1324;
+  --card:rgba(17,27,48,.78);
+  --card-2:#101C33;
+  --line:rgba(148,163,184,.16);
+  --line-bright:rgba(16,185,129,.42);
+  --txt:#F8FAFC;
+  --muted:#94A3B8;
+  --c1:#10B981;
+  --c2:#059669;
+  --c3:#38BDF8;
+  --gold:#F59E0B;
+  --shadow:0 24px 56px -14px rgba(0,0,0,.62);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(880px 460px at 12% -4%,rgba(16,185,129,.20),transparent 62%),
+    radial-gradient(820px 440px at 88% 0%,rgba(56,189,248,.16),transparent 60%),
+    var(--bg);
+  color:var(--txt);
+  font:15.5px/1.66 "Be Vietnam Pro",system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+.w{max-width:1140px;margin:0 auto;padding:0 20px}
+
+/* 1. Sticky Frosted Topbar */
+.topbar{
+  position:sticky;top:0;z-index:45;
+  background:rgba(6,12,24,.84);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:66px;
+}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:17.5px;letter-spacing:-.02em}
+.brand-ic{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,var(--c1),var(--c3));
+  color:#04130D;display:inline-flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;
+}
+.nav-mid{display:flex;align-items:center;gap:20px;font-size:13.8px;font-weight:600;color:var(--muted)}
+.nav-mid a:hover{color:#fff}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 22px;border-radius:999px;font:inherit;font-weight:800;font-size:14.5px;
+  cursor:pointer;border:0;transition:transform .16s,box-shadow .16s,filter .16s;
+}
+.btn-main{
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  color:#fff;box-shadow:0 10px 28px -6px rgba(16,185,129,.48);
+}
+.btn-main:hover{transform:translateY(-1.5px);filter:brightness(1.06)}
+.btn-soft{
+  background:rgba(255,255,255,.06);color:var(--txt);
+  border:1px solid var(--line);
+}
+.btn-soft:hover{border-color:var(--c1);background:rgba(16,185,129,.10)}
+
+/* 2. Split Asymmetric Hero */
+.hero{padding:54px 0 48px}
+.hero-grid{
+  display:grid;grid-template-columns:1.08fr .92fr;gap:36px;align-items:center;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 13px;border-radius:999px;
+  background:rgba(16,185,129,.14);border:1px solid rgba(16,185,129,.38);
+  color:#6EE7B7;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.hero h1{
+  font-size:clamp(31px,4.4vw,49px);line-height:1.15;font-weight:900;
+  letter-spacing:-.028em;margin-bottom:16px;
+}
+.hl{
+  background:linear-gradient(135deg,#34D399,#38BDF8);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{color:var(--muted);font-size:16.5px;margin-bottom:24px;max-width:560px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.stats-bar{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  padding-top:20px;border-top:1px solid var(--line);
+}
+.stat b{
+  display:block;font-family:"JetBrains Mono",monospace;
+  font-size:22px;font-weight:800;color:#6EE7B7;
+}
+.stat span{font-size:12.8px;color:var(--muted)}
+
+.hero-visual{position:relative}
+.showcase-card{
+  background:var(--card);border:1px solid var(--line-bright);
+  border-radius:26px;padding:18px;box-shadow:var(--shadow);
+}
+.sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:13px}
+.sc-list{display:grid;gap:12px}
+.sc-item{
+  display:flex;align-items:center;gap:13px;padding:11px;
+  border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line);
+  transition:border-color .18s,transform .18s;
+}
+.sc-item:hover{border-color:var(--c1);transform:translateY(-2px)}
+.sc-item img{width:92px;height:68px;object-fit:cover;border-radius:11px;flex:none}
+.sc-item b{display:block;font-size:14.5px;margin-bottom:2px}
+.sc-item small{display:block;color:var(--muted);font-size:12.5px}
+.sc-tag{display:inline-block;font-size:11px;font-weight:800;color:#38BDF8;margin-top:3px}
+.float-stamp{
+  margin-top:14px;display:inline-flex;align-items:center;gap:10px;
+  padding:10px 15px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(14,165,233,.16));
+  border:1px solid rgba(16,185,129,.42);font-size:13px;font-weight:700;
+}
+
+/* Sections */
+.sec{padding:56px 0}
+.sec-alt{padding:56px 0;background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 36px}
+.eyebrow{
+  display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.08em;color:#38BDF8;margin-bottom:8px;
+}
+.sec-head h2{font-size:clamp(25px,3.2vw,36px);font-weight:900;letter-spacing:-.02em;line-height:1.22}
+.sec-head p{color:var(--muted);margin-top:8px}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:22px;padding:24px;box-shadow:var(--shadow);
+}
+.ic{
+  width:46px;height:46px;border-radius:13px;
+  background:rgba(16,185,129,.14);border:1px solid rgba(16,185,129,.32);
+  display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;
+}
+.card h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14.5px}
+
+/* Pricing */
+.pkg{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:24px;padding:26px;display:flex;flex-direction:column;position:relative;
+}
+.pkg.hot{
+  border:2px solid var(--c1);
+  background:linear-gradient(165deg,rgba(16,185,129,.13),rgba(17,27,48,.92));
+  transform:translateY(-4px);
+}
+.hot-tag{
+  position:absolute;top:-13px;right:20px;
+  background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;
+  font-size:11.5px;font-weight:900;padding:4px 12px;border-radius:999px;
+}
+.pk-tag{font-size:12px;font-weight:800;color:#38BDF8;text-transform:uppercase;letter-spacing:.05em}
+.pkg h3{font-size:20px;font-weight:900;margin:6px 0}
+.pk-price{
+  font-family:"JetBrains Mono",monospace;font-size:28px;font-weight:800;
+  color:#6EE7B7;margin:6px 0 4px;
+}
+.pk-sub{font-size:12.5px;color:var(--muted);margin-bottom:16px}
+.pkg ul{list-style:none;margin-bottom:22px;flex:1;display:grid;gap:9px;font-size:14px}
+.pkg li{color:#E2E8F0;line-height:1.5}
+.pkg li b{color:#6EE7B7}
+
+.step-no{
+  font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:800;
+  color:#6EE7B7;background:rgba(16,185,129,.14);display:inline-block;
+  padding:4px 10px;border-radius:8px;margin-bottom:10px;
+}
+.stars{color:#FBBF24;letter-spacing:2px;font-size:14px;margin-bottom:8px}
+.qt{font-size:14.5px;color:#E2E8F0;margin-bottom:12px;font-style:italic}
+.rl{display:block;font-size:12.5px;color:var(--muted)}
+
+.faq-wrap{max-width:780px;margin:0 auto;display:grid;gap:12px}
+details.faq{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:16px 20px;
+}
+details.faq summary{font-weight:800;cursor:pointer;font-size:15.5px}
+details.faq p{color:var(--muted);font-size:14.5px;margin-top:10px}
+
+/* Lead Form */
+.form-shell{
+  max-width:760px;margin:0 auto;
+  background:linear-gradient(155deg,rgba(16,185,129,.12),rgba(15,25,45,.95));
+  border:1.5px solid var(--line-bright);border-radius:26px;padding:30px;
+  box-shadow:var(--shadow);
+}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.f-lbl{display:block;font-size:13.2px;font-weight:700;margin-bottom:6px;color:#E2E8F0}
+.f-inp{
+  width:100%;padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(6,12,24,.82);
+  color:#fff;font:inherit;font-size:14.5px;
+}
+.f-inp:focus{outline:none;border-color:var(--c1)}
+
+footer{padding:30px 0 90px;text-align:center;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+
+@media(max-width:880px){
+  .hero-grid,.grid-3,.f-grid{grid-template-columns:1fr}
+  .nav-mid{display:none}
+  .pkg.hot{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="w topbar-in">
+    <a href="/" class="brand"><span class="brand-ic">⚡</span><span>Deta Studio <span style="color:#6EE7B7">B2B</span></span></a>
+    <nav class="nav-mid">
+      <a href="#uu-diem">Điểm khác biệt</a>
+      <a href="#bang-gia">Bảng giá trọn gói</a>
+      <a href="#quy-trinh">Quy trình 24h</a>
+      <a href="/#khu-cong-cu" style="color:#6EE7B7">🎁 9 Công cụ AI 0đ</a>
+    </nav>
+    <a href="#dat-lich" class="btn btn-main" style="padding:9px 18px;font-size:13.5px">Nhận Bản Nháp 24h →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="w hero-grid">
+    <div>
+      <span class="kicker">💼 DỊCH VỤ DONE-FOR-YOU B2B · DETA AI LAB</span>
+      <h1>Thiết Kế Landing Page Chốt Đơn &amp; Phễu AI <span class="hl">Bàn Giao Trong 24 Giờ</span></h1>
+      <p class="hero-sub">Bạn đã thử bộ 9 công cụ AI miễn phí 0đ trên <b>kiemtien.deta.vn</b> nhưng bận kinh doanh, không muốn tự mua tên miền, trỏ DNS, cắt ảnh hay gắn Pixel quảng cáo? Đội ngũ kỹ sư Deta làm trọn gói từ A–Z cho Shop của bạn!</p>
+      <div class="hero-ctas">
+        <a href="#dat-lich" class="btn btn-main">🚀 Đặt Lịch Tư Vấn 1-1 Qua Zalo</a>
+        <a href="#bang-gia" class="btn btn-soft">Xem 3 Gói Trọn Gói ↓</a>
+      </div>
+      <div class="stats-bar">
+        <div class="stat"><b>24 Giờ</b><span>Bàn giao trang chạy thật</span></div>
+        <div class="stat"><b>0đ/tháng</b><span>Miễn phí Hosting trọn đời</span></div>
+        <div class="stat"><b>98/100</b><span>Điểm tốc độ Google Mobile</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="showcase-card">
+        <div class="sc-head">
+          <b>✨ Bấm xem trực tiếp 2 mẫu thật do Deta thiết kế:</b>
+          <span style="color:#6EE7B7;font-weight:700">Live 100%</span>
+        </div>
+        <div class="sc-list">
+          <a class="sc-item" href="/mau-landing/van-son-tra/" target="_blank" rel="noopener">
+            <img src="/mau-landing/assets/van-son-tra-hero.webp" alt="Vân Sơn Trà">
+            <div>
+              <b>🍃 Vân Sơn Trà — Đặc Sản &amp; F&amp;B</b>
+              <small>Phong cách Sáng Tinh Tế (Lora Serif) · Hợp trà bánh, mỹ phẩm, quà tặng, y dược.</small>
+              <span class="sc-tag">Bấm mở trang mẫu thật ↗</span>
+            </div>
+          </a>
+          <a class="sc-item" href="/mau-landing/detaspeak-ai/" target="_blank" rel="noopener">
+            <img src="/mau-landing/assets/detaspeak-ai-hero.webp" alt="DetaSpeak AI">
+            <div>
+              <b>🎙️ DetaSpeak AI — Khóa Học &amp; Dịch Vụ B2B</b>
+              <small>Phong cách Tối Hiện Đại (Aurora SaaS) · Hợp phần mềm, khóa học, tư vấn, agency.</small>
+              <span class="sc-tag">Bấm mở trang mẫu thật ↗</span>
+            </div>
+          </a>
+          <a class="sc-item" href="https://giaytieuduong.com/" target="_blank" rel="noopener">
+            <img src="/mau-landing/assets/banner-giaytieuduong.webp?v=2" alt="Giày Tiểu Đường TIDU">
+            <div>
+              <b>👟 Giày Tiểu Đường TIDU (giaytieuduong.com)</b>
+              <small>Thương hiệu thực tế đang đồng hành truyền thông trên toàn hệ thống Deta AI Lab.</small>
+              <span class="sc-tag">Xem thương hiệu đồng hành ↗</span>
+            </div>
+          </a>
+        </div>
+        <div class="float-stamp">🛡️ Cam kết: Dựng bản nháp ưng ý mới tất toán · Bàn giao 100% mã nguồn sạch</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-alt" id="uu-diem">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Vì sao chủ shop chọn Deta Studio?</span>
+      <h2>Giải quyết dứt điểm 3 nỗi đau làm Web bán hàng tại Việt Nam</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ic">⚡</div>
+        <h3>Tải tức thì &lt;0.5 giây · 0đ phí Hosting hàng tháng</h3>
+        <p>Kiến trúc HTML5 tinh gọn triển khai trực tiếp trên mạng lưới Cloudflare toàn cầu: khách bấm quảng cáo 4G mở trang ngay lập tức, không tốn 150k–300k/tháng tiền thuê hosting hay phí gia hạn nền tảng Ladipage.</p>
+      </div>
+      <div class="card">
+        <div class="ic">📲</div>
+        <h3>Chuẩn 8 khối tâm lý chốt đơn Zalo &amp; Điện thoại</h3>
+        <p>Tối ưu riêng cho hành vi mua hàng của người Việt trên smartphone: Hero 2 cột rõ ưu đãi, chứng thực nổi, bảng 3 gói giá neo tâm lý, FAQ giải tỏa nghi ngại và nút Nhắn Zalo/Gọi nổi theo ngón tay cái.</p>
+      </div>
+      <div class="card">
+        <div class="ic">🤝</div>
+        <h3>Kỹ sư thật tinh chỉnh 1-1 theo ảnh thật của Shop</h3>
+        <p>Không bỏ mặc bạn tự loay hoay kéo thả. Anh Lê Thái Bình Dương cùng đội ngũ Deta trực tiếp xử lý ảnh sản phẩm, viết copywriting sắc bén, trỏ tên miền <code>.vn/.com</code> và cài Pixel đo lường.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="bang-gia">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Chi phí minh bạch · Trả 1 lần sở hữu vĩnh viễn</span>
+      <h2>Bảng gói Thiết Kế &amp; Triển Khai Trọn Gói (Done-For-You)</h2>
+      <p>Không phí ẩn hàng tháng. Bạn toàn quyền sở hữu mã nguồn, kịch bản AI và tên miền riêng.</p>
+    </div>
+    <div class="card" style="margin-bottom:20px;border:1.5px solid rgba(16,185,129,.45);background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(15,25,45,.92));display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px">
+      <div style="min-width:260px;flex:1">
+        <span style="display:inline-block;font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;background:linear-gradient(135deg,#10B981,#0EA5E9);color:#fff;margin-bottom:6px">🤖 MỚI · GÓI BỘ NÃO CHATBOT CHỐT ĐƠN CHO SHOP ONLINE</span>
+        <h3 style="font-size:20px;margin-bottom:4px">Thiết Kế System Prompt, Kho Tri Thức &amp; Kịch Bản Chốt Đơn Riêng — <span style="color:#6EE7B7">290.000đ</span></h3>
+        <p style="font-size:14px;color:var(--muted)">Đội ngũ Deta đọc toàn bộ sản phẩm &amp; bảng giá của Shop, viết bộ <b>System Prompt chống bịa giá + 30 kịch bản xử lý khách chê đắt/ngập ngừng</b> theo giọng văn riêng và hướng dẫn gắn vào Fanpage/Zalo/Coze/Web trong ngày.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <a href="/tai-lieu/chatbot-chot-don" class="btn btn-soft" style="text-decoration:none">📘 Tự học 12 Bài (Đọc thử miễn phí · 79k)</a>
+        <button type="button" class="btn btn-soft" onclick="window.moChatDemoShop&&window.moChatDemoShop('shop-thoi-trang','','Sao giày bên shop bán 779k đắt hơn trên Shopee thế?')">💬 Chat thử Bot Demo</button>
+        <button type="button" class="btn btn-main pick-pkg" data-pkg="chatbot-290k">Chọn Gói Làm Hộ 290.000đ →</button>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="pkg">
+        <span class="pk-tag">Khởi động nhanh</span>
+        <h3>Landing Page Chốt Đơn 24h</h3>
+        <div class="pk-price">490.000đ</div>
+        <div class="pk-sub">Trọn gói 1 lần · Miễn phí hosting trọn đời</div>
+        <ul>
+          <li><b>✓</b> Thiết kế riêng 1 trang chuẩn 8 khối chốt đơn (Sáng Tinh Tế hoặc Tối Aurora) theo ảnh &amp; sản phẩm thật</li>
+          <li><b>✓</b> Cài đặt trọn gói lên Cloudflare Pages + hỗ trợ trỏ tên miền riêng (<code>.vn</code>, <code>.com</code>) có HTTPS</li>
+          <li><b>✓</b> Gắn nút Nhắn Zalo / Gọi điện nổi trên di động &amp; tối ưu thẻ SEO/OpenGraph chia sẻ Zalo nét cao</li>
+          <li><b>✓</b> Bảo hành chỉnh sửa giá bán / nội dung miễn phí</li>
+        </ul>
+        <button type="button" class="btn btn-soft pick-pkg" data-pkg="landing-490k">Chọn Gói 490.000đ →</button>
+      </div>
+
+      <div class="pkg hot">
+        <span class="hot-tag">🔥 ĐƯỢC CHỌN NHIỀU NHẤT</span>
+        <span class="pk-tag">Tăng trưởng bán hàng</span>
+        <h3>Combo Web + Pixel + 30 Ngày Content</h3>
+        <div class="pk-price">990.000đ</div>
+        <div class="pk-sub">Trọn gói cho Chủ Shop chạy Ads &amp; Xây kênh</div>
+        <ul>
+          <li><b>✓</b> <b>Trọn bộ quyền lợi Gói Landing Page Chốt Đơn 24h</b> (tốc độ Google Mobile &gt;95/100)</li>
+          <li><b>✓</b> Cài sẵn <b>Facebook Pixel / TikTok Pixel / Google Analytics</b> + Form đặt hàng báo đơn nhanh</li>
+          <li><b>✓</b> Thiết kế thêm <b>3 ảnh Banner sản phẩm / Quảng cáo</b> đồng bộ nhận diện trang đích</li>
+          <li><b>✓</b> Tặng bộ <b>30 ngày bài đăng Fanpage &amp; 15 kịch bản Hook TikTok</b> viết riêng cho Shop</li>
+          <li><b>✓</b> <b>Tặng 1 tuần treo Banner Đỉnh Dofollow</b> trên toàn bộ hệ thống <code>kiemtien.deta.vn</code></li>
+        </ul>
+        <button type="button" class="btn btn-main pick-pkg" data-pkg="combo-990k">Chọn Combo 990.000đ →</button>
+      </div>
+
+      <div class="pkg">
+        <span class="pk-tag">Tự động hóa doanh nghiệp</span>
+        <h3>Hệ Thống Công Cụ AI &amp; VietQR Riêng</h3>
+        <div class="pk-price">1.990.000đ</div>
+        <div class="pk-sub">Kiến trúc tự vận hành giống Deta AI Lab</div>
+        <ul>
+          <li><b>✓</b> Dựng <b>1 Micro-Tool AI phễu hút khách</b> (chấm điểm, tra cứu, báo giá tự động) hoặc <b>Chatbot AI 24/7</b> hiểu sản phẩm của bạn</li>
+          <li><b>✓</b> Tích hợp cổng thanh toán <b>VietQR + SePay Open Banking</b> tự động duyệt đơn trong 2 giây</li>
+          <li><b>✓</b> Trang quản trị <code>/admin</code> đo lường nguồn Traffic &amp; quản lý đơn hàng/khách hàng riêng</li>
+          <li><b>✓</b> Bàn giao 100% mã nguồn sạch + hướng dẫn vận hành 1-1</li>
+        </ul>
+        <button type="button" class="btn btn-soft pick-pkg" data-pkg="ai-system-1990k">Chọn Gói AI 1.990.000đ →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-alt" id="quy-trinh">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Nhanh gọn · Không rủi ro</span>
+      <h2>Quy trình 3 bước bàn giao trong 24 giờ</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <span class="step-no">BƯỚC 01 · 2 PHÚT</span>
+        <h3>Để lại SĐT Zalo &amp; Nhu cầu</h3>
+        <p>Điền biểu mẫu bên dưới. Kỹ sư phụ trách của Deta sẽ nhắn Zalo xác nhận hình ảnh sản phẩm, bảng giá và tông màu bạn ưng ý nhất.</p>
+      </div>
+      <div class="card">
+        <span class="step-no">BƯỚC 02 · 12–24 GIỜ</span>
+        <h3>Dựng bản chạy thật trên link Demo</h3>
+        <p>Đội ngũ viết nội dung chốt đơn, xử lý hình ảnh và gửi link trang chạy thật trên cả máy tính lẫn điện thoại để bạn duyệt trực tiếp.</p>
+      </div>
+      <div class="card">
+        <span class="step-no">BƯỚC 03 · BÀN GIAO</span>
+        <h3>Gắn tên miền chính thức &amp; Bàn giao</h3>
+        <p>Tinh chỉnh đến khi bạn hoàn toàn hài lòng, trỏ tên miền <code>.vn/.com</code>, gắn mã đo lường quảng cáo và bàn giao toàn bộ mã nguồn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="hoi-dap">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Giải đáp rõ ràng</span>
+      <h2>Câu hỏi thường gặp của Chủ Shop</h2>
+    </div>
+    <div class="faq-wrap">
+      <details class="faq" open>
+        <summary>1. Vì sao không tốn phí duy trì Hosting hay phí nền tảng hàng tháng?</summary>
+        <p>Khác với các nền tảng kéo thả thu phí thuê bao 150.000đ – 300.000đ/tháng (ngừng đóng tiền là mất trang), Deta Studio xuất trang thành mã nguồn chuẩn độc lập và cài thẳng lên Cloudflare Pages tài khoản của bạn — miễn phí băng thông trọn đời và chịu tải hàng chục nghìn người xem cùng lúc.</p>
+      </details>
+      <details class="faq">
+        <summary>2. Shop mình chưa có sẵn tên miền hay bài viết giới thiệu thì sao?</summary>
+        <p>Bạn chỉ cần gửi ảnh sản phẩm chụp bằng điện thoại và giá bán qua Zalo! Đội ngũ Deta sẽ tự viết toàn bộ lời chào hàng chuyển đổi cao và hướng dẫn bạn mua tên miền chính chủ (hoặc dùng tên miền phụ miễn phí ngay lập tức).</p>
+      </details>
+      <details class="faq">
+        <summary>3. Muốn tự làm miễn phí 0đ trước khi thuê gói trọn gói có được không?</summary>
+        <p>Hoàn toàn được! Bạn có thể dùng ngay <a href="/cong-cu/tao-landing-page" style="color:#6EE7B7;font-weight:700">Công cụ AI Tự Code Landing Page 0đ tại đây</a> để tải file <code>index.html</code> miễn phí. Chỉ khi nào bạn cần người thiết kế may đo theo ảnh thật, gắn tên miền &amp; cài Pixel trọn gói thì mới đặt Deta Studio B2B.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec-alt" id="dat-lich">
+  <div class="w">
+    <div class="form-shell">
+      <div style="text-align:center;margin-bottom:22px">
+        <span class="kicker" style="margin-bottom:8px">⚡ PHẢN HỒI QUA ZALO TRONG 15–30 PHÚT</span>
+        <h2 style="font-size:clamp(22px,3vw,30px);font-weight:900">Đăng Ký Nhận Tư Vấn 1-1 &amp; Dựng Bản Nháp</h2>
+        <p style="color:var(--muted);font-size:14.5px;margin-top:4px">Để lại Số điện thoại Zalo để anh Dương &amp; đội ngũ Deta liên hệ gửi phương án demo phù hợp nhất cho sản phẩm của bạn.</p>
+      </div>
+
+      <form id="b2b-form">
+        <div class="f-grid">
+          <div>
+            <label class="f-lbl" for="b2b-ten">Họ tên / Tên Shop của bạn *</label>
+            <input class="f-inp" id="b2b-ten" required maxlength="80" placeholder="Ví dụ: Anh Tuấn — Trà Thảo Mộc An Nhiên">
+          </div>
+          <div>
+            <label class="f-lbl" for="b2b-lh">Số điện thoại Zalo (hoặc Email) *</label>
+            <input class="f-inp" id="b2b-lh" required maxlength="120" placeholder="Ví dụ: 0909 123 456">
+          </div>
+        </div>
+
+        <div class="f-grid">
+          <div>
+            <label class="f-lbl" for="b2b-goi">Gói dịch vụ bạn đang quan tâm</label>
+            <select class="f-inp" id="b2b-goi">
+              <option value="chatbot-290k">🤖 Gói Bộ Não Chatbot &amp; Kịch Bản Chốt Đơn Cho Shop — 290.000đ</option>
+              <option value="landing-490k">🚀 Gói Landing Page Chốt Đơn 24h — 490.000đ</option>
+              <option value="combo-990k" selected>🔥 Combo Landing Page + Pixel + 30 Ngày Content + Banner — 990.000đ</option>
+              <option value="ai-system-1990k">🤖 Hệ thống Micro-Tool AI / Chatbot + VietQR SePay — 1.990.000đ</option>
+              <option value="tu-van-rieng">💬 Cần tư vấn giải pháp thiết kế riêng theo yêu cầu</option>
+            </select>
+          </div>
+          <div>
+            <label class="f-lbl" for="b2b-link">Link Web / Fanpage / Shopee hiện tại (nếu có)</label>
+            <input class="f-inp" id="b2b-link" maxlength="240" placeholder="https://facebook.com/... hoặc bỏ trống">
+          </div>
+        </div>
+
+        <div style="margin-bottom:18px">
+          <label class="f-lbl" for="b2b-chu">Mô tả ngắn sản phẩm, mức giá bán hoặc mong muốn của bạn</label>
+          <textarea class="f-inp" id="b2b-chu" rows="3" maxlength="800" placeholder="Ví dụ: Shop mình bán combo yến chưng tươi 390k-890k, muốn làm trang tông sáng sang trọng có nút đặt qua Zalo và gắn Pixel chạy quảng cáo Facebook…"></textarea>
+        </div>
+
+        <button type="submit" id="b2b-submit" class="btn btn-main" style="width:100%;padding:15px;font-size:16px">📨 Gửi Yêu Cầu Tư Vấn 1-1 Qua Zalo (Miễn Phí)</button>
+      </form>
+
+      <div id="b2b-done" hidden style="margin-top:18px;padding:20px;border-radius:18px;background:rgba(16,185,129,.14);border:1.5px solid #10B981"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    © 2026 <b>Deta AI Lab &amp; Deta Studio B2B</b> (<a href="/" style="color:#6EE7B7">kiemtien.deta.vn</a>) · Vận hành bởi Lê Thái Bình Dương · <a href="/#khu-cong-cu" style="color:#38BDF8">Dùng 9 Công cụ AI Miễn Phí 0đ →</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var qs = new URLSearchParams(location.search);
+  var nguon = qs.get('nguon') || 'b2b-direct';
+  if (qs.get('goi') && $('b2b-goi')) {
+    var g = qs.get('goi');
+    for (var i = 0; i < $('b2b-goi').options.length; i++) {
+      if ($('b2b-goi').options[i].value === g) { $('b2b-goi').selectedIndex = i; break; }
+    }
+  }
+  if (qs.get('shop')) {
+    if ($('b2b-link') && /^https?:\/\//i.test(qs.get('shop'))) $('b2b-link').value = qs.get('shop');
+    else if ($('b2b-ten')) $('b2b-ten').value = qs.get('shop');
+  }
+
+  document.querySelectorAll('.pick-pkg').forEach(function(b){
+    b.onclick = function(){
+      var pkg = b.dataset.pkg;
+      if ($('b2b-goi')) $('b2b-goi').value = pkg;
+      $('dat-lich').scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(function(){ if ($('b2b-ten')) $('b2b-ten').focus(); }, 450);
+    };
+  });
+
+  function esc(s){
+    return String(s || '').replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  $('b2b-form').onsubmit = function(ev){
+    if (ev) ev.preventDefault();
+    var ten = ($('b2b-ten').value || '').trim();
+    var lh = ($('b2b-lh').value || '').trim();
+    var goi = $('b2b-goi').value;
+    var link = ($('b2b-link').value || '').trim();
+    var chu = ($('b2b-chu').value || '').trim();
+    if (lh.length < 6) {
+      alert('Bạn vui lòng nhập Số điện thoại Zalo (tối thiểu 6 ký tự) để đội ngũ Deta liên hệ nhé!');
+      $('b2b-lh').focus();
+      return false;
+    }
+    var bt = $('b2b-submit');
+    bt.disabled = true;
+    var oldTxt = bt.textContent;
+    bt.textContent = '⏳ Đang ghi nhận hồ sơ ưu tiên…';
+
+    fetch('/api/b2b/dang-ky', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        ho_ten: ten,
+        lien_he: lh,
+        goi: goi,
+        link_hien_tai: link,
+        ghi_chu: chu,
+        nguon: nguon
+      })
+    }).then(function(r){ return r.json(); }).then(function(res){
+      bt.disabled = false; bt.textContent = oldTxt;
+      if (!res.ok) { alert(res.loi || 'Chưa gửi được yêu cầu, bạn thử lại nhé.'); return; }
+      var done = $('b2b-done');
+      done.hidden = false;
+      done.innerHTML =
+        '<div style="font-weight:900;font-size:17px;color:#6EE7B7;margin-bottom:6px">✅ Đã nhận yêu cầu tư vấn của ' + esc(ten || 'bạn') + ' (Mã hồ sơ #' + res.lead_id + ')!</div>' +
+        '<p style="font-size:14px;color:#E2E8F0;margin-bottom:12px">Anh Dương &amp; đội ngũ Deta đã nhận thông tin liên hệ <b>' + esc(lh) + '</b> và sẽ nhắn Zalo trao đổi phương án demo sớm nhất.</p>' +
+        '<div style="padding-top:12px;border-top:1px dashed rgba(255,255,255,.18)">' +
+          '<div style="font-size:13.2px;color:var(--muted);margin-bottom:9px">⚡ <b>Tùy chọn ưu tiên (Không bắt buộc):</b> Nếu bạn muốn khóa lịch kỹ sư bắt tay dựng bản nháp ngay lập tức trong ca hôm nay, có thể quét đặt cọc giữ suất <b>100.000đ</b> (trừ thẳng vào chi phí gói):</div>' +
+          '<button type="button" id="btn-coc-100k" class="btn btn-soft" style="font-size:13.5px;padding:9px 16px;border-color:#6EE7B7;color:#6EE7B7">💼 Lấy mã VietQR Đặt Cọc Giữ Lịch Ưu Tiên 100.000đ</button>' +
+          '<div id="b2b-qr-box" hidden style="text-align:center;margin-top:14px;padding:14px;border-radius:14px;background:rgba(6,12,24,.88)"></div>' +
+        '</div>';
+
+      var btCoc = $('btn-coc-100k');
+      if (btCoc) {
+        btCoc.onclick = function(){
+          btCoc.disabled = true;
+          fetch('/api/don', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              loai: 'ban-hang',
+              mon: 'coc-b2b-100k',
+              ten: ten.slice(0, 30),
+              loi_nhan: 'Coc B2B #' + res.lead_id + ' (' + lh.slice(0, 20) + ')',
+              nguon: 'b2b-coc'
+            })
+          }).then(function(r2){ return r2.json(); }).then(function(o){
+            btCoc.disabled = false;
+            if (!o.qr) return;
+            var qb = $('b2b-qr-box'); qb.hidden = false;
+            qb.innerHTML =
+              '<img src="' + esc(o.qr) + '" alt="VietQR Cọc B2B 100.000đ" style="max-width:220px;width:100%;background:#fff;padding:9px;border-radius:14px;border:2px solid #10B981">' +
+              '<p style="font-weight:800;font-size:14px;margin:8px 0 3px">📲 Quét cọc giữ lịch ưu tiên: <span style="color:#6EE7B7">' + o.so_tien.toLocaleString('vi-VN') + 'đ</span> · Nội dung: <span style="color:#FDE68A">' + esc(o.noi_dung) + '</span></p>' +
+              '<p style="font-size:12.5px;color:var(--muted)">Tự động xác nhận trong 2 giây qua SePay Open Banking &amp; ưu tiên xếp lịch kỹ sư ngay hôm nay!</p>';
+            var d = 0, tm = setInterval(function(){
+              d++;
+              fetch('/api/don/' + o.ma + '?k=' + o.k, {cache:'no-store'}).then(function(r3){ return r3.json(); }).then(function(st){
+                if (st.trang_thai === 'xong') {
+                  clearInterval(tm);
+                  qb.innerHTML = '<div style="font-weight:900;color:#6EE7B7;font-size:16px">🎉 ĐÃ NHẬN CỌC ƯU TIÊN 100.000Đ! Hồ sơ #' + res.lead_id + ' đã được đẩy lên đầu hàng đợi kỹ sư hôm nay!</div>';
+                }
+              }).catch(function(){});
+              if (d > 360) clearInterval(tm);
+            }, 3000);
+          });
+        };
+      }
+      done.scrollIntoView({behavior:'smooth', block:'center'});
+    }).catch(function(){
+      bt.disabled = false; bt.textContent = oldTxt;
+      alert('Kết nối tạm gián đoạn, bạn bấm gửi lại giúp mình nhé!');
+    });
+    return false;
+  };
+})();
+</script>
+<link rel="stylesheet" href="/deta-chat.css?v=5"><script src="/deta-chat.js?v=5" defer></script>
+</body>
+</html>

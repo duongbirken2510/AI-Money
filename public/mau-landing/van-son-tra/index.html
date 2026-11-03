@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vân Sơn Trà · Trà Shan Tuyết Cổ Thụ Tây Côn Lĩnh — Showcase Deta AI</title>
+<meta name="description" content="Trà Shan Tuyết cổ thụ trên đỉnh Tây Côn Lĩnh 1.800m: búp trà phủ tuyết trắng tự nhiên, sao tay chảo gang, vị chát dịu hậu ngọt sâu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F0;--card:#FFFFFF;--surface:#F3ECE0;
+  --ink:#261C15;--muted:#68574B;--line:#E5D9C8;
+  --tea:#2D5A4C;--tea-dark:#1F4237;--amber:#C57B27;--amber-soft:#FDF3E4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.68 "Be Vietnam Pro",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:"Lora",Georgia,serif;line-height:1.18;margin:0}
+img{max-width:100%;display:block}
+a{color:inherit}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* Thanh thông báo Showcase Deta AI */
+.sc-bar{
+  background:linear-gradient(90deg,#1F4237,#2D5A4C,#8C5319);color:#fff;
+  font-size:13.5px;padding:9px 16px;text-align:center;font-weight:600
+}
+.sc-bar a{
+  display:inline-block;margin-left:10px;padding:4px 12px;border-radius:999px;
+  background:#fff;color:#1F4237;font-weight:800;text-decoration:none;font-size:12.5px
+}
+
+/* Topbar kính mờ */
+.topbar{
+  position:sticky;top:0;z-index:25;
+  background:rgba(251,247,240,.90);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)
+}
+.topbar .w{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:"Lora",serif;font-weight:700;font-size:22px}
+.brand-ic{width:38px;height:38px;border-radius:50%;background:var(--tea);color:#fff;display:grid;place-items:center;font-size:18px}
+.menu{display:flex;gap:26px;font-weight:600;font-size:15px;color:var(--muted)}
+.menu a{text-decoration:none;transition:color .15s}
+.menu a:hover{color:var(--tea)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 24px;border-radius:999px;font-weight:700;font-size:15.5px;
+  text-decoration:none;border:0;cursor:pointer;transition:transform .16s,box-shadow .16s
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-main{background:var(--tea);color:#fff;box-shadow:0 12px 26px -8px rgba(45,90,76,.48)}
+.btn-main:hover{background:var(--tea-dark)}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+
+/* Split Hero */
+.hero{padding:52px 0 64px}
+.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:46px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--tea);
+  background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px
+}
+.hero h1{font-size:clamp(34px,5vw,56px);margin:18px 0 16px;letter-spacing:-.015em}
+.hero h1 em{color:var(--amber);font-style:italic}
+.lead{font-size:17.5px;color:var(--muted);margin:0 0 26px;max-width:530px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.facts b{display:block;font-family:"Lora",serif;font-size:27px;color:var(--tea)}
+.facts span{font-size:13.5px;color:var(--muted)}
+.hero-media{position:relative}
+.hero-media img{
+  width:100%;aspect-ratio:4/3.4;object-fit:cover;border-radius:28px;
+  box-shadow:0 32px 64px -26px rgba(38,28,21,.42);border:1px solid var(--line)
+}
+.stamp{
+  position:absolute;left:-18px;bottom:22px;background:#fff;border:1px solid var(--line);
+  border-radius:18px;padding:13px 18px;box-shadow:0 16px 34px -12px rgba(38,28,21,.28);
+  max-width:270px;font-size:13.5px;line-height:1.45
+}
+.stamp b{display:block;font-size:15px;color:var(--tea);margin-bottom:2px}
+
+section{padding:68px 0}
+.sec-head{text-align:center;max-width:650px;margin:0 auto 40px}
+.sec-head .sub-k{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:8px}
+.sec-head h2{font-size:clamp(28px,3.8vw,40px);margin-bottom:12px}
+.sec-head p{margin:0;color:var(--muted)}
+
+/* 3 Tinh hoa */
+.pillars{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pillar{background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:28px}
+.pillar .ic{width:48px;height:48px;border-radius:14px;background:var(--amber-soft);display:grid;place-items:center;font-size:23px;margin-bottom:16px}
+.pillar h3{font-size:21px;margin-bottom:9px}
+.pillar p{margin:0;color:var(--muted);font-size:15px}
+
+/* Bộ sưu tập 3 gói trà */
+.pkg{
+  background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;
+  display:flex;flex-direction:column;position:relative;box-shadow:0 12px 30px -18px rgba(38,28,21,.15)
+}
+.pkg.hot{border:2px solid var(--tea);box-shadow:0 22px 46px -18px rgba(45,90,76,.28);transform:translateY(-4px)}
+.hot-tag{
+  position:absolute;top:-13px;left:24px;background:var(--amber);color:#fff;
+  font-size:12px;font-weight:800;padding:4px 13px;border-radius:999px;letter-spacing:.04em
+}
+.pkg .loai{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.pkg h3{font-size:23px;margin:6px 0 8px}
+.pkg .gia{font-family:"Lora",serif;font-size:32px;font-weight:700;color:var(--tea);margin:6px 0 14px}
+.pkg .gia small{font-family:"Be Vietnam Pro",sans-serif;font-size:14px;color:var(--muted);font-weight:500}
+.pkg ul{list-style:none;padding:0;margin:0 0 22px;flex:1}
+.pkg li{padding:7px 0;border-bottom:1px dashed var(--line);font-size:14.5px;color:var(--ink)}
+.pkg li:last-child{border-bottom:0}
+
+/* Quy trình pha & Đánh giá */
+.steps{background:var(--surface)}
+.step-num{font-family:"Lora",serif;font-size:34px;font-weight:700;color:var(--amber);line-height:1;margin-bottom:10px}
+.review{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px}
+.stars{color:#D97706;font-size:15px;letter-spacing:2px;margin-bottom:10px}
+.review p{margin:0 0 14px;font-style:italic;color:var(--ink)}
+.review b{font-size:14.5px;display:block}
+.review span{font-size:13px;color:var(--muted)}
+
+/* FAQ */
+.faq-wrap{max-width:780px;margin:0 auto}
+details.faq{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin-bottom:12px}
+details.faq summary{font-weight:700;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-size:22px;color:var(--tea);font-weight:600}
+details.faq[open] summary::after{content:"−"}
+details.faq p{margin:12px 0 0;color:var(--muted);font-size:15px}
+
+/* Khối chốt cuối */
+.cta-end{
+  background:linear-gradient(135deg,#1F4237,#2D5A4C);color:#fff;
+  border-radius:30px;padding:52px 32px;text-align:center;margin:20px 0 64px
+}
+.cta-end h2{font-size:clamp(28px,4vw,42px);margin-bottom:12px;color:#fff}
+.cta-end p{max-width:580px;margin:0 auto 26px;color:rgba(255,255,255,.86);font-size:17px}
+.cta-end .btn-amber{background:var(--amber);color:#fff;box-shadow:0 14px 28px -8px rgba(0,0,0,.35)}
+
+footer{border-top:1px solid var(--line);padding:28px 0 48px;text-align:center;color:var(--muted);font-size:14px}
+.float-zalo{
+  position:fixed;right:18px;bottom:18px;z-index:40;
+  background:var(--tea);color:#fff;text-decoration:none;font-weight:800;font-size:14.5px;
+  padding:13px 20px;border-radius:999px;box-shadow:0 14px 30px -6px rgba(31,66,55,.55);
+  display:flex;align-items:center;gap:8px
+}
+@media(max-width:860px){
+  .menu{display:none}
+  .hero-grid,.grid-3{grid-template-columns:1fr}
+  .stamp{position:static;margin-top:12px;max-width:none}
+  .pkg.hot{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="sc-bar" id="deta-sc-bar">
+  ✨ <b>Mẫu Showcase #1 (Phong cách Tinh tế &amp; Thủ công)</b> do Deta AI tự thiết kế &amp; code 100%
+  <a href="/cong-cu/tao-landing-page?mau=van-son-tra">🚀 Tạo trang như vầy cho sản phẩm của bạn (29k) →</a>
+</div>
+
+<header class="topbar">
+  <div class="w">
+    <a class="brand" href="#"><span class="brand-ic">🍃</span>Vân Sơn Trà</a>
+    <nav class="menu">
+      <a href="#tinh-hoa">Tinh hoa cổ thụ</a>
+      <a href="#bo-suu-tap">Bảng giá &amp; Quà biếu</a>
+      <a href="#pha-tra">Nghệ thuật pha</a>
+      <a href="#hoi-dap">Hỏi đáp</a>
+    </nav>
+    <a class="btn btn-main" style="padding:10px 18px;font-size:14px" href="#dat-tra">Đặt trà vụ mới</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="w hero-grid">
+    <div>
+      <span class="kicker">🌿 Thu hái thủ công đỉnh Tây Côn Lĩnh · 1.800m</span>
+      <h1>Một chén sương mây Hà Giang, <em>ngọt hậu sâu</em> suốt sáu tuần nước</h1>
+      <p class="lead">Những búp trà Shan Tuyết phủ lông trắng tự nhiên từ rừng trà cổ thụ hơn 200 năm tuổi. Sao tay trên chảo gang củi nhãn bởi nghệ nhân bản địa, không hương liệu, không chất bảo quản.</p>
+      <div class="acts">
+        <a class="btn btn-main" href="#bo-suu-tap">Chọn phẩm trà vụ Xuân →</a>
+        <a class="btn btn-ghost" href="#tinh-hoa">Khám phá vùng nguyên liệu</a>
+      </div>
+      <div class="facts">
+        <div><b>200+ năm</b><span>Tuổi đời cây trà cổ thụ</span></div>
+        <div><b>6 nước</b><span>Giữ trọn hương cốm &amp; mật rừng</span></div>
+        <div><b>4.9 ★</b><span>Từ 1.400+ khách thưởng trà</span></div>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="/mau-landing/assets/van-son-tra-hero.webp" alt="Ấm trà gốm rót nước trà Shan Tuyết vàng óng bên hiên núi Tây Côn Lĩnh">
+      <div class="stamp">
+        <b>🍃 Mẻ trà sương sớm mới ra lò</b>
+        Chỉ 45kg búp 1 tôm 1 lá mỗi vụ · Đóng hũ thiếc hút chân không kèm thẻ truy xuất gốc cây.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars" id="tinh-hoa">
+  <div class="w">
+    <div class="sec-head">
+      <span class="sub-k">Vì sao người sành trà chọn Vân Sơn</span>
+      <h2>Ba nguyên tắc giữ trọn linh khí núi rừng</h2>
+      <p>Chúng tôi không trộn búp trà đồi thấp hay ướp hương hóa học. Mỗi ấm trà là hương vị nguyên bản của mây mù và sương đá Hà Giang.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pillar">
+        <div class="ic">🏔️</div>
+        <h3>Sinh trưởng hoang dã 1.800m</h3>
+        <p>Rễ cây cắm sâu vào tầng đá phiến dưới tán rừng già quanh năm mây phủ, tích tụ hàm lượng L-Theanine tự nhiên cao gấp 3 lần trà thường — uống êm dịu, không gây mất ngủ cồn cào.</p>
+      </div>
+      <div class="pillar">
+        <div class="ic">🔥</div>
+        <h3>Sao chảo gang củi nhãn</h3>
+        <p>Nghệ nhân người Dao trực tiếp cảm nhận nhiệt độ bằng đôi tay trần trên chảo gang, đánh thức hương cốm non và khóa chặt lớp tuyết bạc trên từng búp trà.</p>
+      </div>
+      <div class="pillar">
+        <div class="ic">🎁</div>
+        <h3>Kiểm thử trước khi thanh toán</h3>
+        <p>Mỗi đơn hàng đều gửi kèm 1 gói thử 10g bên ngoài hộp chính. Bạn pha thử đúng vị thanh khiết, ngọt hậu như cam kết mới nhận hộp lớn — không ưng hoàn trả 100% miễn phí.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bo-suu-tap">
+  <div class="w">
+    <div class="sec-head">
+      <span class="sub-k">Bộ sưu tập vụ Xuân 2026</span>
+      <h2>Chọn phẩm trà hợp gu thưởng thức của bạn</h2>
+      <p>Miễn phí giao nhanh toàn quốc cho đơn từ 2 hộp · Tặng kèm kẹp tre gắp trà thủ công.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pkg">
+        <span class="loai">Thanh tao · Hương hoa rừng</span>
+        <h3>Bạch Trà Mây Sớm</h3>
+        <div class="gia">285.000đ <small>/ hũ 100g</small></div>
+        <ul>
+          <li>✓ 100% búp đinh 1 tôm phủ tuyết trắng dày</li>
+          <li>✓ Nước trà vàng ánh trăng, vị thanh mát nhẹ nhàng</li>
+          <li>✓ Rất hợp thưởng trà sáng sớm hoặc chiều tĩnh tâm</li>
+          <li>✓ Tặng kèm gói dùng thử 10g bên ngoài</li>
+        </ul>
+        <a class="btn btn-ghost" href="#dat-tra">Đặt Bạch Trà qua Zalo</a>
+      </div>
+
+      <div class="pkg hot">
+        <span class="hot-tag">🔥 ĐƯỢC CHỌN NHIỀU NHẤT</span>
+        <span class="loai">Đậm đà · Hương mật ong rừng</span>
+        <h3>Lục Trà Cổ Thụ Tuyết Sơn</h3>
+        <div class="gia">360.000đ <small>/ hũ 150g</small></div>
+        <ul>
+          <li>✓ Tuyển chọn búp 1 tôm 1 lá cây trên 200 năm tuổi</li>
+          <li>✓ Tiền chát dịu êm, hậu ngọt sâu đọng cổ họng 30 phút</li>
+          <li>✓ Bền bỉ suốt 6–7 tuần nước không nhạt vị</li>
+          <li>✓ Hũ thiếc 2 lớp nắp kín khí + Túi giấy mỹ thuật</li>
+        </ul>
+        <a class="btn btn-main" href="#dat-tra">Đặt Lục Trà Cổ Thụ →</a>
+      </div>
+
+      <div class="pkg">
+        <span class="loai">Sang trọng · Quà biếu đối tác</span>
+        <h3>Hộp Gỗ Thông Song Vân</h3>
+        <div class="gia">790.000đ <small>/ bộ đôi 300g</small></div>
+        <ul>
+          <li>✓ Gồm 1 hũ Bạch Trà Mây Sớm + 1 hũ Hồng Trà Ủ Mật</li>
+          <li>✓ Hộp gỗ thông khắc laser tên người nhận miễn phí</li>
+          <li>✓ Kèm thiệp viết tay &amp; cẩm nang pha trà chuẩn nghệ nhân</li>
+          <li>✓ Xuất hóa đơn VAT đầy đủ cho doanh nghiệp</li>
+        </ul>
+        <a class="btn btn-ghost" href="#dat-tra">Đặt Hộp Quà Biếu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="pha-tra">
+  <div class="w">
+    <div class="sec-head">
+      <span class="sub-k">Thưởng thức trọn vị</span>
+      <h2>Ba bước đánh thức búp trà Shan Tuyết</h2>
+    </div>
+    <div class="grid-3" style="margin-bottom:44px">
+      <div class="pillar" style="background:#fff">
+        <div class="step-num">01. Nhiệt nước 88–92°C</div>
+        <h3>Tráng ấm &amp; Đánh thức trà</h3>
+        <p>Dùng 5g trà cho ấm 180ml. Rót nước sôi hạ nhiệt 90°C ngập cánh trà rồi rót ra ngay trong 3 giây để búp trà hé mở hương núi rừng.</p>
+      </div>
+      <div class="pillar" style="background:#fff">
+        <div class="step-num">02. Ủ đúng 35 giây</div>
+        <h3>Chiết xuất chén trà vàng mật</h3>
+        <p>Châm nước lần hai, đợi đúng 35–40 giây rồi rót hết ra tống chuyên trà để giữ cánh trà không bị ngâm quá lửa.</p>
+      </div>
+      <div class="pillar" style="background:#fff">
+        <div class="step-num">03. Thưởng 6 tuần nước</div>
+        <h3>Cảm vị ngọt hậu lan tỏa</h3>
+        <p>Nhấp từng ngụm nhỏ để hương cốm quyện mật rừng lan khắp vòm họng. Mỗi tuần nước sau cộng thêm 10 giây ủ.</p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“Mình uống trà Thái Nguyên 15 năm, chuyển qua Lục Trà Tuyết Sơn của Vân Sơn bị thuyết phục hoàn toàn. Nước 5 vẫn thơm ngọt dịu và tối ngủ rất ngon.”</p>
+        <b>Anh Hoàng Minh Tuấn (44 tuổi)</b>
+        <span>Kiến trúc sư · Quận 3, TP.HCM</span>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“Đặt 12 hộp gỗ Song Vân khắc tên tặng đối tác dịp cuối quý, ai nhận cũng khen hộp chỉn chu tinh tế và vị Hồng trà thơm mùi mật rừng rất lạ.”</p>
+        <b>Chị Lê Thanh Thảo</b>
+        <span>Giám đốc Nhân sự · Cầu Giấy, Hà Nội</span>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>“Thích nhất chính sách gửi kèm gói 10g pha thử bên ngoài. Sự tử tế và tự tin vào chất lượng thật khiến mình trở thành khách quen suốt 1 năm nay.”</p>
+        <b>Bác Trần Đình Khôi</b>
+        <span>Cán bộ hưu trí · Đà Nẵng</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hoi-dap">
+  <div class="w">
+    <div class="sec-head">
+      <span class="sub-k">Giải đáp nhanh</span>
+      <h2>Câu hỏi thường gặp trước khi đặt trà</h2>
+    </div>
+    <div class="faq-wrap">
+      <details class="faq" open>
+        <summary>Uống trà Shan Tuyết cổ thụ buổi chiều tối có bị mất ngủ không?</summary>
+        <p>Khác với trà đồi thấp bón phân hóa học dễ gây tim đập nhanh, trà Shan Tuyết cổ thụ sống dưới sương mù dày giàu L-Theanine giúp thư giãn thần kinh êm dịu. Nếu mới làm quen, bạn có thể chọn Bạch Trà Mây Sớm cực kỳ êm nhẹ.</p>
+      </details>
+      <details class="faq">
+        <summary>Thời gian giao hàng về Hà Nội và TP.HCM mất bao lâu?</summary>
+        <p>Nội thành Hà Nội nhận ngay trong ngày (2–4 tiếng). TP.HCM và các tỉnh thành khác nhận trong 24–48 giờ, được mở kiểm tra và pha gói thử 10g trước khi thanh toán.</p>
+      </details>
+      <details class="faq">
+        <summary>Trà bảo quản được bao lâu sau khi mở nắp hũ thiếc?</summary>
+        <p>Hũ thiếc 2 tầng nắp của Vân Sơn giữ trọn hương trà 12 tháng nơi khô mát. Đặc biệt với Bạch Trà cổ thụ, càng để lâu năm hương vị càng chuyển ngọt đằm như thuốc quý.</p>
+      </details>
+    </div>
+
+    <div class="cta-end" id="dat-tra">
+      <h2>Thưởng thức chén trà mây Tây Côn Lĩnh ngay tuần này</h2>
+      <p>Nhắn Zalo để nghệ nhân tư vấn đúng phẩm trà hợp gu của bạn — tặng kèm gói pha thử 10g &amp; miễn phí giao hàng từ 2 hũ.</p>
+      <a class="btn btn-amber" href="/cong-cu/tao-landing-page?mau=van-son-tra">💬 Nhắn Zalo Đặt Trà (Demo Showcase Deta AI) →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <b>Vân Sơn Trà</b> · Thương hiệu mẫu giả định trong bộ <b>Showcase Landing Page của Deta AI Lab (kiemtien.deta.vn)</b>.<br>
+    Bạn muốn sở hữu 1 trang Landing Page chỉn chu như thế này cho sản phẩm của mình? <a href="/cong-cu/tao-landing-page" style="color:var(--tea);font-weight:700">Dựng xem trước miễn phí ngay tại đây (tải file .html sạch chỉ 29.000đ)</a>.
+  </div>
+</footer>
+
+<a class="float-zalo" href="/cong-cu/tao-landing-page?mau=van-son-tra">🚀 Dùng mẫu này cho SP của bạn</a>
+<script>if(new URLSearchParams(location.search).get('clean')==='1'){var b=document.getElementById('deta-sc-bar');if(b)b.remove();}</script>
+</body>
+</html>

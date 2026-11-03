@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DetaSpeak AI · Gia Sư Luyện Phản Xạ Tiếng Anh 1-1 24/7 — Showcase Deta AI</title>
+<meta name="description" content="Luyện nói tiếng Anh phản xạ 1-1 cùng AI giọng bản xứ 24/7: sửa lỗi phát âm từng âm tiết IPA trong 0.4 giây, nhập vai 120 tình huống đi làm & phỏng vấn.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050B16;--card:rgba(17,27,46,.72);--card-solid:#0E182B;
+  --line:rgba(148,163,184,.16);--ink:#F8FAFC;--muted:#94A3B8;
+  --mint:#10B981;--mint-light:#34D399;--cyan:#38BDF8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background-color:var(--bg);
+  background-image:
+    radial-gradient(880px 460px at 14% -4%,rgba(16,185,129,.20),transparent 62%),
+    radial-gradient(820px 440px at 88% 0%,rgba(56,189,248,.18),transparent 60%);
+  color:var(--ink);font:400 16px/1.68 "Be Vietnam Pro",system-ui,sans-serif;overflow-x:hidden
+}
+h1,h2,h3{line-height:1.16;margin:0;letter-spacing:-.025em}
+img{max-width:100%;display:block}
+a{color:inherit}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+.mono{font-family:"JetBrains Mono",monospace}
+
+/* Thanh thông báo Showcase */
+.sc-bar{
+  background:linear-gradient(90deg,#059669,#0284C7);color:#fff;
+  font-size:13.5px;padding:9px 16px;text-align:center;font-weight:600
+}
+.sc-bar a{
+  display:inline-block;margin-left:10px;padding:4px 12px;border-radius:999px;
+  background:#fff;color:#065F46;font-weight:800;text-decoration:none;font-size:12.5px
+}
+
+.topbar{
+  position:sticky;top:0;z-index:25;
+  background:rgba(5,11,22,.82);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)
+}
+.topbar .w{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:900;font-size:20px;letter-spacing:-.02em}
+.brand-ic{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--mint),var(--cyan));display:grid;place-items:center;font-size:18px;color:#03131A}
+.menu{display:flex;gap:26px;font-weight:600;font-size:14.5px;color:var(--muted)}
+.menu a{text-decoration:none;transition:color .15s}
+.menu a:hover{color:var(--mint-light)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 25px;border-radius:999px;font-weight:800;font-size:15.5px;
+  text-decoration:none;border:0;cursor:pointer;transition:transform .16s,box-shadow .16s
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-glow{background:linear-gradient(135deg,var(--mint),#059669 55%,var(--cyan));color:#fff;box-shadow:0 12px 30px -6px rgba(16,185,129,.48)}
+.btn-glass{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line)}
+
+/* Split Hero */
+.hero{padding:58px 0 68px}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;
+  color:var(--mint-light);background:rgba(16,185,129,.12);
+  border:1px solid rgba(52,211,153,.32);padding:6px 14px;border-radius:999px
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mint-light);box-shadow:0 0 0 4px rgba(52,211,153,.22)}
+.hero h1{font-size:clamp(34px,5vw,56px);font-weight:900;margin:18px 0 16px}
+.grad-txt{background:linear-gradient(135deg,#34D399,#38BDF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lead{font-size:17.5px;color:var(--muted);margin:0 0 28px;max-width:540px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.stat-box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.stat-box b{display:block;font-size:25px;font-weight:800;color:var(--mint-light)}
+.stat-box span{font-size:13px;color:var(--muted)}
+
+.hero-card{position:relative}
+.hero-card img{
+  width:100%;aspect-ratio:4/3.3;object-fit:cover;border-radius:26px;
+  border:1px solid rgba(56,189,248,.28);box-shadow:0 28px 70px -20px rgba(16,185,129,.35)
+}
+.live-voice{
+  position:absolute;left:-18px;bottom:20px;right:24px;
+  background:rgba(10,18,34,.92);backdrop-filter:blur(14px);
+  border:1px solid rgba(52,211,153,.38);border-radius:18px;padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:0 18px 36px -12px rgba(0,0,0,.65)
+}
+.wave{display:flex;align-items:center;gap:4px;height:26px}
+.wave i{display:block;width:4px;border-radius:4px;background:linear-gradient(180deg,#34D399,#38BDF8);animation:bar 1.1s ease-in-out infinite alternate}
+.wave i:nth-child(1){height:10px;animation-delay:.1s}
+.wave i:nth-child(2){height:22px;animation-delay:.25s}
+.wave i:nth-child(3){height:15px;animation-delay:.4s}
+.wave i:nth-child(4){height:26px;animation-delay:.15s}
+.wave i:nth-child(5){height:12px;animation-delay:.35s}
+@keyframes bar{from{transform:scaleY(.45)}to{transform:scaleY(1.08)}}
+
+section{padding:68px 0}
+.sec-head{text-align:center;max-width:660px;margin:0 auto 42px}
+.sec-head .eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:8px}
+.sec-head h2{font-size:clamp(28px,3.8vw,42px);font-weight:900;margin-bottom:12px}
+.sec-head p{margin:0;color:var(--muted)}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.bento{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;transition:border-color .2s}
+.bento:hover{border-color:rgba(52,211,153,.45)}
+.bento .ic{width:48px;height:48px;border-radius:14px;background:rgba(16,185,129,.14);border:1px solid rgba(52,211,153,.28);display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+.bento h3{font-size:20px;font-weight:800;margin-bottom:9px}
+.bento p{margin:0;color:var(--muted);font-size:15px}
+
+/* Bảng giá SaaS */
+.tier{background:var(--card-solid);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column;position:relative}
+.tier.pro{border:2px solid var(--mint);background:linear-gradient(180deg,rgba(16,185,129,.13),var(--card-solid) 45%);box-shadow:0 24px 54px -20px rgba(16,185,129,.35)}
+.pro-badge{position:absolute;top:-13px;right:22px;background:linear-gradient(135deg,var(--mint),var(--cyan));color:#03131A;font-size:12px;font-weight:900;padding:4px 13px;border-radius:999px}
+.tier h3{font-size:21px;font-weight:800;margin:4px 0 10px}
+.price{font-size:36px;font-weight:900;margin:4px 0 16px;color:#fff}
+.price small{font-size:14px;color:var(--muted);font-weight:500}
+.tier ul{list-style:none;padding:0;margin:0 0 24px;flex:1}
+.tier li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:#E2E8F0}
+.tier li:last-child{border-bottom:0}
+
+.faq-wrap{max-width:780px;margin:0 auto}
+details.faq{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin-bottom:12px}
+details.faq summary{font-weight:800;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-size:22px;color:var(--mint-light)}
+details.faq[open] summary::after{content:"−"}
+details.faq p{margin:12px 0 0;color:var(--muted);font-size:15px}
+
+.cta-box{
+  margin:24px 0 64px;padding:52px 28px;border-radius:30px;text-align:center;
+  background:linear-gradient(135deg,rgba(16,185,129,.22),rgba(56,189,248,.16));
+  border:1px solid rgba(52,211,153,.35)
+}
+.cta-box h2{font-size:clamp(28px,4vw,42px);font-weight:900;margin-bottom:12px}
+.cta-box p{max-width:580px;margin:0 auto 26px;color:#CBD5E1;font-size:17px}
+
+footer{border-top:1px solid var(--line);padding:28px 0 48px;text-align:center;color:var(--muted);font-size:14px}
+.float-cta{
+  position:fixed;right:18px;bottom:18px;z-index:40;
+  background:linear-gradient(135deg,var(--mint),#0284C7);color:#fff;
+  text-decoration:none;font-weight:800;font-size:14.5px;padding:13px 20px;border-radius:999px;
+  box-shadow:0 14px 30px -6px rgba(16,185,129,.55)
+}
+@media(max-width:860px){
+  .menu{display:none}
+  .hero-grid,.grid-3,.stats{grid-template-columns:1fr}
+  .live-voice{position:static;margin-top:12px}
+}
+</style>
+</head>
+<body>
+<div class="sc-bar" id="deta-sc-bar">
+  ✨ <b>Mẫu Showcase #2 (Phong cách Công nghệ / SaaS / Khóa học)</b> do Deta AI tự thiết kế &amp; code 100%
+  <a href="/cong-cu/tao-landing-page?mau=detaspeak-ai">🚀 Tạo trang như vầy cho dịch vụ của bạn (29k) →</a>
+</div>
+
+<header class="topbar">
+  <div class="w">
+    <a class="brand" href="#"><span class="brand-ic">🎙️</span>DetaSpeak AI</a>
+    <nav class="menu">
+      <a href="#tinh-nang">Công nghệ sửa phát âm</a>
+      <a href="#hoc-phi">Bảng gói học phí</a>
+      <a href="#hoc-vien">Học viên thực tế</a>
+      <a href="#hoi-dap">Hỏi đáp</a>
+    </nav>
+    <a class="btn btn-glow" style="padding:10px 18px;font-size:14px" href="#hoc-thu">Học thử miễn phí</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="w hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span>AI Voice Engine thế hệ mới · Phản hồi 0.4 giây</span>
+      <h1>Xóa nỗi sợ mở miệng nói tiếng Anh <span class="grad-txt">chỉ với 15 phút mỗi tối</span></h1>
+      <p class="lead">Không còn ngại nói sai trước đám đông. Luyện hội thoại 1-1 bất kỳ lúc nào cùng Gia sư AI giọng Mỹ &amp; Anh chuẩn xác, chấm điểm từng âm tiết IPA và gợi ý cách diễn đạt tự nhiên như người bản xứ.</p>
+      <div class="acts">
+        <a class="btn btn-glow" href="#hoc-phi">Bắt đầu lộ trình 30 ngày →</a>
+        <a class="btn btn-glass" href="#tinh-nang">Xem cách AI sửa phát âm</a>
+      </div>
+      <div class="stats">
+        <div class="stat-box"><b class="mono">14.200+</b><span>Người đi làm đang luyện</span></div>
+        <div class="stat-box"><b class="mono">0.4s</b><span>Độ trễ hội thoại tự nhiên</span></div>
+        <div class="stat-box"><b class="mono">1/10</b><span>Chi phí so với gia sư 1-1</span></div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <img src="/mau-landing/assets/detaspeak-ai-hero.webp" alt="Giao diện cầu âm thanh AI 3D của DetaSpeak AI">
+      <div class="live-voice">
+        <div>
+          <div style="font-size:12px;color:var(--mint-light);font-weight:800">🎙️ ĐANG PHÂN TÍCH GIỌNG NÓI THỜI GIAN THỰC</div>
+          <div style="font-size:14px;font-weight:700;margin-top:2px">Độ chuẩn IPA: <span class="mono" style="color:#38BDF8">94/100</span> · Trọng âm tự nhiên</div>
+        </div>
+        <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tinh-nang">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Đột phá phương pháp</span>
+      <h2>Vì sao học ngữ pháp 10 năm vẫn đứng hình khi gặp người nước ngoài?</h2>
+      <p>Não bộ chỉ hình thành phản xạ nói khi bạn trực tiếp mở miệng đối đáp mỗi ngày trong môi trường không sợ bị phán xét.</p>
+    </div>
+    <div class="grid-3">
+      <div class="bento">
+        <div class="ic">🎯</div>
+        <h3>Chấm điểm từng âm tiết IPA</h3>
+        <p>Chỉ rõ âm đuôi (/s/, /t/, /ed/) hoặc trọng âm bạn vừa nuốt mất bằng màu trực quan và đọc mẫu chậm lại để bạn nhại chuẩn ngay lập tức.</p>
+      </div>
+      <div class="bento">
+        <div class="ic">💼</div>
+        <h3>120+ kịch bản đi làm thực chiến</h3>
+        <p>Từ họp Daily Standup ngành IT, thuyết trình báo cáo doanh số, đàm phán lương cho tới phỏng vấn tập đoàn đa quốc gia bằng tiếng Anh.</p>
+      </div>
+      <div class="bento">
+        <div class="ic">🌙</div>
+        <h3>Rảnh lúc nào mở mic lúc đó 24/7</h3>
+        <p>Không tốn thời gian di chuyển, không mất buổi khi bận họp đột xuất. Chỉ 15 phút trước khi đi ngủ trên điện thoại là hoàn thành bài luyện phản xạ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hoc-phi">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Đầu tư nhỏ · Đổi bước tiến sự nghiệp</span>
+      <h2>Chọn gói luyện phản xạ phù hợp với bạn</h2>
+      <p>Cam kết hoàn tiền 100% trong 7 ngày đầu nếu bạn cảm thấy không phù hợp — không hỏi lý do.</p>
+    </div>
+    <div class="grid-3">
+      <div class="tier">
+        <span style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase">Trải nghiệm nền tảng</span>
+        <h3>Gói Khởi Động 1 Tháng</h3>
+        <div class="price mono">199.000đ <small>/ tháng</small></div>
+        <ul>
+          <li>✓ Hội thoại AI không giới hạn 30 ngày</li>
+          <li>✓ Chấm điểm phát âm chuẩn IPA từng câu</li>
+          <li>✓ Mở khóa 40 chủ đề giao tiếp đời sống</li>
+          <li>✓ Báo cáo tiến bộ hằng tuần qua Zalo</li>
+        </ul>
+        <a class="btn btn-glass" href="#hoc-thu">Đăng ký Gói 1 Tháng</a>
+      </div>
+
+      <div class="tier pro">
+        <span class="pro-badge">⚡ TIẾT KIỆM 42% · HOT NHẤT</span>
+        <span style="font-size:12px;font-weight:800;color:var(--mint-light);text-transform:uppercase">Đủ mở miệng tự tin đi làm</span>
+        <h3>Lộ Trình Bứt Phá 6 Tháng</h3>
+        <div class="price mono">690.000đ <small>/ trọn 6 tháng</small></div>
+        <ul>
+          <li>✓ Không giới hạn thời lượng luyện nói 24/7</li>
+          <li>✓ Trọn bộ 120 kịch bản Tiếng Anh Công sở &amp; IT</li>
+          <li>✓ Chế độ Giả lập Phỏng vấn (Mock Interview)</li>
+          <li>✓ Lưu trữ lịch sử ghi âm để nghe lại sự tiến bộ</li>
+        </ul>
+        <a class="btn btn-glow" href="#hoc-thu">Kích hoạt Gói 6 Tháng →</a>
+      </div>
+
+      <div class="tier">
+        <span style="font-size:12px;font-weight:800;color:var(--cyan);text-transform:uppercase">Đầu tư một lần duy nhất</span>
+        <h3>Đặc Quyền VIP Trọn Đời</h3>
+        <div class="price mono">1.290.000đ <small>/ vĩnh viễn</small></div>
+        <ul>
+          <li>✓ Toàn bộ tính năng Gói Bứt Phá không phí gia hạn</li>
+          <li>✓ Tự tải CV/JD riêng để AI đóng vai nhà tuyển dụng</li>
+          <li>✓ Ưu tiên cập nhật giọng AI Anh - Mỹ - Úc mới nhất</li>
+          <li>✓ Tặng thêm 1 tài khoản phụ cho người thân</li>
+        </ul>
+        <a class="btn btn-glass" href="#hoc-thu">Sở hữu VIP Trọn Đời</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hoc-vien">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Kết quả người thật</span>
+      <h2>Học viên đi làm nói gì sau 30 ngày?</h2>
+    </div>
+    <div class="grid-3">
+      <div class="bento">
+        <div style="color:#FBBF24;margin-bottom:8px">★★★★★</div>
+        <p style="color:var(--ink);margin-bottom:14px">“Trước đây mỗi lần họp với khách Singapore là mình toát mồ hôi viết sẵn ra giấy. Luyện kịch bản Daily Standup trên DetaSpeak 3 tuần là tự bật ra câu trôi chảy.”</p>
+        <b>Nguyễn Quốc Bảo</b><br><span style="font-size:13px;color:var(--muted)">Backend Developer · TP.HCM</span>
+      </div>
+      <div class="bento">
+        <div style="color:#FBBF24;margin-bottom:8px">★★★★★</div>
+        <p style="color:var(--ink);margin-bottom:14px">“Tính năng giả lập phỏng vấn quá đỉnh! Mình dán JD vị trí Product Owner vào, AI hỏi xoáy đúng chuyên môn và sửa cách mình trả lời theo cấu trúc STAR.”</p>
+        <b>Phạm Thu Hà</b><br><span style="font-size:13px;color:var(--muted)">Product Owner · Hà Nội</span>
+      </div>
+      <div class="bento">
+        <div style="color:#FBBF24;margin-bottom:8px">★★★★★</div>
+        <p style="color:var(--ink);margin-bottom:14px">“Mẹ bỉm bận con nhỏ chỉ rảnh lúc 10h30 đêm, không trung tâm nào dạy giờ đó. Có DetaSpeak cắm tai nghe nói 15 phút mỗi tối tiện vô cùng.”</p>
+        <b>Trần Ngọc Mai</b><br><span style="font-size:13px;color:var(--muted)">Kế toán trưởng · Hải Phòng</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hoi-dap">
+  <div class="w">
+    <div class="sec-head">
+      <span class="eyebrow">Giải đáp thắc mắc</span>
+      <h2>Câu hỏi thường gặp</h2>
+    </div>
+    <div class="faq-wrap">
+      <details class="faq" open>
+        <summary>Mất gốc hoàn toàn, nghe chưa kịp thì học được không?</summary>
+        <p>Hoàn toàn được! Bạn có thể chỉnh tốc độ giọng AI xuống 0.8x, bật phụ đề song ngữ Anh - Việt ngay khi AI đang nói và bấm vào bất kỳ từ nào để xem nghĩa tức thì.</p>
+      </details>
+      <details class="faq">
+        <summary>Dùng được trên cả iPhone, Android và Máy tính chứ?</summary>
+        <p>Tài khoản đồng bộ 100% trên trình duyệt điện thoại iOS, Android và Laptop mà không bắt buộc cài ứng dụng nặng máy.</p>
+      </details>
+      <details class="faq">
+        <summary>Chính sách hoàn tiền 7 ngày hoạt động như thế nào?</summary>
+        <p>Trong 7 ngày đầu sau khi kích hoạt, nếu bạn thấy chưa phù hợp chỉ cần nhắn Zalo hỗ trợ 1 tin duy nhất, hệ thống hoàn lại 100% học phí về tài khoản ngân hàng trong 2 giờ.</p>
+      </details>
+    </div>
+
+    <div class="cta-box" id="hoc-thu">
+      <h2>Mở mic nói thử 15 phút miễn phí ngay tối nay</h2>
+      <p>Không cần thẻ tín dụng. Nhận ngay bài kiểm tra trình độ phản xạ 3 phút và lộ trình cá nhân hóa qua Zalo.</p>
+      <a class="btn btn-glow" href="/cong-cu/tao-landing-page?mau=detaspeak-ai">🎙️ Nhận tài khoản học thử (Demo Showcase Deta AI) →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <b>DetaSpeak AI</b> · Thương hiệu mẫu giả định trong bộ <b>Showcase Landing Page của Deta AI Lab (kiemtien.deta.vn)</b>.<br>
+    Bạn cần trang Landing Page hiện đại như thế này cho Khóa học, App hoặc Dịch vụ của mình? <a href="/cong-cu/tao-landing-page" style="color:var(--mint-light);font-weight:700">Tạo bản xem trước miễn phí ngay tại đây (tải code chỉ 29.000đ)</a>.
+  </div>
+</footer>
+
+<a class="float-cta" href="/cong-cu/tao-landing-page?mau=detaspeak-ai">🚀 Dùng mẫu này cho Dịch vụ của bạn</a>
+<script>if(new URLSearchParams(location.search).get('clean')==='1'){var b=document.getElementById('deta-sc-bar');if(b)b.remove();}</script>
+</body>
+</html>

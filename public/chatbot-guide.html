@@ -1,0 +1,1896 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cẩm Nang 12 Bài: Tự Dựng Chatbot & AI Automation CSKH Chốt Đơn 24/7 · Deta AI Lab</title>
+  <meta name="description" content="Mỗi tin nhắn bỏ sót lúc 11h đêm đều là một đơn hàng bị mất! Bộ cẩm nang 12 bài thực hành giúp chủ shop tự dựng Chatbot AI đa kênh (Fanpage, Zalo, Web) chốt đơn tự nhiên như người thật. Đọc thử miễn phí Bài 1, Bài 2 & Bài 9!">
+  <meta property="og:title" content="📘 Cẩm Nang 12 Bài: Tự Dựng Chatbot & AI Chốt Đơn Đa Kênh 24/7">
+  <meta property="og:description" content="Không chỉ phản hồi tức thì, Chatbot AI giúp nhân đôi cơ hội chốt đơn 24/7. Đọc thử miễn phí Bài 1, Bài 2 & Bài 9 ngay trên web!">
+  <meta property="og:image" content="https://kiemtien.deta.vn/anh-chia-se.png">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/deta-chat.css?v=6">
+  <style>
+    :root {
+      --bg-page: #F8FAFC;
+      --bg-white: #FFFFFF;
+      --bg-soft-blue: #EFF6FF;
+      --bg-soft-mint: #ECFDF5;
+      --text-main: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
+      --brand-blue: #0066FF;
+      --brand-blue-dark: #0052CC;
+      --brand-emerald: #059669;
+      --brand-emerald-light: #10B981;
+      --brand-amber: #F59E0B;
+      --border-light: #E2E8F0;
+      --border-blue: #BFDBFE;
+      --shadow-soft: 0 12px 32px -8px rgba(15, 23, 42, 0.07);
+      --shadow-blue: 0 20px 45px -12px rgba(0, 102, 255, 0.14);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+    /* 1. STICKY BRIGHT TOPBAR (SAPO STYLE) */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 12px 0;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 17px;
+      color: var(--text-main);
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0066FF, #10B981);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 6px 14px rgba(0, 102, 255, 0.25);
+    }
+    .brand-badge {
+      background: #EFF6FF;
+      color: #0066FF;
+      border: 1px solid #BFDBFE;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-body);
+    }
+    .nav-links a:hover { color: var(--brand-blue); }
+    .btn-top-cta {
+      background: linear-gradient(135deg, #0066FF, #0284C7);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 10px 18px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 102, 255, 0.25);
+      transition: transform 0.15s;
+    }
+    .btn-top-cta:hover { transform: translateY(-1px); }
+
+    /* 2. BRIGHT PASTEL HERO WITH OMNICHANNEL MOCKUP */
+    .hero {
+      padding: 48px 0 56px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.14), transparent 45%),
+        radial-gradient(circle at 10% 20%, rgba(0, 102, 255, 0.12), transparent 50%),
+        linear-gradient(180deg, #EBF5FF 0%, #F0FDF9 65%, #F8FAFC 100%);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1px solid #BFDBFE;
+      color: #0066FF;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 102, 255, 0.08);
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: #0F172A;
+    }
+    .hero h1 .hl {
+      background: linear-gradient(135deg, #0066FF 0%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text-body);
+      margin-bottom: 24px;
+      max-width: 590px;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0066FF, #0284C7);
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px 24px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(0, 102, 255, 0.28);
+      transition: transform 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-emerald {
+      background: linear-gradient(135deg, #10B981, #059669);
+      box-shadow: 0 12px 28px rgba(16, 185, 129, 0.28);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 14.5px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      transition: all 0.15s;
+    }
+    .btn-secondary:hover { border-color: #0066FF; color: #0066FF; }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+    .stat-item strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 900;
+      color: #0066FF;
+    }
+    .stat-item span {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* HERO RIGHT: OMNICHANNEL VISUAL HUB MOCKUP */
+    .omni-hub-wrap {
+      position: relative;
+    }
+    .channel-pills-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .ch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #1E293B;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+    }
+    .ch-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .omni-window {
+      background: #FFFFFF;
+      border: 2px solid #BFDBFE;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-blue);
+    }
+    .ow-header {
+      background: linear-gradient(135deg, #0066FF, #0284C7);
+      color: #fff;
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ow-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ow-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #fff;
+      color: #0066FF;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .ow-body {
+      padding: 16px;
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .msg-row.bot { justify-content: flex-end; }
+    .msg-bubble {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .msg-user {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      color: #1E293B;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .msg-ai {
+      background: linear-gradient(135deg, #0066FF, #0284C7);
+      color: #FFFFFF;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 6px 16px rgba(0, 102, 255, 0.2);
+    }
+    .mini-prod-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      color: #0F172A;
+    }
+    .mini-prod-card img {
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex: none;
+    }
+    .ow-quick-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    .ow-qbtn {
+      background: #EFF6FF;
+      border: 1px solid #93C5FD;
+      color: #0066FF;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .ow-order-toast {
+      background: #ECFDF5;
+      border: 1.5px solid #10B981;
+      border-radius: 12px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      color: #065F46;
+      font-weight: 700;
+    }
+
+    /* COMMON SECTION */
+    .section { padding: 64px 0; border-bottom: 1px solid var(--border-light); }
+    .section-white { background: #FFFFFF; }
+    .section-tinted { background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%); }
+    .sec-head { text-align: center; max-width: 780px; margin: 0 auto 42px; }
+    .sec-kicker {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #0066FF;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .sec-head h2 {
+      font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+      font-weight: 900;
+      color: #0F172A;
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .sec-head p { color: var(--text-body); font-size: 15.5px; }
+
+    /* 3. SAPO-STYLE 3 PAIN POINT VISUAL CARDS */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .pain-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s;
+    }
+    .pain-card:hover { transform: translateY(-4px); }
+    .pain-illust {
+      height: 150px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .illust-red { background: linear-gradient(135deg, #FEF2F2, #FFF1F2); border: 1px solid #FECACA; }
+    .illust-amber { background: linear-gradient(135deg, #FFFBEB, #FEF3C7); border: 1px solid #FDE68A; }
+    .illust-purple { background: linear-gradient(135deg, #F5F3FF, #EDE9FE); border: 1px solid #DDD6FE; }
+    .pain-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 8px;
+    }
+    .pain-card p {
+      font-size: 14px;
+      color: var(--text-body);
+    }
+
+    /* 4. SAPO-STYLE ZIG-ZAG VISUAL FEATURE SHOWCASES */
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 52px;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse .feat-text { order: 2; }
+    .feature-row.reverse .feat-visual { order: 1; }
+    .feat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .feat-text h3 {
+      font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+      font-weight: 900;
+      color: #0F172A;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .feat-text p {
+      font-size: 15px;
+      color: var(--text-body);
+      margin-bottom: 16px;
+    }
+    .feat-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .feat-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      color: var(--text-main);
+    }
+    .feat-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #DCFCE7;
+      color: #059669;
+      font-weight: 900;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      margin-top: 2px;
+    }
+    .feat-visual-card {
+      background: #FFFFFF;
+      border: 1.5px solid #DBEAFE;
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow-blue);
+    }
+
+    /* CAROUSEL MOCKUP IN FEATURE 2 */
+    .carousel-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .c-prod-item {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .c-prod-item img {
+      width: 100%;
+      height: 115px;
+      object-fit: cover;
+      display: block;
+    }
+    .c-prod-info { padding: 10px; }
+    .c-prod-info b { font-size: 13px; color: #0F172A; display: block; }
+    .c-prod-info span { font-size: 12px; color: #059669; font-weight: 800; }
+    .c-prod-btn {
+      margin-top: 7px;
+      width: 100%;
+      background: #0066FF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* 5. CURRICULUM 12 LESSONS LIST */
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .cur-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-light);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      transition: all 0.15s;
+    }
+    .cur-item:hover { border-color: #93C5FD; transform: translateY(-2px); }
+    .cur-item.is-free {
+      border-color: #10B981;
+      background: linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 60%);
+    }
+    .cur-item.is-star {
+      border-color: #F59E0B;
+      background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 60%);
+    }
+    .cur-left { display: flex; gap: 12px; align-items: flex-start; }
+    .cur-num {
+      min-width: 58px;
+      height: 30px;
+      border-radius: 8px;
+      background: #EFF6FF;
+      color: #0066FF;
+      font-weight: 900;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cur-item.is-free .cur-num { background: #10B981; color: #FFFFFF; }
+    .cur-item.is-star .cur-num { background: #F59E0B; color: #FFFFFF; }
+    .cur-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 3px;
+    }
+    .cur-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .cur-badge {
+      white-space: nowrap;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .badge-free {
+      background: #DCFCE7;
+      color: #065F46;
+      border: 1px solid #6EE7B7;
+    }
+    .badge-lock {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #CBD5E1;
+    }
+
+    /* 6. BRIGHT HANDBOOK READER FOR FREE PREVIEW & UNLOCKED LESSONS */
+    .reader-wrap { max-width: 940px; margin: 0 auto; }
+    .lesson-card {
+      background: #FFFFFF;
+      border: 2px solid #A7F3D0;
+      border-radius: 22px;
+      padding: 30px 32px;
+      margin-bottom: 26px;
+      box-shadow: var(--shadow-soft);
+    }
+    .lesson-card.unlocked-card {
+      border-color: #93C5FD;
+    }
+    .lesson-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .lesson-part {
+      font-size: 12px;
+      font-weight: 900;
+      color: #059669;
+      background: #ECFDF5;
+      padding: 4px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .lesson-time {
+      font-size: 12.5px;
+      color: #0066FF;
+      font-weight: 800;
+    }
+    .lesson-card h3 {
+      font-size: 21px;
+      font-weight: 900;
+      color: #0F172A;
+      margin-bottom: 14px;
+      line-height: 1.35;
+    }
+    .lesson-body h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0066FF;
+      margin: 20px 0 8px;
+    }
+    .lesson-body p {
+      font-size: 15px;
+      color: #1E293B;
+      margin-bottom: 10px;
+    }
+    .lesson-body ul, .lesson-body ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+      color: #334155;
+      font-size: 14.5px;
+    }
+    .lesson-body li { margin-bottom: 7px; }
+    .lesson-body code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #EFF6FF;
+      color: #0052CC;
+      border: 1px solid #BFDBFE;
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+
+    .guide-table-wrap {
+      overflow-x: auto;
+      margin: 14px 0 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border-light);
+    }
+    .guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+    .guide-table th {
+      background: #EFF6FF;
+      color: #0052CC;
+      padding: 12px 14px;
+      font-weight: 800;
+      border-bottom: 1px solid #BFDBFE;
+    }
+    .guide-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #E2E8F0;
+      color: #1E293B;
+      vertical-align: top;
+      background: #FFFFFF;
+    }
+
+    .code-box {
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+    .code-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 14px;
+      background: #1E293B;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #93C5FD;
+    }
+    .btn-copy-inline {
+      background: #10B981;
+      border: none;
+      color: #042f2e;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 11px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .code-box pre {
+      padding: 15px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.8px;
+      color: #F8FAFC;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.6;
+    }
+
+    /* INSTANT VIETQR UNLOCK GATE (BRIGHT HIGH-CONVERTING CARD) */
+    .unlock-gate {
+      background: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 55%, #ECFDF5 100%);
+      border: 2.5px solid #0066FF;
+      border-radius: 24px;
+      padding: 32px 30px;
+      margin: 30px 0;
+      box-shadow: var(--shadow-blue);
+    }
+    .ug-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .ug-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .ug-price-now {
+      font-size: 34px;
+      font-weight: 900;
+      color: #0066FF;
+    }
+    .ug-price-old {
+      font-size: 17px;
+      color: #94A3B8;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .ug-price-tag {
+      background: #FEF3C7;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .ug-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 20px;
+    }
+    .ug-checklist li {
+      font-size: 14.5px;
+      color: #1E293B;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .qr-panel {
+      background: #FFFFFF;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+    .qr-panel img {
+      width: 215px;
+      height: 215px;
+      object-fit: contain;
+      background: #fff;
+      padding: 6px;
+      border-radius: 12px;
+      border: 2px solid #0066FF;
+      margin: 8px auto;
+      display: block;
+    }
+    .restore-bar {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px dashed #CBD5E1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-body);
+    }
+    .restore-inputs { display: flex; gap: 8px; }
+    .restore-inputs input {
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      color: #0F172A;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      width: 175px;
+      text-transform: uppercase;
+    }
+    .restore-inputs button {
+      background: #0F172A;
+      border: none;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* 7. 3-TIER UPSELL PRICING */
+    .pricing-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .p-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-light);
+      border-radius: 22px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+    }
+    .p-card.featured {
+      border: 2.5px solid #0066FF;
+      background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 35%);
+      box-shadow: var(--shadow-blue);
+    }
+    .p-ribbon {
+      position: absolute;
+      top: -13px;
+      right: 18px;
+      background: linear-gradient(135deg, #0066FF, #059669);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 5px 13px;
+      border-radius: 99px;
+      box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+    }
+    .p-title { font-size: 19px; font-weight: 900; color: #0F172A; margin-bottom: 6px; }
+    .p-desc { font-size: 13.5px; color: var(--text-muted); margin-bottom: 14px; }
+    .p-price { font-size: 30px; font-weight: 900; color: #0066FF; margin-bottom: 14px; }
+    .p-price small { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+    .p-list { list-style: none; margin-bottom: 22px; }
+    .p-list li {
+      font-size: 14px;
+      color: #1E293B;
+      margin-bottom: 9px;
+      display: flex;
+      gap: 8px;
+    }
+
+    /* 8. FAQ */
+    .faq-list { max-width: 840px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow-soft);
+    }
+    .faq-item h4 { font-size: 15.5px; font-weight: 800; color: #0F172A; margin-bottom: 6px; }
+    .faq-item p { font-size: 14px; color: var(--text-body); }
+
+    @media (max-width: 920px) {
+      .hero-grid, .pain-grid, .feature-row, .curriculum-grid, .ug-grid, .pricing-3 {
+        grid-template-columns: 1fr;
+      }
+      .feature-row.reverse .feat-text { order: 1; }
+      .feature-row.reverse .feat-visual { order: 2; }
+      .nav-links { display: none; }
+    }
+
+    @media print {
+      body { background: #fff !important; color: #111 !important; }
+      .topbar, .hero-ctas, .unlock-gate, #bang-gia, #hoi-dap, footer, #deta-chat-goc { display: none !important; }
+      .lesson-card { border: 1px solid #ccc !important; box-shadow: none !important; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. STICKY BRIGHT TOPBAR -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="/" class="brand">
+        <span class="brand-icon">🤖</span>
+        <span>Deta OmniAI</span>
+        <span class="brand-badge">CẨM NANG 12 BÀI THỰC HÀNH</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#tinh-nang-truc-quan">✨ Hình Ảnh Luồng Bot</a>
+        <a href="#muc-luc-12-bai">📋 Mục Lục 12 Bài</a>
+        <a href="#xem-truoc-mien-phi">🎁 Đọc Thử Bài 1, 2 & 9</a>
+        <a href="#bang-gia">💎 Tự Học vs Cài Trọn Gói</a>
+      </nav>
+      <button type="button" class="btn-top-cta" onclick="scrollToUnlock()">🔓 Mở Khóa 12 Bài (79k)</button>
+    </div>
+  </header>
+
+  <!-- 2. BRIGHT PASTEL HERO WITH OMNICHANNEL MOCKUP -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-kicker">
+          <span class="pulse-dot"></span>
+          <span>GIẢI PHÁP CHATBOT ĐA KÊNH AI · DỰNG XONG TRONG 1 BUỔI TỐI</span>
+        </div>
+        <h1>11 Giờ Đêm Khách Nhắn Hỏi Giá — <span class="hl">Đừng Để Sáng Mai Mất Đơn Sang Đối Thủ!</span></h1>
+        <p class="hero-sub">
+          Hợp nhất và tự động phản hồi tin nhắn từ <strong>Facebook Fanpage, Zalo, Instagram, Website</strong> trong 3 giây. Cẩm nang 12 bài thực hành cầm tay chỉ việc giúp bạn tự dựng <strong>Chatbot AI trả lời tự nhiên như nhân viên ruột</strong>, cài thẻ sản phẩm trượt ngang và tự động lấy SĐT chốt đơn 24/7!
+        </p>
+        <div class="hero-ctas">
+          <a href="#xem-truoc-mien-phi" class="btn-primary">📖 Đọc Thử Miễn Phí Bài 1, Bài 2 & Bài 9 ↓</a>
+          <button type="button" class="btn-secondary" onclick="if(window.moChatDemoShop){window.moChatDemoShop('shop-thoi-trang','','Sao giày bên shop bán 779k đắt hơn trên Shopee thế?');}">💬 Bấm Chat Thử Với Bot Mẫu Ngay</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <strong>3 Giây</strong>
+            <span>Tự động bắt Comment & Inbox</span>
+          </div>
+          <div class="stat-item">
+            <strong>0đ / Tháng</strong>
+            <span>Tận dụng gói Free của nền tảng</span>
+          </div>
+          <div class="stat-item">
+            <strong>+240%</strong>
+            <span>Tỷ lệ khách để lại SĐT ban đêm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO RIGHT: SAPO-INSPIRED OMNICHANNEL CHAT VISUAL -->
+      <div class="omni-hub-wrap">
+        <div class="channel-pills-bar">
+          <span class="ch-pill"><span class="ch-dot" style="background:#0066FF"></span> Facebook Fanpage</span>
+          <span class="ch-pill"><span class="ch-dot" style="background:#0284C7"></span> Zalo OA / Cá nhân</span>
+          <span class="ch-pill"><span class="ch-dot" style="background:#E11D48"></span> Instagram & TikTok</span>
+          <span class="ch-pill"><span class="ch-dot" style="background:#10B981"></span> Website Livechat</span>
+        </div>
+
+        <div class="omni-window">
+          <div class="ow-header">
+            <div class="ow-header-left">
+              <div class="ow-avatar">🤖</div>
+              <div>
+                <div style="font-weight:800;font-size:14px">Trợ Lý Chốt Đơn AI · Trực Ca Đêm 24/7</div>
+                <div style="font-size:11.5px;opacity:0.9">🟢 Đang phản hồi tự nhiên · Độ trễ gõ phím 2.5s (Bài 9)</div>
+              </div>
+            </div>
+            <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800">23:18 Đêm</span>
+          </div>
+
+          <div class="ow-body">
+            <div class="msg-row">
+              <div class="msg-bubble msg-user">
+                Shop ơi giờ này còn ai trực không? Đôi giày Y khoa TIDU có size 39 cho bố mình đi bộ không, ship về Hải Phòng bao lâu?
+              </div>
+            </div>
+
+            <div class="msg-row bot">
+              <div class="msg-bubble msg-ai">
+                Dạ em chào chị Minh Lan ạ ❤️ Mẫu <strong>Giày Y Khoa TIDU chuẩn IWGDF</strong> hiện kho em đang sẵn size 39 êm mềm cho bác trai đi bộ ạ!
+                <br>Gửi về Hải Phòng chỉ <strong>2 ngày</strong> là bưu tá giao tận nhà, bác được mở hộp đi thử êm chân mới thanh toán chị nhé!
+                <div class="mini-prod-card">
+                  <img src="/mau-landing/assets/tidu-shoe.webp" alt="Giày Y Khoa TIDU">
+                  <div style="flex:1;min-width:0">
+                    <div style="font-weight:800;font-size:12.5px">Giày Y Khoa TIDU Mũi Rộng</div>
+                    <div style="color:#059669;font-weight:800;font-size:12px">779.000đ · Freeship Toàn Quốc</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ow-quick-btns">
+              <span class="ow-qbtn" onclick="if(window.moChatDemoShop){window.moChatDemoShop('shop-thoi-trang');}">🔥 Lấy 1 Đôi Size 39 (Freeship)</span>
+              <span class="ow-qbtn" onclick="if(window.moChatDemoShop){window.moChatDemoShop('shop-thoi-trang');}">🎁 Lấy Combo 2 Đôi (-100k)</span>
+              <span class="ow-qbtn" onclick="if(window.moChatDemoShop){window.moChatDemoShop('shop-thoi-trang');}">📏 Cách Đo Chân Chuẩn</span>
+            </div>
+
+            <div class="ow-order-toast">
+              <span>🎉 <strong>AI Tự Động Chốt Đơn #DH892:</strong> Đã lưu SĐT <code>0912.xxx.889</code> & bắn về Telegram Chủ Shop!</span>
+              <span style="background:#10B981;color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;white-space:nowrap">Đã đồng bộ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SAPO-STYLE PAIN POINTS WITH BRIGHT ILLUSTRATIONS -->
+  <section class="section section-white" id="van-de">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">THỰC TRẠNG CỦA 85% CHỦ SHOP NHỎ HIỆN NAY</span>
+        <h2>Mỗi Tin Nhắn Bỏ Sót Đều Là Một Đơn Hàng Rơi Vào Tay Đối Thủ</h2>
+        <p>Tiền chạy quảng cáo và công sức làm video đăng bài đổ sông đổ bể chỉ vì 3 điểm nghẽn trong hộp thư:</p>
+      </div>
+
+      <div class="pain-grid">
+        <!-- PAIN 1 -->
+        <div class="pain-card">
+          <div class="pain-illust illust-red">
+            <div style="display:flex;gap:10px;margin-bottom:10px">
+              <span style="background:#fff;padding:8px 12px;border-radius:12px;font-weight:800;font-size:12px;color:#0066FF;box-shadow:0 4px 10px rgba(0,0,0,0.06)">💬 Fanpage <b style="background:#EF4444;color:#fff;padding:1px 6px;border-radius:99px">24</b></span>
+              <span style="background:#fff;padding:8px 12px;border-radius:12px;font-weight:800;font-size:12px;color:#0284C7;box-shadow:0 4px 10px rgba(0,0,0,0.06)">📱 Zalo <b style="background:#EF4444;color:#fff;padding:1px 6px;border-radius:99px">19</b></span>
+            </div>
+            <div style="background:#FECACA;color:#991B1B;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:800">⚠️ Quá tải · Trôi bình luận hỏi giá của khách!</div>
+          </div>
+          <h3>1. Tin nhắn nằm rải rác & Bị đối thủ cướp khách</h3>
+          <p>Khách bình luận hỏi giá dưới bài đăng nhưng chủ shop bận đóng hàng chưa kịp ẩn comment. Chỉ 3 phút sau, đối thủ dùng tool quét SĐT nhảy vào chốt mất khách!</p>
+        </div>
+
+        <!-- PAIN 2 -->
+        <div class="pain-card">
+          <div class="pain-illust illust-amber">
+            <div style="background:#fff;padding:10px 14px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);width:90%;font-size:12px;margin-bottom:8px">
+              <b style="color:#D97706">🌙 23:15 Đêm:</b> "Shop ơi mẫu này còn hàng không mình đặt 2 hộp?"
+            </div>
+            <div style="background:#FDE68A;color:#92400E;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:800">😴 07:30 Sáng mai: "Mình mua shop khác tối qua rồi ạ"</div>
+          </div>
+          <h3>2. Phản hồi chậm trễ sau 22h đêm làm rớt 60% đơn</h3>
+          <p>Khách hàng mua sắm online nhiều nhất từ 21h–1h sáng. Không có người trực trả lời ngay trong 60 giây đầu tiên đồng nghĩa với việc nhường doanh thu cho shop khác.</p>
+        </div>
+
+        <!-- PAIN 3 -->
+        <div class="pain-card">
+          <div class="pain-illust illust-purple">
+            <div style="background:#fff;padding:10px 14px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);width:90%;font-size:12px;margin-bottom:8px;color:#64748B">
+              🤖 <i>"Cảm ơn quý khách. Vui lòng bấm phím 1 hoặc để lại SĐT..."</i>
+            </div>
+            <div style="background:#DDD6FE;color:#5B21B6;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:800">😒 Khách thấy máy móc vô hồn → Thoát khỏi khung chat</div>
+          </div>
+          <h3>3. Bot kịch bản cũ trả lời ngô nghê, lộ rõ là máy</h3>
+          <p>Các mẫu bot cũ bắt khách tự gõ chữ hoặc trả lời văn mẫu cứng nhắc khiến khách khó chịu. Bạn cần một "Bộ Não AI" biết xưng hô theo tên và xử lý chê đắt mượt như người thật.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SAPO-STYLE ZIG-ZAG VISUAL FEATURE SHOWCASES -->
+  <section class="section section-tinted" id="tinh-nang-truc-quan">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">TRỰC QUAN HÓA HỆ THỐNG BẠN SẼ DỰNG ĐƯỢC TRONG 1 BUỔI TỐI</span>
+        <h2>Không Chỉ Phản Hồi Tức Thì — Chatbot AI Giúp Tăng Gấp Đôi Cơ Hội Chốt Đơn</h2>
+        <p>Từng màn hình và luồng tự động hóa dưới đây đều được hướng dẫn cầm tay chỉ việc trong 12 bài thực hành:</p>
+      </div>
+
+      <!-- FEATURE 1: AUTO COMMENT & OMNICHANNEL INBOX -->
+      <div class="feature-row">
+        <div class="feat-text">
+          <span class="feat-badge">⚡ BÀI 2, BÀI 4 & BÀI 7 TRONG CẨM NANG</span>
+          <h3>Tự Động Ẩn Bình Luận Chứa SĐT & Kéo Khách Vào Inbox Trong 3 Giây</h3>
+          <p>Ngay khi khách vừa gõ <em>"Ib giá giúp mình"</em> hoặc để lại SĐT dưới bài đăng Facebook/Reels, hệ thống tự động vận hành 3 bước bảo vệ và đón khách tức thì:</p>
+          <ul class="feat-list">
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Tự động ẩn (Hide) bình luận chứa SĐT trong 0.5 giây:</strong> Chặn đứng 100% tình trạng đối thủ dùng phần mềm quét bình luận cướp khách của shop.</span>
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Trả lời bình luận xoay vòng tự nhiên:</strong> Tăng tương tác bài viết mà không bị Facebook đánh dấu spam.</span>
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Bắn tin nhắn kèm ảnh báo giá thẳng vào Inbox khách:</strong> Đón khách ngay lúc cảm xúc mua hàng đang cao nhất.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-visual-card">
+            <div style="font-size:12px;font-weight:800;color:#0066FF;margin-bottom:10px;display:flex;justify-content:space-between">
+              <span>🛡️ MÔ PHỎNG LUỒNG BẮT BÌNH LUẬN TỰ ĐỘNG (BÀI 7)</span>
+              <span style="color:#059669">● Chạy 24/7</span>
+            </div>
+            <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:14px;padding:12px;margin-bottom:10px">
+              <div style="font-size:12.5px;font-weight:800;color:#0F172A">💬 Bình luận mới trên Fanpage:</div>
+              <div style="font-size:13px;color:#334155;margin-top:4px">"Shop ơi gửi mình xem bảng giá trà shan tuyết cổ thụ nhé, sđt mình 0908.xxx.456"</div>
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <span style="background:#FEE2E2;color:#991B1B;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px">🙈 Đã tự động ẩn SĐT (0.3s)</span>
+                <span style="background:#DCFCE7;color:#065F46;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px">📨 Đã bắn báo giá vào Inbox</span>
+              </div>
+            </div>
+            <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:14px;padding:12px">
+              <div style="font-size:12px;font-weight:800;color:#0052CC;margin-bottom:4px">🤖 Tin nhắn tự động mở đầu trong hộp thư khách:</div>
+              <div style="font-size:13px;color:#1E293B">"Dạ em chào anh Tuấn ạ ❤️ Em vừa thấy anh hỏi Set Trà Shan Tuyết Cổ Thụ trên bài viết nên gửi ngay bảng giá ưu đãi vào đây cho anh tiện xem. Anh Tuấn bấm nút bên dưới để nhận mã Freeship hôm nay nhé 👇"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 2: PRODUCT CAROUSEL & NATURAL HUMAN TONE -->
+      <div class="feature-row reverse">
+        <div class="feat-text">
+          <span class="feat-badge">🌟 BÀI 8, BÀI 9, BÀI 10 & BÀI 11 TRONG CẨM NANG</span>
+          <h3>Biến Hộp Thư Chat Thành Mini-Website Với Thẻ Sản Phẩm Trượt Ngang & Nút Bấm 1 Chạm</h3>
+          <p>Khách dùng điện thoại rất lười gõ chữ. Thay vì gửi 10 tấm ảnh rời rạc làm trôi tin nhắn, bạn sẽ biết cách cài đặt:</p>
+          <ul class="feat-list">
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Thẻ sản phẩm trượt ngang (Carousel Gallery — Bài 11):</strong> Hiển thị ảnh vuông sắc nét, giá bán, ưu đãi và nút <code>[🛒 Chốt Mẫu Này Ngay]</code> ngay dưới từng ảnh.</span>
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Bộ 3 Nút Bấm Giả Định (Quick Replies — Bài 10):</strong> Điều hướng khách chọn gói Combo Freeship chỉ bằng 1 ngón cái.</span>
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Giọng văn nhân viên ruột + 20 kịch bản gỡ rối chê đắt (Bài 9):</strong> Kết hợp độ trễ gõ phím 2.5 giây xóa sạch cảm giác nói chuyện với máy.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-visual-card">
+            <div style="font-size:12px;font-weight:800;color:#0066FF;margin-bottom:8px;display:flex;justify-content:space-between">
+              <span>🛍️ THẺ SẢN PHẨM TRƯỢT NGANG TRONG MESSENGER / ZALO (BÀI 11)</span>
+              <span>↔️ Vuốt ngang</span>
+            </div>
+            <div class="carousel-demo-grid">
+              <div class="c-prod-item">
+                <img src="/mau-landing/assets/van-son-tra-hero.webp" alt="Vân Sơn Trà">
+                <div class="c-prod-info">
+                  <b>Hộp Quà Vân Sơn Trà Cổ Thụ</b>
+                  <span>390.000đ · Freeship từ 2 hộp</span>
+                  <button type="button" class="c-prod-btn" onclick="if(window.moChatDemoShop){window.moChatDemoShop('shop-dac-san');}">🛒 Chốt Mẫu Này Ngay</button>
+                </div>
+              </div>
+              <div class="c-prod-item">
+                <img src="/mau-landing/assets/tidu-shoe.webp" alt="Giày Y Khoa TIDU">
+                <div class="c-prod-info">
+                  <b>Giày Êm Chân Chuẩn Y Khoa</b>
+                  <span>779.000đ · Đổi size tận nhà</span>
+                  <button type="button" class="c-prod-btn" onclick="if(window.moChatDemoShop){window.moChatDemoShop('shop-thoi-trang');}">🛒 Chốt Mẫu Này Ngay</button>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:10px;text-align:center;font-size:12px;color:#64748B">
+              👆 Bấm thử vào nút trên thẻ sản phẩm để trải nghiệm luồng Bot thực tế!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 3: 15-MIN FOLLOW UP & AUTO ORDER TO TELEGRAM/SHEET -->
+      <div class="feature-row">
+        <div class="feat-text">
+          <span class="feat-badge">🔔 BÀI 6 & BÀI 12 TRONG CẨM NANG</span>
+          <h3>Vớt Lại 30% Đơn Hàng Bỏ Quên Sau 15 Phút & Báo Chuông Đơn Mới Về Điện Thoại</h3>
+          <p>Khách đang hỏi giá lúc 22h30 thì bận việc quên trả lời? Hoặc khách đã để lại SĐT lúc nửa đêm khi bạn đang ngủ say? Hệ thống tự động xử lý chính xác:</p>
+          <ul class="feat-list">
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Nhánh hẹn giờ thông minh 15 phút (Smart Follow-up):</strong> Tự động kiểm tra khách nào đã hỏi giá mà chưa để lại SĐT để nhắn câu hỏi thăm khéo léo, giữ suất Freeship.</span>
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Tự động kiểm tra đủ 10 số điện thoại & Địa chỉ:</strong> Nếu khách gõ thiếu số, Bot lịch sự nhắc khách kiểm tra lại ngay.</span>
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              <span><strong>Đẩy thẳng đơn hàng về Google Sheet & Telegram trong 1 giây:</strong> Sáng dậy bạn chỉ việc nhìn danh sách đơn đã gom gọn gàng để đóng hàng gửi đi!</span>
+            </li>
+          </ul>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-visual-card">
+            <div style="font-size:12px;font-weight:800;color:#059669;margin-bottom:10px">📲 PHIẾU BÁO ĐƠN TỰ ĐỘNG VỀ ĐIỆN THOẠI CHỦ SHOP (BÀI 12)</div>
+            <div style="background:#ECFDF5;border:1.5px solid #10B981;border-radius:14px;padding:14px;font-size:13px;color:#064E3B">
+              <div style="font-weight:900;font-size:14px;margin-bottom:6px">🔔 [ĐƠN HÀNG MỚI CHỐT LÚC 23:42 ĐÊM]</div>
+              <div>👤 <strong>Khách hàng:</strong> Chị Nguyễn Minh Lan (Khách mới)</div>
+              <div>📞 <strong>Số điện thoại:</strong> <code>0912.889.xxx</code> (Đã xác thực 10 số)</div>
+              <div>📍 <strong>Địa chỉ nhận:</strong> Khu dân cư Him Lam, Quận 7, TP.HCM</div>
+              <div>🛍️ <strong>Sản phẩm chốt:</strong> Combo 2 Hộp Vân Sơn Trà (Freeship)</div>
+              <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #6EE7B7;display:flex;justify-content:space-between;font-size:12px;font-weight:800">
+                <span>📊 Đã ghi vào Google Sheet</span>
+                <span>✅ Sẵn sàng đóng hàng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. 12-LESSON CURRICULUM OVERVIEW -->
+  <section class="section section-white" id="muc-luc-12-bai">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">LỘ TRÌNH 12 BÀI HỌC CẦM TAY CHỈ VIỆC</span>
+        <h2>Mục Lục Chi Tiết 12 Bài Thực Hành Từ A–Z</h2>
+        <p>Chúng tôi mở sẵn <strong>Bài 1, Bài 2 và 50% Bài 9 hoàn toàn miễn phí</strong> ngay bên dưới để bạn kiểm chứng chất lượng thực tế trước khi quyết định mở khóa trọn bộ!</p>
+      </div>
+
+      <div class="curriculum-grid">
+        <a href="#bai-1" class="cur-item is-free">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 1</span>
+            <div>
+              <div class="cur-title">Tổng quan kiến trúc "Phễu Trực Đơn 3 Tầng" Chatbot + AI 24/7</div>
+              <div class="cur-sub">Tại sao chỉ dùng Bot kịch bản cứng hoặc chỉ dùng AI thuần đều làm rớt đơn?</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-free">🎁 Đọc miễn phí ↓</span>
+        </a>
+
+        <a href="#bai-2" class="cur-item is-free">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 2</span>
+            <div>
+              <div class="cur-title">Bảng so sánh & Chọn nền tảng Chatbot tốn 0đ thuê bao tháng</div>
+              <div class="cur-sub">Đối chiếu Botcake, AhaChat, ManyChat & Coze AI cho Fanpage/Zalo shop nhỏ</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-free">🎁 Đọc miễn phí ↓</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 3</span>
+            <div>
+              <div class="cur-title">3 Lưu ý sống còn trước khi bật Bot (Chống khóa Page & Chống AI bịa giá)</div>
+              <div class="cur-sub">Luật 24h của Meta, kỹ thuật Khóa biên giá & tự tắt Bot khi khách khiếu nại</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 4</span>
+            <div>
+              <div class="cur-title">Thiết lập tài khoản & Đấu nối Fanpage / Zalo trong 5 phút</div>
+              <div class="cur-sub">Cấp quyền chuẩn Handover Protocol không lo mất kết nối khi đổi mật khẩu</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 5</span>
+            <div>
+              <div class="cur-title">Làm quen giao diện & Cấu hình "Bộ Não AI" (System Prompt 3 Lớp)</div>
+              <div class="cur-sub">Bỏ qua 80% nút thừa — Nạp bảng giá & chính sách chuẩn từng đồng</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 6</span>
+            <div>
+              <div class="cur-title">Dựng 5 Block hội thoại chốt đơn đầu tiên (Hỏi giá → Combo → Lấy SĐT)</div>
+              <div class="cur-sub">Cách kiểm tra định dạng SĐT 10 số tự động & neo giá trị trước khi báo giá</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 7</span>
+            <div>
+              <div class="cur-title">Thiết lập Tin nhắn chào, Tự động ẩn & bắt Comment ra Inbox trong 3 giây</div>
+              <div class="cur-sub">Chống đối thủ quét comment cướp khách & cách Test luồng trước khi chạy thật</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 8</span>
+            <div>
+              <div class="cur-title">Cá nhân hóa tin nhắn tự động theo Tên, Giới tính & Khách cũ quay lại</div>
+              <div class="cur-sub">Tự động gọi đúng "anh/chị" & tặng mã ưu đãi riêng cho khách mua lần 2</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#bai-9-preview" class="cur-item is-star">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 9 ⭐</span>
+            <div>
+              <div class="cur-title">Bí quyết viết lời Bot tự nhiên như người thật + 20 Mẫu xử lý từ chối</div>
+              <div class="cur-sub">Trọng tâm đắt giá nhất: Xóa 100% cảm giác máy móc & gỡ rối khi khách chê đắt</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-free">🎁 Xem trước 50% ↓</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 10</span>
+            <div>
+              <div class="cur-title">Điều hướng tâm lý khách bằng "Bộ 3 Nút Bấm Giả Định" (Quick Replies)</div>
+              <div class="cur-sub">Quy tắc 3 chạm tới giỏ hàng giúp tăng gấp 2.4 lần tỷ lệ khách phản hồi</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 11</span>
+            <div>
+              <div class="cur-title">Cài Menu cố định & Thẻ sản phẩm trượt ngang (Carousel) trong hộp thư</div>
+              <div class="cur-sub">Biến Messenger/Zalo thành Mini-Website có ảnh vuông, giá & nút mua ngay</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+
+        <a href="#khung-mo-khoa" class="cur-item">
+          <div class="cur-left">
+            <span class="cur-num">BÀI 12</span>
+            <div>
+              <div class="cur-title">Nhắc khách quên SĐT sau 15 phút & Đẩy đơn tự động về Telegram / Sheet</div>
+              <div class="cur-sub">Kịch bản Follow-up vàng vớt lại 30% đơn bỏ quên & báo chuông điện thoại 1s</div>
+            </div>
+          </div>
+          <span class="cur-badge badge-lock">🔒 Trong trọn bộ</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FREE PREVIEW READER (BÀI 1, BÀI 2 & TRÍCH ĐOẠN BÀI 9) + INSTANT UNLOCK -->
+  <section class="section section-tinted" id="xem-truoc-mien-phi">
+    <div class="container reader-wrap">
+      <div class="sec-head">
+        <span class="sec-kicker">🎁 ĐỌC THỬ MIỄN PHÍ NGAY TRÊN TRANG · KHÔNG CẦN ĐĂNG KÝ</span>
+        <h2>Xem Trước Nội Dung Thực Hành: Bài 1, Bài 2 & Trích Đoạn Bài 9</h2>
+        <p>Đọc trực tiếp 2 bài nền tảng đầu tiên và phần trích đoạn đắt giá nhất của Bài 9 ngay dưới đây. Khi mở khóa trọn bộ, toàn bộ Bài 3 → Bài 12 sẽ hiển thị nối tiếp ngay bên dưới và cho phép in/xuất PDF A4 trọn đời!</p>
+      </div>
+
+      <div id="print-toolbar" style="display:none;margin-bottom:20px;padding:14px 18px;border-radius:14px;background:#ECFDF5;border:2px solid #10B981;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div style="font-size:14.5px;font-weight:800;color:#065F46">
+          ✅ Đã mở khóa trọn bộ 12 Bài Thực Hành & Bộ Template (Mã đơn: <span id="unlocked-order-code" style="color:#0066FF;text-decoration:underline"></span>)
+        </div>
+        <button type="button" onclick="window.print()" class="btn-primary btn-emerald" style="padding:9px 16px;font-size:13px">🖨️ Xuất / In Trọn Bộ Cẩm Nang A4 (PDF)</button>
+      </div>
+
+      <!-- BÀI 1 (FREE 100%) -->
+      <article class="lesson-card" id="bai-1">
+        <div class="lesson-meta">
+          <span class="lesson-part">🎁 PHẦN I · ĐỌC THỬ MIỄN PHÍ 100%</span>
+          <span class="lesson-time">⏱️ 10 phút đọc & vẽ luồng</span>
+        </div>
+        <h3>Bài 1: Tại sao 73% khách nhắn lúc 22h–2h sáng rời đi mãi mãi? Kiến trúc "Phễu Trực Đơn 3 Tầng" kết hợp Chatbot + AI 24/7</h3>
+        <div class="lesson-body">
+          <h4>1. Sự thật về "5 Phút Vàng" trong bán hàng Online tại Việt Nam</h4>
+          <p>Thống kê thực tế từ hơn 300 Fanpage bán lẻ (Thời trang, Mỹ phẩm, Đặc sản, Gia dụng, Khóa học) cho thấy <strong>42% tổng lượng tin nhắn hỏi giá phát sinh từ 21h30 tối đến 1h30 sáng</strong> — khung giờ khách hàng đã nằm nghỉ trên giường và lướt Facebook/TikTok.</p>
+          <ul>
+            <li>Nếu shop phản hồi trong vòng <strong>dưới 60 giây</strong>: Tỷ lệ khách tiếp tục trò chuyện và để lại SĐT đạt <strong>38% – 52%</strong>.</li>
+            <li>Nếu để quá <strong>15 phút</strong> (hoặc đợi đến 8h sáng hôm sau): Cảm xúc mua hàng bốc đồng (Impulse Buying) đã nguội lạnh, hoặc khách đã bấm vào 3 bài quảng cáo tương tự của đối thủ và chốt đơn bên shop trả lời trước!</li>
+          </ul>
+
+          <h4>2. Tại sao dùng "Bot kịch bản cứng" HOẶC "AI thuần túy" riêng lẻ đều thất bại?</h4>
+          <p>Rất nhiều chủ shop từng thử cài Chatbot nhưng bỏ cuộc vì rơi vào 1 trong 2 thái cực sai lầm sau:</p>
+          <ul>
+            <li><strong>Sai lầm 1 — Chỉ dùng Bot nút bấm cứng nhắc (Rule-based):</strong> Khi khách không bấm nút mà gõ một câu hỏi thực tế như <em>"Chị cao 1m56 nặng 54kg bụng hơi to mặc size M có bị lộ bụng không em?"</em>, Bot kịch bản cứng sẽ đơ ra hoặc lặp lại câu vô nghĩa.</li>
+            <li><strong>Sai lầm 2 — Giao trắng 100% cho AI tự chém gió không có khung luồng:</strong> Khách vào không thấy hình ảnh sản phẩm, không thấy nút bấm chọn nhanh, phải tự gõ từng chữ trên điện thoại rất mỏi tay → khách lười và thoát ra.</li>
+          </ul>
+
+          <h4>3. Giải pháp chuẩn Deta: Kiến trúc "Lai 3 Tầng" (Hybrid Flow + AI Brain)</h4>
+          <p>Để chốt đơn tự động mượt như nhân viên thật, hệ thống chúng ta dựng trong 12 bài này kết hợp chặt chẽ 3 tầng:</p>
+          <div class="code-box">
+            <div class="code-head"><span>📐 Sơ đồ Kiến trúc Phễu Trực Đơn 3 Tầng (Áp dụng xuyên suốt 12 bài)</span></div>
+            <pre>[TẦNG 1: ĐÓN KHÁCH TRONG 3 GIÂY (Auto-Comment + Welcome Card + Nút bấm)]
+Khách bình luận bài viết hoặc bấm vào hộp thư -> Bot gửi ngay Thẻ ảnh sản phẩm sắc nét + 3 Nút bấm chọn nhanh (Báo giá ưu đãi / Tư vấn size / Xem ảnh thật).
+
+       ↓ (Nếu khách bấm nút -> Đi theo luồng chốt nhanh 3 chạm)
+       ↓ (Nếu khách tự gõ câu hỏi khó ngoài kịch bản -> Chuyển sang Tầng 2)
+
+[TẦNG 2: BỘ NÃO AI TƯ VẤN & XỬ LÝ TỪ CHỐI (System Prompt 3 Lớp)]
+AI đọc câu hỏi tự nhiên của khách -> Tra cứu đúng Bảng giá & Chính sách của shop -> Trả lời ấm áp trong 3-4 câu -> Luôn khép lại bằng câu hỏi xin SĐT + Địa chỉ kèm Nút bấm chốt Combo.
+
+       ↓ (Khi phát hiện khách nhập SĐT 10 số hoặc sau 15 phút khách quên trả lời)
+
+[TẦNG 3: THU THẬP ĐƠN, NHẮC KHÁCH QUÊN SĐT & BẮN VỀ TELEGRAM/SHEET]
+Tự động lưu Tên + SĐT + Địa chỉ vào Google Sheet, bắn thông báo chuông về Telegram chủ shop trong 1 giây, hoặc nhắc khéo sau 15 phút nếu khách đang hỏi dở mà quên để lại SĐT.</pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- BÀI 2 (FREE 100%) -->
+      <article class="lesson-card" id="bai-2">
+        <div class="lesson-meta">
+          <span class="lesson-part">🎁 PHẦN I · ĐỌC THỬ MIỄN PHÍ 100%</span>
+          <span class="lesson-time">⏱️ 12 phút chọn công cụ & chuẩn bị</span>
+        </div>
+        <h3>Bài 2: Bảng so sánh & Chọn nền tảng Chatbot + AI tốn 0đ phí thuê bao tháng cho Shop nhỏ</h3>
+        <div class="lesson-body">
+          <h4>1. So sánh thực chiến 4 nền tảng phổ biến nhất cho chủ shop Việt Nam</h4>
+          <p>Bạn KHÔNG CẦN mua các phần mềm đắt đỏ hàng triệu đồng mỗi tháng khi mới bắt đầu. Dưới đây là bảng đối chiếu thực tế để bạn chọn đúng công cụ phù hợp nhất với kênh bán của mình:</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table">
+              <thead>
+                <tr>
+                  <th>Nền tảng</th>
+                  <th>Kênh hỗ trợ mạnh nhất</th>
+                  <th>Chính sách Gói Miễn Phí (0đ)</th>
+                  <th>Đánh giá thực chiến cho Shop nhỏ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Botcake.io / Pancake</strong></td>
+                  <td>Facebook Fanpage, Instagram, Zalo OA, TikTok</td>
+                  <td>Miễn phí khởi tạo luồng cơ bản, kết nối trực tiếp POS/Pancake</td>
+                  <td><strong>⭐ Khuyên dùng số 1 cho Shop Việt:</strong> Giao diện 100% tiếng Việt, bắt comment cực nhanh, tích hợp sẵn khối AI Agent rất dễ dán System Prompt.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. AhaChat.com</strong></td>
+                  <td>Facebook Messenger, Zalo OA, Website</td>
+                  <td><strong>Miễn phí 100%</strong> cho tới 1.000 khách hàng đăng ký (Subscribers) đầu tiên</td>
+                  <td><strong>⭐ Dễ làm nhất cho người mới:</strong> Có sẵn các mẫu luồng kéo-thả trực quan, không tốn 1 đồng thuê bao tháng khi shop mới chạy.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. ManyChat.com</strong></td>
+                  <td>Instagram, Facebook Fanpage, TikTok, WhatsApp</td>
+                  <td>Miễn phí tới 1.000 liên hệ đầu tiên (bản Pro từ \$15/tháng)</td>
+                  <td>Mạnh nhất nếu shop bán nhiều trên <strong>Instagram & Reels quốc tế</strong>, giao diện tiếng Anh.</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Coze.com + Gemini API</strong></td>
+                  <td>Bộ não AI đa nhiệm gắn vào Messenger / Zalo / Telegram / Web</td>
+                  <td>Tặng hạn mức token miễn phí hàng ngày rất rộng rãi</td>
+                  <td>Tuyệt vời để làm "Bộ não trung tâm" tra cứu bảng giá hàng trăm sản phẩm mà không tốn phí API cao.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>2. Checklist 3 thứ duy nhất cần chuẩn bị trước khi sang Bài 3 & Bài 4</h4>
+          <ol>
+            <li><strong>1 Fanpage Facebook (hoặc Zalo OA) mà bạn nắm quyền Quản trị viên (Admin):</strong> Nếu chưa có trang, chỉ mất 2 phút tạo trang mới trên Facebook.</li>
+            <li><strong>1 Bảng thông tin sản phẩm tóm tắt (5–10 dòng):</strong> Ghi rõ Tên các sản phẩm chủ lực, Giá bán lẻ, Giá mua theo Combo 2–3 món, Phí ship và Chính sách đổi trả/bảo hành (Bạn có thể dùng ngay <a href="/cong-cu/chatbot-chot-don" style="color:#0066FF;text-decoration:underline;font-weight:800">Công cụ tạo System Prompt miễn phí của Deta tại đây</a> để xuất khung chuẩn trong 10 giây!).</li>
+            <li><strong>3 đến 5 tấm ảnh sản phẩm sắc nét (Tỷ lệ vuông 1:1 — 1080×1080px):</strong> Để lắp vào thẻ trượt ngang (Carousel) ở Bài 11 giúp hộp thư của bạn đẹp như một showroom thật.</li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- BÀI 9 TRÍCH ĐOẠN 50% (FREE PREVIEW OF THE MOST VALUABLE LESSON) -->
+      <article class="lesson-card" id="bai-9-preview" style="border-color:#F59E0B">
+        <div class="lesson-meta">
+          <span class="lesson-part" style="background:#FEF3C7;color:#B45309">⭐ TRÍCH ĐOẠN ĐỌC THỬ MIỄN PHÍ 50% · BÀI HỌC TRỌNG TÂM NHẤT</span>
+          <span class="lesson-time">Bài 9 / 12</span>
+        </div>
+        <h3>Bài 9 (Phần Mở Đầu Miễn Phí): Bí quyết viết lời Bot tự nhiên như người thật — Xóa sạch 100% cảm giác nói chuyện với cái máy vô hồn</h3>
+        <div class="lesson-body">
+          <p>Tại sao khách hàng vừa đọc câu đầu tiên đã biết ngay là Bot và lập tức thoát khỏi hộp thư? Bởi vì 90% chủ shop mắc <strong>3 lỗi viết lời máy móc</strong> dưới đây. Chỉ cần sửa 3 điểm này, tỷ lệ khách ở lại chat tiếp tăng vọt từ 18% lên 74%:</p>
+
+          <h4>Nguyên tắc 1: Thay thế hoàn toàn "Từ vựng tổng đài" bằng "Ngôn ngữ nhân viên ruột"</h4>
+          <div class="guide-table-wrap">
+            <table class="guide-table">
+              <thead>
+                <tr>
+                  <th>Tình huống</th>
+                  <th>❌ Lời Bot Máy Móc (Cấm dùng)</th>
+                  <th>✅ Lời Bot Tự Nhiên Chuẩn Deta (Khuyên dùng)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Mở đầu chào khách</strong></td>
+                  <td>"Xin chào quý khách! Cảm ơn quý khách đã liên hệ với chúng tôi. Quý khách cần hỗ trợ gì?"</td>
+                  <td>"Dạ em chào {{danh_xung}} {{first_name}} ạ ❤️ Mình đang xem mẫu [Tên SP] để dùng hàng ngày hay làm quà tặng để em tư vấn chuẩn nhất cho mình nha?"</td>
+                </tr>
+                <tr>
+                  <td><strong>Khi báo giá sản phẩm</strong></td>
+                  <td>"Sản phẩm A có giá 290.000 VNĐ chưa bao gồm phí vận chuyển 30.000 VNĐ."</td>
+                  <td>"Dạ mẫu này bên em đang có giá ưu đãi tại xưởng là 290k ạ! Đặc biệt nếu {{danh_xung}} lấy Combo 2 món (550k) thì bên em hỗ trợ MIỄN PHÍ SHIP tận nhà + được mở hộp kiểm hàng ưng mới thanh toán ạ!"</td>
+                </tr>
+                <tr>
+                  <td><strong>Khi xin Số Điện Thoại</strong></td>
+                  <td>"Vui lòng nhập số điện thoại của quý khách để hoàn tất đặt hàng."</td>
+                  <td>"Dạ để em giữ suất Freeship hôm nay và đóng gói gửi chuyến sớm nhất chiều nay cho mình, {{danh_xung}} {{first_name}} nhắn giúp em SĐT + Địa chỉ nhận hàng vào đây nhé ạ 👇"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Nguyên tắc 2: Kỹ thuật "Chia 2 Bong Bóng Chat + Độ Trễ Giả Lập Gõ Phím 2.5 Giây"</h4>
+          <ul>
+            <li>Người thật KHÔNG BAO GIỜ gửi một bức tường chữ dài 15 dòng trong vòng 0.1 giây sau khi khách vừa hỏi!</li>
+            <li><strong>Cách cài chuẩn trong luồng:</strong> Hãy tách câu trả lời thành <strong>2 bong bóng tin nhắn ngắn</strong> (mỗi bong bóng chỉ 2–3 câu). Giữa bong bóng 1 và bong bóng 2, chèn phần tử <code>Typing / Delay (Hiển thị dấu 3 chấm đang gõ phím...)</code> trong <strong>2 đến 3 giây</strong>. Khách nhìn thấy dấu <code>...</code> nhấp nháy sẽ đinh ninh 100% là nhân viên thật đang gõ trả lời mình!</li>
+          </ul>
+          <p style="margin-top:14px;padding:14px 16px;border-radius:12px;background:#FFFBEB;border:1.5px dashed #F59E0B;color:#92400E;font-size:14px;font-weight:600">
+            🔒 <strong>Phần còn lại của Bài 9 (Trọn bộ 20 Mẫu câu xử lý từ chối khi khách chê đắt, khách bảo "để hỏi chồng/vợ", khách đòi freeship 1 món...)</strong> cùng toàn bộ <strong>Bài 3, 4, 5, 6, 7, 8, 10, 11, 12</strong> sẽ tự động hiển thị ngay bên dưới sau khi bạn mở khóa trọn bộ!
+          </p>
+        </div>
+      </article>
+
+      <!-- CONTAINER WHERE UNLOCKED LESSONS 3-12 RENDER INSTANTLY -->
+      <div id="unlocked-lessons-container"></div>
+
+      <!-- INSTANT VIETQR UNLOCK GATE -->
+      <div class="unlock-gate" id="khung-mo-khoa">
+        <div class="ug-grid">
+          <div>
+            <span class="sec-kicker" style="margin-bottom:8px">🔓 MỞ KHÓA TỰ ĐỘNG TRONG 2 GIÂY QUA VIETQR SEPAY</span>
+            <h3 style="font-size:24px;font-weight:900;color:#0F172A;line-height:1.3">
+              Sở Hữu Trọn Bộ 12 Bài Thực Hành + 20 Kịch Bản Xử Lý Từ Chối & Template Copy-Paste
+            </h3>
+            <div class="ug-price-row">
+              <span class="ug-price-now">79.000đ</span>
+              <span class="ug-price-old">199.000đ</span>
+              <span class="ug-price-tag">🔥 Ưu đãi mở hàng hôm nay (-60%)</span>
+            </div>
+            <ul class="ug-checklist">
+              <li>✅ <strong>Mở khóa ngay lập tức toàn bộ 12 Bài học chi tiết</strong> (Bài 3 → Bài 12) ngay trên màn hình này sau 2 giây quét mã VietQR.</li>
+              <li>✅ <strong>Trọn bộ Khung System Prompt 3 Lớp & Khối lệnh chống khách gài giảm giá</strong> (Copy 1 chạm dán thẳng vào Botcake / AhaChat / Coze).</li>
+              <li>✅ <strong>20 Mẫu câu xử lý từ chối thực chiến (Bài 9 Full)</strong> + Kịch bản nhắc khách quên SĐT sau 15 phút (Bài 12).</li>
+              <li>✅ <strong>Nút Xuất / In Cẩm Nang A4 (PDF)</strong> lưu về máy tính & điện thoại tra cứu trọn đời.</li>
+            </ul>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <button type="button" class="btn-primary btn-emerald" id="btn-create-qr" onclick="taoMaQrMoKhoa()">
+                ⚡ Lấy Mã VietQR Mở Khóa Ngay (79.000đ)
+              </button>
+              <a href="/dich-vu/thiet-ke-tron-goi?goi=chatbot-290k#form-dat-lich" class="btn-secondary">
+                🤝 Bận rộn? Thuê Deta làm trọn gói A–Z (290k) →
+              </a>
+            </div>
+          </div>
+
+          <!-- QR PANEL -->
+          <div class="qr-panel" id="qr-box-panel">
+            <div style="font-size:12.5px;font-weight:900;color:#0066FF;margin-bottom:6px" id="qr-status-title">
+              📲 QUÉT MÃ VIETQR MỞ KHÓA TỰ ĐỘNG 24/7
+            </div>
+            <div id="qr-placeholder" style="padding:22px 10px;color:#475569;font-size:13.5px">
+              <div style="font-size:40px;margin-bottom:8px">🔓</div>
+              Bấm nút <strong>"Lấy Mã VietQR Mở Khóa Ngay"</strong> để tạo mã QR tự động.<br>Hệ thống SePay xác nhận và mở khóa toàn bộ 12 bài chỉ sau <strong>2 giây</strong>!
+            </div>
+            <div id="qr-live-area" style="display:none">
+              <img id="qr-img" src="" alt="Mã VietQR mở khóa Cẩm nang 12 bài Chatbot">
+              <div style="font-size:13px;color:#0F172A;margin-top:6px">
+                Số tiền: <strong style="color:#059669">79.000đ</strong> · Nội dung CK: <strong id="qr-code-text" style="color:#0066FF;font-family:monospace"></strong>
+              </div>
+              <div id="qr-polling-msg" style="margin-top:8px;font-size:12px;color:#0284C7;font-weight:800">
+                ⏳ Đang chờ ngân hàng báo về (tự động mở khóa sau 2–5 giây)...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESTORE PREVIOUS ORDER -->
+        <div class="restore-bar">
+          <span>🔑 Bạn đã thanh toán trước đó hoặc mở trên thiết bị khác? Nhập mã đơn <code>DETA...</code> để mở lại ngay:</span>
+          <div class="restore-inputs">
+            <input type="text" id="inp-restore-code" placeholder="VD: DETA8F2A1B">
+            <button type="button" onclick="khoiPhucBangMa()">Mở Lại Ngay</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. 3-TIER UPSELL LADDER (SELF-STUDY 79K vs DONE-FOR-YOU 290K vs COMBO 990K) -->
+  <section class="section section-white" id="bang-gia">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">CHỌN GIẢI PHÁP PHÙ HỢP VỚI QUỸ THỜI GIAN CỦA BẠN</span>
+        <h2>Tự Tay Làm Trong 1 Buổi Tối Hay Để Đội Ngũ Deta Cài Đặt Trọn Gói?</h2>
+        <p>Dù bạn thích tự mình mày mò làm chủ công nghệ hay muốn bàn giao chìa khóa trao tay trong 24h, Deta AI Lab đều có gói giải pháp tối ưu chi phí nhất.</p>
+      </div>
+
+      <div class="pricing-3">
+        <!-- TIER 1: 79K DIY HANDBOOK -->
+        <div class="p-card">
+          <div>
+            <div class="p-title">📘 Gói 1: Tự Học & Tự Dựng</div>
+            <div class="p-desc">Dành cho chủ shop muốn tự tay kết nối và làm chủ luồng Chatbot trong 1 buổi tối.</div>
+            <div class="p-price">79.000đ <small>/ trọn đời (Gốc 199k)</small></div>
+            <ul class="p-list">
+              <li><span>✔️</span> <span>Trọn bộ <strong>12 Bài thực hành cầm tay chỉ việc</strong> từ A–Z</span></li>
+              <li><span>✔️</span> <span>Khung <strong>System Prompt 3 Lớp</strong> + Khóa biên chống khách gài giá</span></li>
+              <li><span>✔️</span> <span><strong>20 Mẫu câu xử lý từ chối</strong> tự nhiên như người thật (Bài 9 Full)</span></li>
+              <li><span>✔️</span> <span>Kịch bản <strong>Follow-up 15 phút</strong> + Bắn đơn về Telegram/Sheet</span></li>
+              <li><span>✔️</span> <span>Tặng kèm công cụ tạo Prompt tự động miễn phí trên web</span></li>
+            </ul>
+          </div>
+          <button type="button" class="btn-primary btn-emerald" style="width:100%;justify-content:center" onclick="scrollToUnlock()">
+            🔓 Mở Khóa Trọn Bộ 12 Bài (79k)
+          </button>
+        </div>
+
+        <!-- TIER 2: 290K DONE-FOR-YOU CHATBOT -->
+        <div class="p-card featured">
+          <div class="p-ribbon">🔥 ĐƯỢC CHỦ SHOP CHỌN NHIỀU NHẤT</div>
+          <div>
+            <div class="p-title">🤖 Gói 2: Deta Làm Hộ Trọn Gói</div>
+            <div class="p-desc">Dành cho chủ shop bận rộn — Đội ngũ kỹ sư Deta thiết kế "Bộ Não" & kịch bản riêng cho shop bạn!</div>
+            <div class="p-price">290.000đ <small>/ trọn gói 1 lần</small></div>
+            <ul class="p-list">
+              <li><span>🌟</span> <span><strong>Đội ngũ Deta trực tiếp viết System Prompt & Kho tri thức</strong> theo đúng bảng giá, size số và tone giọng riêng của shop bạn</span></li>
+              <li><span>🌟</span> <span>Thiết kế sẵn kịch bản báo giá, chốt Combo & xử lý khách chê đắt</span></li>
+              <li><span>🌟</span> <span>Hướng dẫn/hỗ trợ đấu nối vào <strong>Fanpage, Zalo OA, Pancake, Coze hoặc Website</strong> trong 24h</span></li>
+              <li><span>🌟</span> <span><strong>Tặng miễn phí 100%</strong> Cẩm nang 12 Bài thực hành trị giá 199k</span></li>
+              <li><span>🌟</span> <span>Bảo hành tinh chỉnh câu chữ miễn phí 7 ngày đầu chạy thật</span></li>
+            </ul>
+          </div>
+          <a href="/dich-vu/thiet-ke-tron-goi?goi=chatbot-290k#form-dat-lich" class="btn-primary" style="width:100%;justify-content:center">
+            🤝 Đặt Đội Ngũ Deta Cài Cho Shop (290k) →
+          </a>
+        </div>
+
+        <!-- TIER 3: 990K FULL COMBO -->
+        <div class="p-card">
+          <div>
+            <div class="p-title">👑 Gói 3: Combo Web + Bot + Content</div>
+            <div class="p-desc">Giải pháp chuyển đổi toàn diện: Vừa có Landing Page chạy Ads vừa có Bot trực đơn 24/7.</div>
+            <div class="p-price">990.000đ <small>/ trọn gói A–Z</small></div>
+            <ul class="p-list">
+              <li><span>🚀</span> <span><strong>Thiết kế Landing Page 8 Khối chuẩn chuyển đổi cao</strong> (Tặng kèm cài đặt tên miền riêng & SSL)</span></li>
+              <li><span>🚀</span> <span><strong>Tích hợp trực tiếp Chatbot AI chốt đơn 24/7</strong> ngay trên Landing Page & Fanpage</span></li>
+              <li><span>🚀</span> <span>Cài đặt sẵn Meta Pixel, TikTok Pixel & Bắn đơn về Telegram</span></li>
+              <li><span>🚀</span> <span>Tặng kèm <strong>Lịch 30 Ngày Bài Đăng Bán Hàng & Kịch Bản TikTok</strong></span></li>
+              <li><span>🚀</span> <span>Bàn giao toàn bộ mã nguồn sạch — 0đ phí duy trì hàng tháng</span></li>
+            </ul>
+          </div>
+          <a href="/dich-vu/thiet-ke-tron-goi?goi=combo-990k#form-dat-lich" class="btn-secondary" style="width:100%;justify-content:center">
+            👑 Xem Chi Tiết Combo Toàn Diện →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section class="section section-tinted" id="hoi-dap">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-kicker">GIẢI ĐÁP THẮC MẮC TRƯỚC KHI BẮT ĐẦU</span>
+        <h2>Câu Hỏi Thường Gặp Của Chủ Shop</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>1. Mình hoàn toàn mù công nghệ, không biết lập trình (code) có tự làm theo 12 bài được không?</h4>
+          <p>Dạ hoàn toàn được 100%! Các nền tảng Chatbot hiện nay (Botcake, AhaChat, ManyChat) đều là giao diện kéo-thả tiếng Việt và dán văn bản (Copy & Paste). Tài liệu đã viết sẵn từng mẫu câu và khối lệnh, bạn chỉ cần thay tên sản phẩm + giá của shop vào là chạy ngay trong 1 buổi tối.</p>
+        </div>
+        <div class="faq-item">
+          <h4>2. Sau khi quét mã VietQR 79.000đ thì bao lâu mình nhận được trọn bộ tài liệu?</h4>
+          <p>Hệ thống thanh toán của Deta AI Lab kết nối tự động với ngân hàng qua SePay 24/7 (kể cả 2 giờ sáng). Chỉ sau <strong>2 đến 5 giây</strong> kể từ khi bạn chuyển khoản thành công, toàn bộ Bài 3 → Bài 12 và các khung mẫu Copy-Paste sẽ tự động mở khóa ngay trên màn hình này kèm nút <strong>Xuất / In PDF A4</strong>!</p>
+        </div>
+        <div class="faq-item">
+          <h4>3. Nếu mình mua gói Cẩm nang 79k tự làm trước, sau đó bận quá muốn nâng cấp lên gói Deta làm hộ 290k thì sao?</h4>
+          <p>Dạ bạn được <strong>khấu trừ 100% số tiền 79.000đ đã mua cẩm nang</strong> vào gói dịch vụ làm trọn gói 290.000đ (chỉ cần bù phần chênh lệch)! Bạn hoàn toàn yên tâm đọc và thử nghiệm trước mà không lo mất phí đôi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:36px 0;background:#FFFFFF;border-top:1px solid var(--border-light);text-align:center;color:var(--text-muted);font-size:13.5px">
+    <div class="container">
+      <p><strong style="color:#0F172A">Deta AI Lab (kiemtien.deta.vn)</strong> · Thực nghiệm 20 Ngày AI Tự Kiếm Tiền Thật Tại Việt Nam</p>
+      <p style="margin-top:8px">
+        <a href="/" style="color:#0066FF;font-weight:700">🏠 Trang chủ</a> ·
+        <a href="/cong-cu/chatbot-chot-don" style="color:#0066FF;font-weight:700">🤖 Công cụ tạo Prompt Chatbot (0đ)</a> ·
+        <a href="/dich-vu/thiet-ke-tron-goi" style="color:#0066FF;font-weight:700">💼 Dịch vụ Thiết kế B2B</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const LS_UNLOCK_KEY = 'deta_chatbot_guide_unlocked_ma';
+    let currentOrderMa = '';
+    let pollTimer = null;
+
+    function scrollToUnlock() {
+      const el = document.getElementById('khung-mo-khoa');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function copyTextBlock(btn) {
+      const pre = btn.closest('.code-box')?.querySelector('pre');
+      if (!pre) return;
+      navigator.clipboard.writeText(pre.innerText).then(() => {
+        const old = btn.innerText;
+        btn.innerText = '✅ Đã sao chép!';
+        setTimeout(() => { btn.innerText = old; }, 1800);
+      });
+    }
+
+    async function taoMaQrMoKhoa() {
+      const btn = document.getElementById('btn-create-qr');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Đang khởi tạo mã VietQR...';
+      }
+      try {
+        const r = await fetch('/api/don', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            mon: 'tai-lieu-chatbot',
+            ten: 'Chủ Shop Mở Khóa 12 Bài Chatbot',
+            loi_nhan: 'Mở khóa trọn bộ 12 Bài dựng Chatbot & AI Chốt Đơn 24/7',
+            nguon: 'tai-lieu-chatbot'
+          })
+        });
+        const d = await r.json();
+        if (!d || !d.ma) throw new Error(d?.loi || 'Không tạo được đơn');
+        currentOrderMa = d.ma;
+        document.getElementById('qr-placeholder').style.display = 'none';
+        const live = document.getElementById('qr-live-area');
+        live.style.display = 'block';
+        document.getElementById('qr-img').src = d.qr || d.qr_url;
+        document.getElementById('qr-code-text').innerText = d.noi_dung || d.ma;
+        if (btn) {
+          btn.innerText = '📲 Đã tạo mã QR bên phải — Quét để mở khóa 2s';
+          btn.disabled = false;
+        }
+        batDauKiemTraDon(d.ma);
+      } catch (e) {
+        alert('Có lỗi khi tạo mã QR: ' + e.message);
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = '⚡ Lấy Mã VietQR Mở Khóa Ngay (79.000đ)';
+        }
+      }
+    }
+
+    function batDauKiemTraDon(ma) {
+      if (pollTimer) clearInterval(pollTimer);
+      pollTimer = setInterval(async () => {
+        try {
+          const r = await fetch('/api/don/' + encodeURIComponent(ma));
+          const d = await r.json();
+          if (d && d.trang_thai === 'xong') {
+            clearInterval(pollTimer);
+            pollTimer = null;
+            localStorage.setItem(LS_UNLOCK_KEY, ma);
+            await taiNoiDungMoKhoa(ma, true);
+          }
+        } catch (err) {}
+      }, 3000);
+    }
+
+    async function khoiPhucBangMa() {
+      const inp = document.getElementById('inp-restore-code');
+      const ma = (inp?.value || '').trim().toUpperCase();
+      if (!ma) {
+        alert('Vui lòng nhập mã đơn hàng (ví dụ: DETA...)');
+        return;
+      }
+      const ok = await taiNoiDungMoKhoa(ma, true);
+      if (!ok) {
+        alert('Chưa tìm thấy đơn hàng hoàn tất với mã "' + ma + '". Nếu bạn vừa chuyển khoản, vui lòng đợi 3-5 giây rồi bấm lại nhé!');
+      }
+    }
+
+    async function taiNoiDungMoKhoa(ma, scrollAfter) {
+      try {
+        const r = await fetch('/api/tai-lieu/chatbot-full?ma=' + encodeURIComponent(ma));
+        const d = await r.json();
+        if (!d || !d.ok || !Array.isArray(d.lessons)) return false;
+
+        localStorage.setItem(LS_UNLOCK_KEY, d.ma);
+        const container = document.getElementById('unlocked-lessons-container');
+        container.innerHTML = d.lessons.map(item => `
+          <article class="lesson-card unlocked-card" id="bai-${item.bai}">
+            <div class="lesson-meta">
+              <span class="lesson-part" style="background:#EFF6FF;color:#0066FF">🔓 ${item.phan} · ĐÃ MỞ KHÓA TOÀN BỘ</span>
+              <span class="lesson-time">⏱️ ${item.thoi_luong}</span>
+            </div>
+            <h3>${item.tieu_de}</h3>
+            <div class="lesson-body">${item.noi_dung_html}</div>
+          </article>
+        `).join('');
+
+        document.querySelectorAll('.badge-lock').forEach(el => {
+          el.className = 'cur-badge badge-free';
+          el.innerText = '✅ Đã mở khóa';
+        });
+
+        const pt = document.getElementById('print-toolbar');
+        if (pt) {
+          pt.style.display = 'flex';
+          document.getElementById('unlocked-order-code').innerText = d.ma;
+        }
+        const gate = document.getElementById('khung-mo-khoa');
+        if (gate) {
+          gate.innerHTML = `
+            <div style="text-align:center;padding:12px">
+              <div style="font-size:36px;margin-bottom:8px">🎉</div>
+              <h3 style="color:#059669;font-size:21px;font-weight:900">Chúc mừng! Bạn đã mở khóa trọn bộ 12 Bài Thực Hành Chatbot & AI 24/7</h3>
+              <p style="color:#334155;font-size:14.5px;margin:8px 0 14px">Mã đơn lưu trữ của bạn: <strong style="color:#0066FF">${d.ma}</strong> (Đã tự động lưu trên trình duyệt này).</p>
+              <button type="button" class="btn-primary btn-emerald" onclick="window.print()">🖨️ Xuất / In Trọn Bộ Cẩm Nang Ra File PDF A4</button>
+            </div>
+          `;
+        }
+        if (scrollAfter) {
+          const b3 = document.getElementById('bai-3');
+          if (b3) b3.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    (function initUnlockState() {
+      const params = new URLSearchParams(location.search);
+      const maUrl = (params.get('ma') || '').trim().toUpperCase();
+      const maSaved = (localStorage.getItem(LS_UNLOCK_KEY) || '').trim().toUpperCase();
+      const targetMa = maUrl || maSaved;
+      if (targetMa) {
+        taiNoiDungMoKhoa(targetMa, false);
+      }
+    })();
+
+    (function trackTraffic() {
+      const K = 'deta-ma-xem';
+      let ma = localStorage.getItem(K);
+      if (!ma) {
+        ma = 'x' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+        try { localStorage.setItem(K, ma); } catch (e) {}
+      }
+      const u = new URLSearchParams(location.search);
+      const nguon = u.get('utm_source') || u.get('nguon') || u.get('ref') || '';
+      fetch('/api/dang-xem?ma=' + encodeURIComponent(ma) + '&trang=' + encodeURIComponent(location.pathname) + '&nguon=' + encodeURIComponent(nguon) + '&ref=' + encodeURIComponent(document.referrer || '') + '&pv=1').catch(() => {});
+    })();
+  </script>
+  <script src="/deta-chat.js?v=6" defer></script>
+</body>
+</html>

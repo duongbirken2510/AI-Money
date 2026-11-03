@@ -1,0 +1,26 @@
+# Sensitive configurations & secrets
+config.json
+cloudflared-config.yml
+.env
+*.pem
+*.key
+
+# Binaries & runtime caches
+bin/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Runtime SQLite database & logs
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/du-lieu.json
+data/*_log.json
+data/tsh_replied_comments.json
+data/tracked_posts.json
+
+# Browser profiles & temp files
+.bot-chrome-profile/
+/tmp/
+*.log

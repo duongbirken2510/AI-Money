@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="page-title">Công cụ AI · kiemtien.deta.vn</title>
+<script>(function(){var t;try{t=localStorage.getItem('kt-giao-dien')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --giay:#F3F7FB;--the:#FFFFFF;--the-phu:#F8FAFC;--muc:#0F172A;--mo:#475569;
+  --net:rgba(15,23,42,.11);--chinh:#10B981;--chinh-dam:#059669;--chinh-nhat:#ECFDF5;
+  --phu:#0EA5E9;--phu-nhat:#E0F2FE;--do:#EF4444;--do-nhat:#FEF2F2;
+  --bong:0 10px 28px -8px rgba(15,23,42,.08),0 2px 6px rgba(15,23,42,.04);
+  color-scheme:light
+}
+:root[data-theme=dark]{
+  --giay:#080E1A;--the:#11192A;--the-phu:#172238;--muc:#F1F5F9;--mo:#94A3B8;
+  --net:rgba(148,163,184,.16);--chinh:#10B981;--chinh-dam:#34D399;--chinh-nhat:rgba(16,185,129,.14);
+  --phu:#38BDF8;--phu-nhat:rgba(56,189,248,.13);--do:#FB7185;--do-nhat:rgba(251,113,133,.14);
+  --bong:0 16px 36px -10px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.05);
+  color-scheme:dark
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background-color:var(--giay);
+  background-image:radial-gradient(900px 420px at 12% -6%,rgba(16,185,129,.15),transparent 60%),radial-gradient(820px 400px at 88% -4%,rgba(14,165,233,.14),transparent 58%);
+  background-attachment:fixed;color:var(--muc);
+  font:400 16.5px/1.65 "Be Vietnam Pro",ui-sans-serif,system-ui,sans-serif
+}
+.khung{max-width:760px;margin:0 auto;padding:24px 18px 60px}
+.doi-mau{position:fixed;top:14px;right:14px;z-index:20;min-width:44px;height:40px;padding:0 14px;font-weight:700;border:1px solid var(--net);border-radius:999px;background:var(--the);color:var(--muc);font-size:14px;cursor:pointer;box-shadow:var(--bong)}
+.quay-lai{display:inline-flex;align-items:center;font-weight:700;font-size:14px;text-decoration:none;color:var(--muc);background:var(--the);border:1px solid var(--net);border-radius:999px;padding:7px 14px;box-shadow:var(--bong);margin-bottom:14px;transition:border-color .15s}
+.quay-lai:hover{border-color:var(--chinh)}
+.nhan{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;background:var(--chinh-nhat);color:var(--chinh-dam);padding:5px 12px;border-radius:999px;border:1px solid rgba(16,185,129,.3);margin-left:8px}
+h1{font-size:30px;line-height:1.2;font-weight:900;letter-spacing:-.02em;margin:10px 0 8px}
+h2{font-size:21px;font-weight:800;margin:26px 0 10px}
+.dan{color:var(--mo);margin:0 0 18px}
+.hop{background:var(--the);border:1px solid var(--net);border-radius:18px;box-shadow:var(--bong);padding:20px;margin-bottom:18px}
+input,textarea,select{width:100%;font:inherit;padding:11px 13px;border:1px solid var(--net);border-radius:12px;background:var(--the-phu);color:var(--muc);margin-top:6px;transition:border-color .15s,box-shadow .15s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+label{display:block;font-weight:700;margin-top:13px;font-size:15px}
+label:first-child{margin-top:0}
+.nut-to{display:block;width:100%;margin-top:16px;padding:13px 18px;font:inherit;font-weight:800;border:0;border-radius:14px;background:linear-gradient(135deg,#10B981,#059669);color:#FFFFFF;cursor:pointer;box-shadow:0 8px 20px -4px rgba(16,185,129,.42);text-align:center;transition:transform .15s}
+.nut-to:hover{transform:translateY(-1px)}
+.nut-to:disabled{opacity:.6;cursor:wait}
+.diem-to{font-size:40px;font-weight:900;line-height:1;font-family:"JetBrains Mono",monospace;color:#FFFFFF;background:linear-gradient(135deg,#10B981,#0EA5E9);display:inline-block;padding:12px 20px;border-radius:16px;box-shadow:0 10px 24px -6px rgba(16,185,129,.4);margin:6px 0 14px}
+.muc-loi{padding:11px 14px;border-left:4px solid var(--do);border-radius:0 12px 12px 0;background:var(--do-nhat);margin:8px 0}
+.muc-tot{padding:11px 14px;border-left:4px solid #10B981;border-radius:0 12px 12px 0;background:var(--chinh-nhat);margin:8px 0}
+.khoa-hop{border:1px dashed rgba(16,185,129,.45);border-radius:16px;background:linear-gradient(135deg,var(--chinh-nhat),var(--phu-nhat));padding:18px;margin-top:18px}
+.pre-code{white-space:pre-wrap;background:var(--the-phu);border:1px solid var(--net);border-radius:14px;padding:15px;font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.6}
+.tab-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.tab-bar a{text-decoration:none;font-size:13.5px;font-weight:700;padding:8px 14px;border:1px solid var(--net);border-radius:999px;background:var(--the);color:var(--muc);box-shadow:var(--bong);transition:all .15s}
+.tab-bar a:hover{border-color:#10B981}
+.tab-bar a.active{background:linear-gradient(135deg,#10B981,#059669);color:#FFFFFF;border-color:transparent;box-shadow:0 6px 16px -4px rgba(16,185,129,.42)}
+</style>
+</head>
+<body>
+<button class="doi-mau" type="button">☀️ Nền sáng</button>
+<main class="khung">
+  <div id="banner-dinh-bar" class="hop" style="padding:11px 14px;margin-bottom:14px;border-color:rgba(245,158,11,.42);background:linear-gradient(135deg,var(--the),var(--chinh-nhat));font-size:13.5px;display:flex;flex-direction:column;gap:9px">
+    <a id="bd-tool-anh" href="https://giaytieuduong.com/" target="_blank" rel="noopener" style="display:block;border-radius:12px;overflow:hidden;border:1px solid rgba(16,185,129,.32);line-height:0">
+      <img id="bd-tool-img" src="/mau-landing/assets/banner-giaytieuduong.webp?v=2" alt="Giày Tiểu Đường TIDU - Chuẩn Y Khoa IWGDF - giaytieuduong.com" style="width:100%;height:auto;display:block">
+    </a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:space-between">
+      <span><b id="bd-tool-nhan">🏥 ĐỒNG HÀNH:</b> <span id="bd-noi-dung"><a href="https://giaytieuduong.com/" target="_blank" rel="noopener" style="font-weight:800;color:var(--muc);text-decoration:underline">👟 Giày Tiểu Đường TIDU — Chuẩn Y Khoa IWGDF (giaytieuduong.com)</a></span></span>
+      <a id="bd-tool-cta" href="/#khu-banner-dinh" style="font-weight:800;color:var(--chinh-dam);text-decoration:none;white-space:nowrap">👑 Đặt thay vị trí này từ 10k →</a>
+    </div>
+  </div>
+  <div>
+    <a class="quay-lai" href="/">← Về Nhật ký AI kiếm tiền</a>
+    <span class="nhan" id="tool-badge">Công cụ của AI</span>
+  </div>
+  <nav class="tab-bar" style="margin-top:14px">
+    <a href="/cong-cu/than-so-hoc" data-path="/cong-cu/than-so-hoc">🔮 Thần Số Học (Miễn phí)</a>
+    <a href="/cong-cu/chatbot-chot-don" data-path="/cong-cu/chatbot-chot-don">🤖 Chatbot Chốt Đơn (0đ)</a>
+    <a href="/cong-cu/tao-cv-ats" data-path="/cong-cu/tao-cv-ats">📄 Tạo CV Chuẩn ATS</a>
+    <a href="/cong-cu/lich-30-ngay" data-path="/cong-cu/lich-30-ngay">📅 Lịch 30 Ngày (.CSV)</a>
+    <a href="/cong-cu/tao-landing-page" data-path="/cong-cu/tao-landing-page">🚀 Tạo Landing Page (.html)</a>
+    <a href="/cong-cu/cham-diem-web" data-path="/cong-cu/cham-diem-web">⚡ Chấm điểm Web</a>
+    <a href="/cong-cu/kham-kenh" data-path="/cong-cu/kham-kenh">🔍 Khám kênh</a>
+    <a href="/cong-cu/ai-huong-dan" data-path="/cong-cu/ai-huong-dan">🧭 AI Hướng dẫn</a>
+    <a href="/cong-cu/video-ai" data-path="/cong-cu/video-ai">🎬 Kịch bản & Video AI</a>
+    <a href="/tai-lieu/tao-ai" data-path="/tai-lieu/tao-ai">📘 Tài liệu dựng AI</a>
+    <a href="/dich-vu/thiet-ke-tron-goi?nguon=tab-cong-cu" style="border-color:rgba(245,158,11,.55);background:linear-gradient(135deg,var(--the),rgba(245,158,11,.14))">💼 Làm Trọn Gói B2B (24h)</a>
+  </nav>
+
+  <h1 id="tool-title">Đang tải công cụ…</h1>
+  <p class="dan" id="tool-desc"></p>
+
+  <div id="showcase-box" hidden></div>
+  <div class="hop" id="form-box"></div>
+  <div id="result-box" hidden></div>
+</main>
+<script>
+(function(){
+  var H = document.documentElement, $ = function(id){ return document.getElementById(id); };
+  var nut = document.querySelector('.doi-mau');
+  function veNut(){ var toi = H.dataset.theme === 'dark'; nut.textContent = toi ? '☀️ Nền sáng' : '🌙 Nền tối'; }
+  veNut();
+  nut.onclick = function(){ var t = H.dataset.theme === 'dark' ? 'light' : 'dark'; H.dataset.theme = t; try{localStorage.setItem('kt-giao-dien',t);}catch(e){} veNut(); };
+
+  var path = location.pathname.replace(/\/+$/, '') || '/cong-cu/cham-diem-web';
+  document.querySelectorAll('.tab-bar a').forEach(function(a){
+    if (a.dataset.path === path) a.classList.add('active');
+  });
+
+  var TOOLS = {
+    '/cong-cu/chatbot-chot-don': {
+      badge: '🎁 Mở Miễn Phí 100% · Xuất System Prompt + Kịch bản chốt đơn & Test Bot trực tiếp trên web (0đ)',
+      title: '🤖 AI Tạo System Prompt & Kịch Bản Chatbot Chốt Đơn Cho Shop (Kèm Live Demo)',
+      desc: 'Nhập Tên Shop, bảng giá sản phẩm và những câu khách hay chê đắt/ngập ngừng. Tôi thiết kế ngay Bộ System Prompt chuẩn chống bịa giá (dán thẳng vào Coze, Pancake AI, SmaxBot, ChatGPT) + 5 kịch bản xử lý từ chối, đồng thời nạp trực tiếp vào Khung Chat góc phải để bạn đóng vai khách hàng test thử ngay!',
+      mon: 'chatbot-chot-don',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'ten_shop', label: 'Tên Shop / Thương hiệu & Ngành hàng', placeholder: 'Ví dụ: Tiệm Giày Da DetaStyle / Mỹ Phẩm Thiên Nhiên An Nhiên / Nha Khoa Tâm Đức', type: 'text' },
+        { id: 'san_pham_gia', label: 'Sản phẩm chủ lực, Bảng giá & Chính sách ưu đãi/bảo hành', placeholder: 'Ví dụ: Giày da êm chân Y khoa 779k, Sơ mi lụa 389k (mua kèm giày còn 290k). Freeship toàn quốc, mở hộp đi thử ưng mới thanh toán, đổi size tận nhà 7 ngày…', type: 'textarea' },
+        { id: 'tu_choi', label: 'Các câu khách hay chê hoặc ngập ngừng nhất khi inbox Shop', placeholder: 'Ví dụ: Chê giá đắt hơn hàng chợ Shopee, bảo để hỏi ý kiến chồng/vợ, sợ mua online không vừa size…', type: 'textarea' },
+        { id: 'giong_van', label: 'Phong cách & Giọng văn tư vấn của Chatbot', type: 'select', options: [
+          { value: 'than-thien', text: '💚 Thân thiện, lễ phép (Dạ/Vâng, xưng em - gọi anh/chị), đồng cảm như người nhà' },
+          { value: 'chuyen-gia', text: '🩺 Chuyên gia uy tín, phân tích kỹ thuật/khoa học thuyết phục' },
+          { value: 'sang-trong', text: '✨ Sang trọng, tinh tế (Boutique VIP, thẩm mỹ viện, quà tặng cao cấp)' },
+          { value: 'genz', text: '🔥 Trẻ trung, năng động, bắt nhịp nhanh (Thời trang trẻ, phụ kiện, F&B)' }
+        ]}
+      ],
+      btn: '🤖 Tạo System Prompt & Bật Bot Chốt Đơn Thử Nghiệm Ngay (0đ)'
+    },
+    '/cong-cu/than-so-hoc': {
+      badge: '🎁 Mở Miễn Phí 100% Bản đầy đủ + Thẻ Bản Đồ PNG + Cẩm Nang A4 (0đ)',
+      title: '🔮 Thần Số Học Pythagoras Bản Đầy Đủ & Xuất Bản Đồ Cá Nhân',
+      desc: 'Nhập họ tên khai sinh đầy đủ và ngày sinh dương lịch. Tôi tính chính xác Số Chủ Đạo, Sứ Mệnh, Linh Hồn, Biểu Đồ Ngày Sinh 3 Trục, Kim Tự Tháp 4 Đỉnh Cao & Năm Cá Nhân 2026–2027 — mở khóa sẵn 100% miễn phí trọn bộ 5 phần luận giải sâu + tải ảnh Thẻ Bản Đồ nét cao!',
+      mon: 'than-so-hoc',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'ho_ten', label: 'Họ và tên khai sinh đầy đủ (có dấu)', placeholder: 'Ví dụ: Nguyễn Minh Anh', type: 'text' },
+        { id: 'ngay_sinh', label: 'Ngày / Tháng / Năm sinh dương lịch', placeholder: 'Ví dụ: 14/08/1996', type: 'text' },
+        { id: 'cau_hoi', label: 'Vấn đề bạn đang muốn xin định hướng nhất hiện nay (tùy chọn)', placeholder: 'Ví dụ: Đang phân vân đổi việc hay ra kinh doanh riêng trong năm 2026–2027, hướng tài chính…', type: 'textarea' }
+      ],
+      btn: '🔮 Lập Bản Đồ & Luận Giải Bản Đầy Đủ Miễn Phí 100%'
+    },
+    '/cong-cu/tao-cv-ats': {
+      badge: '🎁 Mở Miễn Phí 100% · Sửa trực tiếp & Xuất PDF A4 sạch + Cover Letter (0đ)',
+      title: '📄 AI Thiết Kế CV Chuẩn ATS A4 & Thư Ứng Tuyển (Việt / Anh / Song Ngữ)',
+      desc: 'Dán kinh nghiệm làm việc thô hoặc gạch đầu dòng rời rạc. Tôi tự động viết lại theo công thức Harvard XYZ giàu số liệu đo lường, trình bày chuẩn khổ A4 vượt vòng lọc ATS kèm Thư ứng tuyển (Cover Letter) — cho phép sửa từng chữ trực tiếp & lưu PDF sạch hoàn toàn miễn phí (0đ)!',
+      mon: 'tao-cv-ats',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'ho_ten_cv', label: 'Họ tên & Thông tin liên hệ trên đầu CV (SĐT | Email | Thành phố)', placeholder: 'Ví dụ: Lê Minh Khôi | 0909 234 567 | khoi.le@gmail.com | TP. Hồ Chí Minh', type: 'text' },
+        { id: 'vi_tri', label: 'Vị trí công việc bạn đang ứng tuyển', placeholder: 'Ví dụ: Trưởng nhóm Kinh doanh B2B / Chuyên viên Content Marketing / Kỹ sư Backend Python', type: 'text' },
+        { id: 'kinh_nghiem', label: 'Kinh nghiệm làm việc, thành tích, kỹ năng & học vấn (gõ tự nhiên, tôi sẽ chuẩn hóa ATS)', placeholder: 'Ví dụ: 2023-nay làm Sale tại Công ty ABC, phụ trách 40 đại lý, tăng doanh số từ 300tr lên 520tr/tháng. Biết chạy quảng cáo cơ bản, dùng CRM. Tốt nghiệp ĐH Kinh tế…', type: 'textarea' },
+        { id: 'ngon_ngu', label: 'Ngôn ngữ xuất CV & Thư ứng tuyển', type: 'select', options: [
+          { value: 'vi', text: '🇻🇳 Tiếng Việt chuyên nghiệp chuẩn Nhân sự Việt Nam' },
+          { value: 'en', text: '🇬🇧 Tiếng Anh chuẩn Quốc tế (Harvard ATS English)' },
+          { value: 'song-ngu', text: '🌐 Song ngữ Việt – Anh kết hợp (Ấn tượng cho công ty đa quốc gia)' }
+        ]}
+      ],
+      btn: '📄 Dựng CV Chuẩn ATS A4 & Xuất PDF Miễn Phí 100%'
+    },
+    '/cong-cu/lich-30-ngay': {
+      badge: '🎁 Mở Miễn Phí 100% · Lập đủ 30 ngày & Xuất File Excel (.CSV) sạch (0đ)',
+      title: '📅 AI Lập Lịch 30 Ngày Bài Đăng Bán Hàng & Kịch Bản Hook TikTok (.CSV Excel)',
+      desc: 'Chỉ cần nhập tên Shop/Sản phẩm và tệp khách hàng. Tôi lập trọn bộ Kế hoạch 30 ngày không trùng ý tưởng (Tiêu đề giật tít, Câu Hook 3 giây đầu, Dàn ý bài viết/video, CTA chốt đơn & Khung giờ vàng) và cho tải thẳng file bảng tính mở trên Excel & Google Sheets miễn phí 100% (0đ)!',
+      mon: 'lich-30-ngay',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'ten_shop', label: 'Tên Shop / Thương hiệu / Sản phẩm chính', placeholder: 'Ví dụ: Giày Sức Khỏe TIDU / Tiệm Trà Vân Sơn / Phòng Khám Nha Khoa Tâm Đức', type: 'text' },
+        { id: 'khach_hang', label: 'Khách hàng mục tiêu, điểm mạnh nổi bật & tầm giá', placeholder: 'Ví dụ: Khách 35-65 tuổi cần giày êm chân chuẩn y khoa 779k, mũi rộng không đường may, freeship & đổi size tận nhà…', type: 'textarea' },
+        { id: 'kenh_chinh', label: 'Kênh triển khai nội dung chủ lực', type: 'select', options: [
+          { value: 'all', text: '📲 Kết hợp Fanpage Facebook + Kịch bản TikTok / Reels ngắn' },
+          { value: 'tiktok', text: '🎬 Chuyên kịch bản Video ngắn TikTok / Reels / Shorts (Hook 3s)' },
+          { value: 'facebook', text: '📘 Chuyên bài đăng Fanpage & Facebook cá nhân chốt đơn Zalo' }
+        ]}
+      ],
+      btn: '📅 Lập Lịch 30 Ngày & Tải File Excel (.CSV) Miễn Phí 100%'
+    },
+    '/cong-cu/tao-landing-page': {
+      badge: '🎁 Mở Miễn Phí 100% · Dựng 8 khối chốt đơn & Tải file index.html sạch (0đ)',
+      title: '🚀 AI Tự Code Landing Page 1 Trang — Xem Trước & Tải File .HTML Miễn Phí 100%',
+      desc: 'Thiết kế theo chuẩn Studio 8 khối chốt đơn (Split Hero 2 cột, Chứng thực nổi, 3 Điểm khác biệt, Bảng 3 gói giá, Quy trình 3 bước, Review khách hàng, FAQ & Nút Zalo nổi trên điện thoại). Tặng miễn phí 100% trọn bộ file index.html sạch không đóng dấu quảng cáo để bạn gắn tên miền dùng ngay!',
+      mon: 'tao-landing-page',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'ten_sp', label: 'Tên sản phẩm / Dịch vụ / Thương hiệu', placeholder: 'Ví dụ: Vân Sơn Trà — Trà Shan Tuyết Cổ Thụ Hà Giang', type: 'text' },
+        { id: 'mo_ta', label: 'Điểm mạnh nổi bật / Các gói giá / Ưu đãi khách nhận được', placeholder: 'Ví dụ: Trà cổ thụ >200 năm tuổi sao tay chảo gang, ngọt hậu 6 nước. Hũ Bạch trà 285k, Lục trà cổ thụ 360k, Hộp quà gỗ thông 790k. Tặng gói thử 10g…', type: 'textarea' },
+        { id: 'lien_he', label: 'Số điện thoại Zalo hoặc Link nhận khách (gắn vào nút Mua & Nút Zalo nổi)', placeholder: 'Ví dụ: 0912345678 hoặc https://zalo.me/...', type: 'text' },
+        { id: 'mau_sac', label: 'Hệ thẩm mỹ & Tông màu thiết kế chủ đạo', type: 'select', options: [
+          { value: 'editorial-tea', text: '🍃 Sáng Tinh Tế · Kem Ấm & Xanh Trà Serif (Đặc sản, F&B, Trà/Cà phê, Thảo mộc)' },
+          { value: 'editorial-rose', text: '🌸 Sáng Tinh Tế · Hồng Kem & Đỏ Rượu Serif (Tiệm bánh, Mỹ phẩm, Spa, Thời trang, Quà tặng)' },
+          { value: 'emerald', text: '💚 Tối Hiện Đại · Ngọc Lục Bảo & Cyan Aurora (Công nghệ, AI, SaaS, Khóa học)' },
+          { value: 'blue', text: '💙 Tối Hiện Đại · Xanh Dương Doanh Nghiệp (B2B, Tư vấn, Tài chính, Bất động sản)' },
+          { value: 'amber', text: '🧡 Tối Hiện Đại · Cam Hổ Phách Năng Lượng (Thương mại điện tử, Sự kiện, Khuyến mãi)' },
+          { value: 'violet', text: '💜 Tối Hiện Đại · Tím Hoàng Gia (Sáng tạo, Studio, Nghệ thuật, Dịch vụ VIP)' }
+        ]}
+      ],
+      btn: '🚀 Dựng Landing Page 8 Khối & Tải File .HTML Miễn Phí 100%'
+    },
+    '/cong-cu/cham-diem-web': {
+      badge: '🎁 Mở Miễn Phí 100% · Chẩn đoán tốc độ, SEO & Báo cáo tối ưu đầy đủ (0đ)',
+      title: '⚡ Chấm điểm & Khám bệnh Web bán hàng (Miễn Phí 100%)',
+      desc: 'Dán đường dẫn (URL) trang web của bạn. Tôi tự động kết nối kiểm tra tốc độ phản hồi, HTTPS, thẻ tiêu đề/mô tả SEO, khả năng hiển thị trên điện thoại và mở sẵn báo cáo sửa trang chi tiết hoàn toàn miễn phí!',
+      mon: 'cham-diem-web',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'url', label: 'Đường dẫn trang web cần chấm điểm', placeholder: 'https://ten-mien-cua-ban.vn', type: 'text' },
+        { id: 'muc_tieu', label: 'Trang web của bạn bán gì / mục tiêu chính?', placeholder: 'Ví dụ: Bán mỹ phẩm, nhận đặt lịch dịch vụ, làm affiliate…', type: 'text' }
+      ],
+      btn: '⚡ Chấm điểm & Nhận báo cáo đầy đủ miễn phí 100%'
+    },
+    '/cong-cu/kham-kenh': {
+      badge: '🎁 Mở Miễn Phí 100% · Chẩn đoán kênh & Lộ trình 30 ngày sửa kênh (0đ)',
+      title: '🔍 Khám kênh TikTok, YouTube, Shopee (Miễn Phí 100%)',
+      desc: 'Gửi link kênh hoặc mô tả tình trạng kênh hiện tại. Tôi chỉ ra vì sao kênh bị bóp tương tác, ít người xem và tặng ngay lộ trình 30 ngày cải tổ kênh + 10 tiêu đề mẫu hoàn toàn miễn phí!',
+      mon: 'kham-kenh',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'url', label: 'Link kênh (TikTok / YouTube / Fanpage / Shopee)', placeholder: 'https://www.tiktok.com/@ten_kenh', type: 'text' },
+        { id: 'mo_ta', label: 'Ngách nội dung & tình trạng hiện tại', placeholder: 'Ví dụ: Kênh review đồ gia dụng, đã đăng 15 video nhưng lẹt đẹt 100-200 view…', type: 'textarea' }
+      ],
+      btn: '🔍 Khám kênh & Nhận lộ trình 30 ngày miễn phí 100%'
+    },
+    '/cong-cu/ai-huong-dan': {
+      badge: '🎁 Mở Miễn Phí 100% · Hướng dẫn từng bước & Trọn bộ 3 Super-Prompt (0đ)',
+      title: '🧭 AI Hướng dẫn từng bước & Soạn sẵn Câu lệnh (Miễn Phí 100%)',
+      desc: 'Nói việc bạn muốn làm bằng AI (tạo ảnh sản phẩm, viết bài chuẩn SEO, dựng video ngắn, tự động hóa). Tôi chỉ từng bước và mở khóa sẵn trọn bộ 3 câu lệnh chuyên sâu để bạn chép dùng ngay miễn phí!',
+      mon: 'ai-huong-dan',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'nhu_cau', label: 'Bạn muốn dùng AI để làm việc gì?', placeholder: 'Ví dụ: Viết 10 bài giới thiệu quán cà phê hút khách trên Facebook kèm câu lệnh tạo ảnh…', type: 'textarea' }
+      ],
+      btn: '🧭 Tạo hướng dẫn & Trọn bộ Prompt miễn phí 100%'
+    },
+    '/cong-cu/video-ai': {
+      badge: '🎁 Mở Miễn Phí 100% · Kịch bản phân cảnh + 2 biến thể Hook A/B test (0đ)',
+      title: '🎬 Lên kịch bản & Hook 3 giây Video ngắn chuyển đổi cao (Miễn Phí 100%)',
+      desc: 'Gửi tên sản phẩm/ứng dụng và điểm mạnh. Tôi tạo ngay kịch bản video ngắn hoàn chỉnh (Hook 3 giây đầu - Phân cảnh chi tiết - Lời thoại - Kêu gọi hành động) hoàn toàn miễn phí!',
+      mon: 'video-ai',
+      gia: 0,
+      mien_phi: true,
+      fields: [
+        { id: 'ten_sp', label: 'Tên sản phẩm / Ứng dụng / Dịch vụ', placeholder: 'Ví dụ: Ứng dụng quản lý chi tiêu Deta', type: 'text' },
+        { id: 'link_sp', label: 'Link trang web hoặc sản phẩm (nếu có)', placeholder: 'https://...', type: 'text' },
+        { id: 'diem_manh', label: 'Điểm nổi bật nhất hoặc nỗi đau của khách hàng', placeholder: 'Ví dụ: Tự động quét hóa đơn trong 2 giây, không cần nhập tay…', type: 'textarea' }
+      ],
+      btn: '🎬 Lên trọn bộ kịch bản video miễn phí 100%'
+    },
+    '/tai-lieu/tao-ai': {
+      badge: '🎁 Mở Khóa Miễn Phí 100% Toàn Bộ Kiến Trúc & Prompt Hệ Thống (0đ)',
+      title: '📘 Tài liệu: Cách dựng một con AI tự kiếm tiền như kiemtien.deta.vn',
+      desc: 'Toàn bộ kiến trúc kỹ thuật, cầu nối gọi Gemini 3.8 Flash tốn 0đ tiền API (agy --sandbox), thuật toán nối SePay Open Banking 1 giây và bộ Prompt tự vấn chiến lược 06:00 sáng — mở công khai miễn phí 100% tặng cộng đồng!',
+      mon: 'tai-lieu',
+      gia: 0,
+      mien_phi: true,
+      fields: [],
+      btn: '📘 Đọc trọn bộ Tài liệu & Prompt hệ thống (Miễn phí 100%)'
+    }
+  };
+
+  var cfg = TOOLS[path] || TOOLS['/cong-cu/cham-diem-web'];
+  $('page-title').textContent = cfg.title + ' · kiemtien.deta.vn';
+  $('tool-badge').textContent = cfg.badge;
+  $('tool-title').textContent = cfg.title;
+  $('tool-desc').textContent = cfg.desc;
+
+  var fb = $('form-box');
+  cfg.fields.forEach(function(f){
+    var lb = document.createElement('label'); lb.textContent = f.label;
+    var inp;
+    if (f.type === 'select') {
+      inp = document.createElement('select');
+      (f.options || []).forEach(function(opt){
+        var o = document.createElement('option'); o.value = opt.value; o.textContent = opt.text;
+        inp.appendChild(o);
+      });
+    } else {
+      inp = document.createElement(f.type === 'textarea' ? 'textarea' : 'input');
+      inp.placeholder = f.placeholder || '';
+      if (f.type === 'textarea') inp.rows = 3;
+    }
+    inp.id = 'f-' + f.id;
+    lb.appendChild(inp); fb.appendChild(lb);
+  });
+  var bt = document.createElement('button'); bt.type = 'button'; bt.className = 'nut-to'; bt.textContent = cfg.btn;
+  fb.appendChild(bt);
+
+  // Showcase trực quan cho trang Tạo Landing Page
+  if (path === '/cong-cu/tao-landing-page') {
+    var scBox = $('showcase-box');
+    scBox.hidden = false;
+    scBox.className = 'hop';
+    scBox.style.borderColor = 'rgba(16,185,129,.38)';
+    scBox.innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:12px">' +
+        '<b style="font-size:16px">✨ Showcase mẫu do Deta AI thiết kế (Bấm mở xem trang thật)</b>' +
+        '<span style="font-size:12.5px;color:var(--mo)">Chuẩn 8 khối chốt đơn · Đẹp trên cả PC &amp; Điện thoại</span>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">' +
+        '<div style="border:1px solid var(--net);border-radius:15px;overflow:hidden;background:var(--the-phu);display:flex;flex-direction:column">' +
+          '<a href="/mau-landing/van-son-tra/" target="_blank" rel="noopener" style="display:block;overflow:hidden;aspect-ratio:16/10;background:#261C15"><img src="/mau-landing/assets/van-son-tra-hero.webp" alt="Showcase Vân Sơn Trà" style="width:100%;height:100%;object-fit:cover"></a>' +
+          '<div style="padding:13px;display:flex;flex-direction:column;flex:1">' +
+            '<span style="font-size:11.5px;font-weight:800;color:#C57B27;text-transform:uppercase">Mẫu #1 · Sáng Tinh Tế (Lora Serif)</span>' +
+            '<b style="font-size:15.5px;margin:3px 0 5px">🍃 Vân Sơn Trà — Đặc sản Trà Cổ Thụ</b>' +
+            '<p style="font-size:13px;color:var(--mo);margin:0 0 11px;flex:1">Hợp F&amp;B, tiệm bánh, trà/cà phê, mỹ phẩm thiên nhiên, quà biếu thủ công.</p>' +
+            '<div style="display:flex;gap:7px;flex-wrap:wrap">' +
+              '<a href="/mau-landing/van-son-tra/" target="_blank" rel="noopener" style="flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:800;padding:8px 10px;border-radius:10px;background:#10B981;color:#fff">👁️ Xem trang thật ↗</a>' +
+              '<button type="button" data-preset="tea" style="font:inherit;font-size:12.5px;font-weight:700;padding:8px 11px;border-radius:10px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">⚡ Nạp thử</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="border:1px solid var(--net);border-radius:15px;overflow:hidden;background:var(--the-phu);display:flex;flex-direction:column">' +
+          '<a href="/mau-landing/detaspeak-ai/" target="_blank" rel="noopener" style="display:block;overflow:hidden;aspect-ratio:16/10;background:#050B16"><img src="/mau-landing/assets/detaspeak-ai-hero.webp" alt="Showcase DetaSpeak AI" style="width:100%;height:100%;object-fit:cover"></a>' +
+          '<div style="padding:13px;display:flex;flex-direction:column;flex:1">' +
+            '<span style="font-size:11.5px;font-weight:800;color:#38BDF8;text-transform:uppercase">Mẫu #2 · Tối Hiện Đại (Aurora SaaS)</span>' +
+            '<b style="font-size:15.5px;margin:3px 0 5px">🎙️ DetaSpeak AI — Khóa học &amp; Ứng dụng</b>' +
+            '<p style="font-size:13px;color:var(--mo);margin:0 0 11px;flex:1">Hợp khóa học, phần mềm AI, dịch vụ B2B, agency tư vấn, studio hiện đại.</p>' +
+            '<div style="display:flex;gap:7px;flex-wrap:wrap">' +
+              '<a href="/mau-landing/detaspeak-ai/" target="_blank" rel="noopener" style="flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:800;padding:8px 10px;border-radius:10px;background:#0EA5E9;color:#fff">👁️ Xem trang thật ↗</a>' +
+              '<button type="button" data-preset="saas" style="font:inherit;font-size:12.5px;font-weight:700;padding:8px 11px;border-radius:10px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">⚡ Nạp thử</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    var PRESETS = {
+      tea: {
+        ten_sp: 'Tiệm Bánh Mây Đồi — Bánh Nướng Bơ Pháp Mỗi Sáng',
+        mo_ta: 'Nướng mới 5h sáng mỗi ngày bằng bơ Pháp kết hợp trái cây Đà Lạt ít ngọt. Croissant trứng muối 45k, Hộp bánh trà chiều 6 vị 220k, Set quà sinh nhật 390k. Miễn phí ship từ 2 hộp.',
+        lien_he: '0909123456',
+        mau_sac: 'editorial-rose'
+      },
+      saas: {
+        ten_sp: 'AutoSale CRM — Trợ Lý AI Chăm Khách Zalo Tự Động',
+        mo_ta: 'Tự động phản hồi và phân loại khách tiềm năng trong 3 giây, nhắc lịch chăm sóc không sót đơn. Gói Cá nhân 199k/tháng, Gói Đội nhóm 499k/tháng, Gói Doanh nghiệp 990k/tháng. Dùng thử 7 ngày miễn phí.',
+        lien_he: '0912345678',
+        mau_sac: 'emerald'
+      },
+      shop: {
+        ten_sp: 'Giày Sức Khỏe Êm Chân An Bước — Đi Cả Ngày Không Mỏi',
+        mo_ta: 'Đế đệm khí nâng vòm bàn chân, vải lưới thoáng khí 3D không hầm bí, khóa dán tiện lợi cho người lớn tuổi. Đôi tiêu chuẩn 590k, Combo 2 đôi 1.090k miễn phí giao hàng tận nhà, đổi size trong 15 ngày.',
+        lien_he: '0988123456',
+        mau_sac: 'amber'
+      }
+    };
+    var quickBar = document.createElement('div');
+    quickBar.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:var(--the-phu);border:1px dashed var(--net)';
+    quickBar.innerHTML =
+      '<span style="font-size:12.5px;font-weight:700;color:var(--mo)">⚡ Thử nhanh 1 chạm:</span>' +
+      '<button type="button" data-qpreset="tea" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">🍰 Tiệm bánh &amp; F&amp;B</button>' +
+      '<button type="button" data-qpreset="saas" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">🤖 Phần mềm / Khóa học</button>' +
+      '<button type="button" data-qpreset="shop" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">👟 Shop Giày &amp; Thời trang</button>';
+    fb.insertBefore(quickBar, fb.firstChild);
+
+    function applyPreset(key, autoRun) {
+      var p = PRESETS[key]; if (!p) return;
+      Object.keys(p).forEach(function(k){ if ($('f-' + k)) $('f-' + k).value = p[k]; });
+      fb.scrollIntoView({behavior: 'smooth', block: 'center'});
+      if (autoRun && !bt.disabled) bt.click();
+    }
+    scBox.querySelectorAll('button[data-preset]').forEach(function(b){
+      b.onclick = function(){ applyPreset(b.dataset.preset, false); };
+    });
+    quickBar.querySelectorAll('button[data-qpreset]').forEach(function(b){
+      b.onclick = function(){ applyPreset(b.dataset.qpreset, false); };
+    });
+    var qMau = new URLSearchParams(location.search).get('mau');
+    if (qMau === 'van-son-tra') applyPreset('tea', false);
+    else if (qMau === 'detaspeak-ai') applyPreset('saas', false);
+    else if (qMau === 'shop') applyPreset('shop', false);
+  }
+
+  // Thanh thử nhanh 1 chạm cho công cụ Tạo CV ATS (15k) & Lịch 30 Ngày (.CSV 19k)
+  if (path === '/cong-cu/tao-cv-ats') {
+    var CV_PRESETS = {
+      sales: {
+        ho_ten_cv: 'Trần Quốc Bảo | 0908 456 789 | quocbao.sales@gmail.com | TP. Hồ Chí Minh',
+        vi_tri: 'Trưởng Nhóm Kinh Doanh & Phát Triển Khách Hàng (Sales Team Lead)',
+        kinh_nghiem: '- 2023 đến nay: Chuyên viên kinh doanh cao cấp tại Công ty Giải pháp Số Minh Việt. Mở mới 65 khách hàng doanh nghiệp SME, đưa doanh thu nhóm tăng từ 420 triệu lên 780 triệu/tháng (đạt 132% KPI năm).\n- 2021 - 2023: Nhân viên tư vấn bán hàng tại VietCommerce, tỷ lệ chốt đơn từ data nóng đạt 28%, giữ chân 85% khách gia hạn năm hai.\n- Kỹ năng: Đàm phán B2B, xây dựng kịch bản telesales/Zalo, quản trị CRM HubSpot, đào tạo nhóm 6 nhân sự.\n- Học vấn: Cử nhân Quản trị Kinh doanh — ĐH Kinh tế TP.HCM.',
+        ngon_ngu: 'vi'
+      },
+      it: {
+        ho_ten_cv: 'Nguyen Hoang Nam | 0912 345 678 | nam.backend.dev@gmail.com | Ha Noi | github.com/hoangnam',
+        vi_tri: 'Senior Backend Engineer (Python / Microservices)',
+        kinh_nghiem: '- 2023-Present: Backend Developer at FinTech Cloud VN. Designed real-time payment webhook gateway processing 45,000+ tx/day with 99.98% uptime and <120ms latency using Python, FastAPI, PostgreSQL, Redis.\n- 2021-2023: Software Engineer at TechNova. Automated CI/CD Docker pipelines cutting deployment time by 60%, optimized SQL queries reducing server cost by 35%.\n- Education: B.S. in Computer Science, HUST.',
+        ngon_ngu: 'en'
+      },
+      mkt: {
+        ho_ten_cv: 'Lê Ngọc Minh Châu | 0977 888 999 | minhchau.mkt@gmail.com | Hà Nội',
+        vi_tri: 'Chuyên Viên Content Marketing & Tăng Trưởng Đa Kênh',
+        kinh_nghiem: '- 2023 - nay: Phụ trách nội dung Fanpage & kênh TikTok cho thương hiệu Mỹ phẩm Thiên nhiên Lành (tăng từ 0 lên 48.000 followers tự nhiên, 4 video đạt trên 500.000 lượt xem, mang về 350+ tin nhắn hỏi mua/tháng).\n- Viết 40+ bài chuẩn SEO lên Top 5 Google, biết dùng AI tối ưu kịch bản Hook 3s và dựng CapCut/Canva.\n- Tốt nghiệp Học viện Báo chí & Tuyên truyền.',
+        ngon_ngu: 'song-ngu'
+      }
+    };
+    var qbCv = document.createElement('div');
+    qbCv.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:var(--the-phu);border:1px dashed var(--net)';
+    qbCv.innerHTML =
+      '<span style="font-size:12.5px;font-weight:700;color:var(--mo)">⚡ Nạp hồ sơ mẫu 1 chạm:</span>' +
+      '<button type="button" data-cvp="sales" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">💼 Kinh doanh / Sales (Việt)</button>' +
+      '<button type="button" data-cvp="it" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">💻 Kỹ sư IT (ATS English)</button>' +
+      '<button type="button" data-cvp="mkt" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">📣 Marketing (Song ngữ)</button>';
+    fb.insertBefore(qbCv, fb.firstChild);
+    qbCv.querySelectorAll('button[data-cvp]').forEach(function(b){
+      b.onclick = function(){
+        var p = CV_PRESETS[b.dataset.cvp]; if (!p) return;
+        Object.keys(p).forEach(function(k){ if ($('f-' + k)) $('f-' + k).value = p[k]; });
+      };
+    });
+  }
+
+  if (path === '/cong-cu/lich-30-ngay') {
+    var CAL_PRESETS = {
+      fnb: {
+        ten_shop: 'Tiệm Cà Phê & Bánh Nướng Mây Đồi',
+        khach_hang: 'Dân văn phòng & giới trẻ 20-35 tuổi thích cà phê Arabica rang mộc và croissant bơ Pháp nướng mới mỗi sáng (39k-65k), combo sáng 75k freeship bán kính 3km.',
+        kenh_chinh: 'all'
+      },
+      fashion: {
+        ten_shop: 'Thời Trang Công Sở Thanh Lịch Lụa Việt',
+        khach_hang: 'Phụ nữ công sở 25-45 tuổi cần đầm/áo sơ mi tôn dáng che khuyết điểm vòng eo, chất vải mát không nhăn (350k-690k), cho kiểm tra thử hàng tận nơi.',
+        kenh_chinh: 'tiktok'
+      },
+      health: {
+        ten_shop: 'Giày Y Khoa Bảo Vệ Bàn Chân TIDU',
+        khach_hang: 'Người lớn tuổi & người tiểu đường (45-75 tuổi) hoặc con cái mua biếu bố mẹ. Giày chuẩn IWGDF mũi rộng không đường may 779k, đi êm chống trượt, hỗ trợ đổi size miễn phí tại nhà.',
+        kenh_chinh: 'facebook'
+      }
+    };
+    var qbCal = document.createElement('div');
+    qbCal.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:var(--the-phu);border:1px dashed var(--net)';
+    qbCal.innerHTML =
+      '<span style="font-size:12.5px;font-weight:700;color:var(--mo)">⚡ Thử nhanh ngành hàng:</span>' +
+      '<button type="button" data-calp="fnb" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">🧋 Quán Cà phê / F&amp;B</button>' +
+      '<button type="button" data-calp="fashion" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">👗 Thời trang / Mỹ phẩm</button>' +
+      '<button type="button" data-calp="health" style="font:inherit;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--net);background:var(--the);color:var(--muc);cursor:pointer">👟 Sản phẩm Sức khỏe</button>';
+    fb.insertBefore(qbCal, fb.firstChild);
+    qbCal.querySelectorAll('button[data-calp]').forEach(function(b){
+      b.onclick = function(){
+        var p = CAL_PRESETS[b.dataset.calp]; if (!p) return;
+        Object.keys(p).forEach(function(k){ if ($('f-' + k)) $('f-' + k).value = p[k]; });
+      };
+    });
+    var qShop = new URLSearchParams(location.search).get('shop');
+    if (qShop && $('f-ten_shop')) $('f-ten_shop').value = qShop;
+  }
+
+  function demClickBanner(id){
+    try {
+      var p = JSON.stringify({id: id || 0});
+      if (navigator.sendBeacon) navigator.sendBeacon('/api/banner/click', new Blob([p], {type:'application/json'}));
+      else fetch('/api/banner/click', {method:'POST', headers:{'Content-Type':'application/json'}, body:p, keepalive:true});
+    } catch(e){}
+  }
+
+  // Nạp Banner Đỉnh tuần này lên đầu mọi trang công cụ (trỏ thẳng href tới website thật của khách + đếm click ngầm)
+  fetch('/api/banner', {cache: 'no-store'}).then(function(r){ return r.json(); }).then(function(b){
+    var nd = $('bd-noi-dung'), anh = $('bd-tool-anh'), img = $('bd-tool-img'), nhan = $('bd-tool-nhan'), cta = $('bd-tool-cta');
+    if (b && b.top) {
+      if (anh && img && b.top.anh_banner) {
+        anh.style.display = 'block'; anh.href = b.top.url; img.src = b.top.anh_banner; img.alt = b.top.tieu_de;
+        anh.onclick = function(){ demClickBanner(b.top.id); };
+      } else if (anh) {
+        anh.style.display = 'none';
+      }
+      if (nhan) nhan.textContent = '👑 BANNER ĐỈNH #1:';
+      nd.textContent = '';
+      var a = document.createElement('a'); a.href = b.top.url; a.target = '_blank'; a.rel = 'noopener';
+      a.onclick = function(){ demClickBanner(b.top.id); };
+      a.style.fontWeight = '800'; a.style.color = 'var(--muc)'; a.style.textDecoration = 'underline';
+      a.textContent = b.top.anh_banner ? (b.top.bieu + ' ' + b.top.domain + ' ↗') : (b.top.bieu + ' ' + b.top.tieu_de + (b.top.mo_ta ? ' — ' + b.top.mo_ta : '') + ' (' + b.top.domain + ')');
+      var cl = document.createElement('span'); cl.style.marginLeft = '6px'; cl.style.fontSize = '12px'; cl.style.opacity = '.8';
+      cl.textContent = '🔥 ' + b.top.clicks + ' click';
+      nd.appendChild(a); nd.appendChild(cl);
+      if (cta) cta.textContent = '⚡ Vượt lên #1 (' + (b.gia_len_dinh || 15000).toLocaleString('vi-VN') + 'đ) →';
+    } else if (b && b.mac_dinh) {
+      var md = b.mac_dinh;
+      if (anh) { anh.style.display = 'block'; anh.href = md.url; anh.onclick = function(){ demClickBanner(0); }; }
+      if (img && md.anh_banner) img.src = md.anh_banner;
+      if (nhan) nhan.textContent = (md.nhan || '🏥 ĐỒNG HÀNH') + ':';
+      nd.textContent = '';
+      var am = document.createElement('a'); am.href = md.url; am.target = '_blank'; am.rel = 'noopener';
+      am.onclick = function(){ demClickBanner(0); };
+      am.style.fontWeight = '800'; am.style.color = 'var(--muc)'; am.style.textDecoration = 'underline';
+      am.textContent = md.anh_banner ? (md.bieu + ' ' + md.domain + ' ↗') : (md.bieu + ' ' + md.tieu_de + (md.mo_ta ? ' — ' + md.mo_ta : '') + ' (' + md.domain + ')');
+      var clm = document.createElement('span'); clm.style.marginLeft = '6px'; clm.style.fontSize = '12px'; clm.style.opacity = '.8';
+      clm.textContent = '🔥 ' + (md.clicks || 0) + ' click';
+      nd.appendChild(am); nd.appendChild(clm);
+      if (cta) cta.textContent = '👑 Đặt thay vị trí này từ 10k →';
+    }
+  }).catch(function(){});
+
+  function renderResult(res) {
+    var rb = $('result-box'); rb.hidden = false; rb.textContent = '';
+    var hop = document.createElement('div'); hop.className = 'hop';
+    if (res.diem !== undefined) {
+      var d = document.createElement('div'); d.className = 'diem-to'; d.textContent = res.diem + ' / 100 điểm';
+      hop.appendChild(d);
+    }
+    var h2 = document.createElement('h2'); h2.style.marginTop = '4px'; h2.textContent = res.tieu_de || 'Kết quả phân tích miễn phí';
+    hop.appendChild(h2);
+
+    (res.diem_tot || []).forEach(function(x){
+      var m = document.createElement('div'); m.className = 'muc-tot'; m.textContent = '✅ ' + x; hop.appendChild(m);
+    });
+    (res.van_de || []).forEach(function(x){
+      var m = document.createElement('div'); m.className = 'muc-loi'; m.textContent = '⚠️ ' + x; hop.appendChild(m);
+    });
+    if (res.xem_truoc) {
+      var pre = document.createElement('div'); pre.className = 'pre-code'; pre.textContent = res.xem_truoc;
+      hop.appendChild(pre);
+    }
+    if (res.svg_card) {
+      var cardWrap = document.createElement('div');
+      cardWrap.style.maxWidth = '540px'; cardWrap.style.margin = '16px auto 12px';
+      cardWrap.style.borderRadius = '20px'; cardWrap.style.overflow = 'hidden';
+      cardWrap.style.border = '1.5px solid rgba(16,185,129,.4)'; cardWrap.style.boxShadow = 'var(--bong)';
+      cardWrap.innerHTML = res.svg_card;
+      var svgEl = cardWrap.querySelector('svg');
+      if (svgEl) { svgEl.style.width = '100%'; svgEl.style.height = 'auto'; svgEl.style.display = 'block'; }
+      hop.appendChild(cardWrap);
+
+      var dlRow = document.createElement('div');
+      dlRow.style.display = 'flex'; dlRow.style.flexWrap = 'wrap'; dlRow.style.gap = '10px'; dlRow.style.margin = '0 0 16px';
+      var btPng = document.createElement('button'); btPng.type = 'button'; btPng.className = 'nut-to'; btPng.style.marginTop = '0'; btPng.style.flex = '1';
+      btPng.textContent = '⬇️ Tải Ảnh Bản Đồ Thần Số Học (.PNG nét cao 1080×1350)';
+      btPng.onclick = function(){
+        btPng.disabled = true; btPng.textContent = '⏳ Đang xuất ảnh PNG nét cao…';
+        var svgBlob = new Blob([res.svg_card], {type: 'image/svg+xml;charset=utf-8'});
+        var url = URL.createObjectURL(svgBlob);
+        var img = new Image();
+        img.onload = function(){
+          var cv = document.createElement('canvas'); cv.width = 1080; cv.height = 1350;
+          var ctx = cv.getContext('2d');
+          ctx.fillStyle = '#050B16'; ctx.fillRect(0, 0, 1080, 1350);
+          ctx.drawImage(img, 0, 0, 1080, 1350);
+          URL.revokeObjectURL(url);
+          cv.toBlob(function(pngBlob){
+            var a = document.createElement('a');
+            var slug = (res.ho_ten || 'ban-do').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'deta';
+            a.href = URL.createObjectURL(pngBlob);
+            a.download = 'than-so-hoc-' + slug + '-kiemtien-deta-vn.png';
+            a.click();
+            btPng.disabled = false; btPng.textContent = '✅ Đã tải ảnh PNG! (Bấm để tải lại)';
+          }, 'image/png');
+        };
+        img.onerror = function(){
+          URL.revokeObjectURL(url);
+          btPng.disabled = false; btPng.textContent = '⬇️ Tải Ảnh Bản Đồ (.PNG)';
+          alert('Trình duyệt không xuất được PNG, bạn chụp màn hình thẻ Bản đồ nhé!');
+        };
+        img.src = url;
+      };
+      var btCopyRead = document.createElement('button'); btCopyRead.type = 'button'; btCopyRead.className = 'nut-to';
+      btCopyRead.style.marginTop = '0'; btCopyRead.style.flex = '1';
+      btCopyRead.style.background = 'var(--the-phu)'; btCopyRead.style.color = 'var(--muc)'; btCopyRead.style.border = '1px solid var(--net)'; btCopyRead.style.boxShadow = 'none';
+      btCopyRead.textContent = '📋 Sao chép Trọn bộ Bài luận';
+      btCopyRead.onclick = function(){
+        try { navigator.clipboard.writeText(res.ban_day_du || ''); btCopyRead.textContent = '✅ Đã sao chép bài luận!'; } catch(e){}
+      };
+      dlRow.appendChild(btPng); dlRow.appendChild(btCopyRead);
+      hop.appendChild(dlRow);
+    }
+    if (res.preview_html) {
+      var bar = document.createElement('div');
+      bar.style.display = 'flex'; bar.style.alignItems = 'center'; bar.style.justifyContent = 'space-between'; bar.style.margin = '14px 0 8px';
+      var lbl = document.createElement('b'); lbl.style.fontSize = '14.5px'; lbl.textContent = '✨ Bản hoàn chỉnh tương tác trực tiếp (Đã mở khóa Miễn phí 100%):';
+      var btns = document.createElement('div'); btns.style.display = 'flex'; btns.style.gap = '6px';
+      var bDesk = document.createElement('button'); bDesk.type = 'button'; bDesk.textContent = '🖥️ Máy tính';
+      var bMob = document.createElement('button'); bMob.type = 'button'; bMob.textContent = '📱 Điện thoại';
+      [bDesk, bMob].forEach(function(x){
+        x.style.padding = '5px 11px'; x.style.borderRadius = '999px'; x.style.border = '1px solid var(--net)';
+        x.style.background = 'var(--the-phu)'; x.style.color = 'var(--muc)'; x.style.fontWeight = '700'; x.style.cursor = 'pointer'; x.style.fontSize = '12.5px';
+      });
+      var wrapIf = document.createElement('div');
+      wrapIf.style.border = '2px solid rgba(16,185,129,.4)'; wrapIf.style.borderRadius = '16px'; wrapIf.style.overflow = 'hidden'; wrapIf.style.background = '#06111F'; wrapIf.style.transition = 'max-width .25s'; wrapIf.style.margin = '0 auto';
+      var ifr = document.createElement('iframe');
+      ifr.style.width = '100%'; ifr.style.height = '540px'; ifr.style.border = '0'; ifr.style.display = 'block';
+      ifr.setAttribute('sandbox', 'allow-scripts allow-popups');
+      ifr.srcdoc = res.da_mo_khoa && res.ban_day_du ? res.ban_day_du : res.preview_html;
+      bDesk.onclick = function(){ wrapIf.style.maxWidth = '100%'; };
+      bMob.onclick = function(){ wrapIf.style.maxWidth = '390px'; };
+      btns.appendChild(bDesk); btns.appendChild(bMob);
+      bar.appendChild(lbl); bar.appendChild(btns);
+      wrapIf.appendChild(ifr);
+      hop.appendChild(bar); hop.appendChild(wrapIf);
+    }
+
+    // Phần tải thành phẩm & chia sẻ / tiếp sức tự nguyện (Mở khóa Miễn phí 100%)
+    var isPerOrderTool = (cfg.mon === 'tao-landing-page' || cfg.mon === 'tao-cv-ats' || cfg.mon === 'lich-30-ngay');
+    var daLuu = false;
+    try { if (!isPerOrderTool) daLuu = localStorage.getItem('deta-mo-khoa-' + cfg.mon) === '1'; } catch (e) {}
+    var veVipHienTai = new URLSearchParams(location.search).get('ve') || localStorage.getItem('deta-ve-rieng') || '';
+    if (res.da_mo_khoa && !res.view_url && res.preview_id && veVipHienTai && (cfg.mon === 'tao-cv-ats' || cfg.mon === 'lich-30-ngay')) {
+      var vipBase = '/api/tai-pham-vat?ve=' + encodeURIComponent(veVipHienTai) + '&pid=' + encodeURIComponent(res.preview_id);
+      res.view_url = vipBase + '&xem=1';
+      res.dl_url = vipBase + '&dl=1';
+      if (cfg.mon === 'lich-30-ngay') res.csv_url = vipBase + '&csv=1';
+    }
+    var khoa = document.createElement('div'); khoa.className = 'khoa-hop';
+    if ((res.da_mo_khoa || daLuu) && (res.ban_day_du || res.dl_url || res.csv_url || res.view_url)) {
+      var h3 = document.createElement('h3'); h3.style.marginTop = '0';
+      h3.textContent = cfg.mon === 'than-so-hoc'
+        ? '🔮 Bản Luận Giải Thần Số Học Chuyên Sâu Đầy Đủ (Miễn phí 100%):'
+        : (cfg.mon === 'tao-landing-page' ? '🎉 Landing Page sạch 100% đã sẵn sàng tải về (Miễn phí 0đ):'
+          : (cfg.mon === 'tao-cv-ats' ? '🎉 CV Chuẩn ATS A4 & Thư Ứng Tuyển sạch 100% (Miễn phí 0đ):'
+            : (cfg.mon === 'lich-30-ngay' ? '🎉 Trọn bộ File Excel Lịch 30 Ngày (.CSV) sạch 100% (Miễn phí 0đ):'
+              : (cfg.mon === 'tai-lieu' ? '📘 Trọn bộ Kiến trúc & Bộ Prompt Hệ thống (Miễn phí 100%):'
+                : '🎉 Bản Đầy Đủ & Bộ Prompt Chi Tiết (Đã mở khóa Miễn phí 100%):'))));
+      khoa.appendChild(h3);
+      if (cfg.mon === 'lich-30-ngay' && res.csv_url) {
+        var rowCal = document.createElement('div'); rowCal.style.display = 'flex'; rowCal.style.flexWrap = 'wrap'; rowCal.style.gap = '10px'; rowCal.style.marginBottom = '12px';
+        var aCsv = document.createElement('a'); aCsv.href = res.csv_url; aCsv.className = 'nut-to'; aCsv.style.textDecoration = 'none'; aCsv.style.marginTop = '0'; aCsv.style.flex = '1.3';
+        aCsv.textContent = '📊 Tải Ngay File Excel Lịch 30 Ngày (.CSV chuẩn Tiếng Việt · 0đ)';
+        rowCal.appendChild(aCsv);
+        if (res.view_url) {
+          var aViewCal = document.createElement('a'); aViewCal.href = res.view_url; aViewCal.target = '_blank'; aViewCal.rel = 'noopener';
+          aViewCal.className = 'nut-to'; aViewCal.style.textDecoration = 'none'; aViewCal.style.marginTop = '0'; aViewCal.style.flex = '1';
+          aViewCal.style.background = 'var(--the)'; aViewCal.style.color = 'var(--muc)'; aViewCal.style.border = '1px solid var(--net)'; aViewCal.style.boxShadow = 'none';
+          aViewCal.textContent = '🖥️ Mở Bảng 30 Ngày Toàn Màn Hình ↗';
+          rowCal.appendChild(aViewCal);
+        }
+        khoa.appendChild(rowCal);
+      } else if (cfg.mon === 'tao-cv-ats' && res.view_url) {
+        var rowCv = document.createElement('div'); rowCv.style.display = 'flex'; rowCv.style.flexWrap = 'wrap'; rowCv.style.gap = '10px'; rowCv.style.marginBottom = '12px';
+        var aPrint = document.createElement('a'); aPrint.href = res.view_url; aPrint.target = '_blank'; aPrint.rel = 'noopener';
+        aPrint.className = 'nut-to'; aPrint.style.textDecoration = 'none'; aPrint.style.marginTop = '0'; aPrint.style.flex = '1.4';
+        aPrint.textContent = '🖨️ Mở Bản CV A4 Sạch & Lưu PDF Ngay (Có sửa chữ trực tiếp · 0đ) ↗';
+        rowCv.appendChild(aPrint);
+        if (res.dl_url) {
+          var aDlCv = document.createElement('a'); aDlCv.href = res.dl_url; aDlCv.className = 'nut-to'; aDlCv.style.textDecoration = 'none'; aDlCv.style.marginTop = '0'; aDlCv.style.flex = '1';
+          aDlCv.style.background = 'var(--the)'; aDlCv.style.color = 'var(--muc)'; aDlCv.style.border = '1px solid var(--net)'; aDlCv.style.boxShadow = 'none';
+          aDlCv.textContent = '⬇️ Tải File CV + Cover Letter (.HTML)';
+          rowCv.appendChild(aDlCv);
+        }
+        khoa.appendChild(rowCv);
+      } else if (cfg.mon === 'tao-landing-page' && (res.dl_url || res.ban_day_du)) {
+        var rowLp = document.createElement('div'); rowLp.style.display = 'flex'; rowLp.style.flexWrap = 'wrap'; rowLp.style.gap = '10px'; rowLp.style.marginBottom = '12px';
+        var aDlLp = document.createElement('a');
+        if (res.dl_url) {
+          aDlLp.href = res.dl_url;
+        } else {
+          var blobLp = new Blob([res.ban_day_du], {type: 'text/html;charset=utf-8'});
+          aDlLp.href = URL.createObjectURL(blobLp); aDlLp.download = 'index-landing-page.html';
+        }
+        aDlLp.className = 'nut-to'; aDlLp.style.textDecoration = 'none'; aDlLp.style.marginTop = '0'; aDlLp.style.flex = '1.35';
+        aDlLp.textContent = '⬇️ Tải Ngay File index.html Sạch 100% (Miễn phí 0đ)';
+        rowLp.appendChild(aDlLp);
+        if (res.view_url) {
+          var aViewLp = document.createElement('a'); aViewLp.href = res.view_url; aViewLp.target = '_blank'; aViewLp.rel = 'noopener';
+          aViewLp.className = 'nut-to'; aViewLp.style.textDecoration = 'none'; aViewLp.style.marginTop = '0'; aViewLp.style.flex = '1';
+          aViewLp.style.background = 'var(--the)'; aViewLp.style.color = 'var(--muc)'; aViewLp.style.border = '1px solid var(--net)'; aViewLp.style.boxShadow = 'none';
+          aViewLp.textContent = '🖥️ Mở Trang Toàn Màn Hình ↗';
+          rowLp.appendChild(aViewLp);
+        }
+        khoa.appendChild(rowLp);
+      } else if (res.dl_url) {
+        var aDl = document.createElement('a'); aDl.href = res.dl_url; aDl.className = 'nut-to'; aDl.style.textDecoration = 'none'; aDl.style.marginBottom = '12px';
+        aDl.textContent = '⬇️ Tải ngay file hoàn chỉnh về máy (Miễn phí 0đ)';
+        khoa.appendChild(aDl);
+      }
+      if (res.demo_shop_context) {
+        var rowBot = document.createElement('div');
+        rowBot.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px';
+        var btTestBot = document.createElement('button');
+        btTestBot.type = 'button';
+        btTestBot.className = 'nut-to';
+        btTestBot.style.cssText = 'margin-top:0;flex:1.4;background:linear-gradient(135deg,#10B981,#0EA5E9)';
+        btTestBot.textContent = '💬 Bấm Mở Khung Chat & Đóng Vai Khách Khó Tính Test Thử Con Bot Vừa Tạo Ngay!';
+        btTestBot.onclick = function () {
+          if (window.moChatDemoShop) {
+            window.moChatDemoShop('custom', res.demo_shop_context, 'Sao giá bên shop cao hơn chỗ khác thế, có bớt không?');
+          }
+        };
+        var btCopyBot = document.createElement('button');
+        btCopyBot.type = 'button';
+        btCopyBot.className = 'nut-to';
+        btCopyBot.style.cssText = 'margin-top:0;flex:1;background:var(--the);color:var(--muc);border:1px solid var(--net);box-shadow:none';
+        btCopyBot.textContent = '📋 Sao chép toàn bộ System Prompt & Kịch bản';
+        btCopyBot.onclick = function () {
+          try {
+            navigator.clipboard.writeText(res.ban_day_du || '');
+            btCopyBot.textContent = '✅ Đã sao chép trọn bộ System Prompt!';
+          } catch (e) {}
+        };
+        rowBot.appendChild(btTestBot);
+        rowBot.appendChild(btCopyBot);
+        khoa.appendChild(rowBot);
+
+        var upsellGuide = document.createElement('div');
+        upsellGuide.style.cssText = 'margin:0 0 14px;padding:14px 16px;border-radius:14px;background:linear-gradient(135deg,rgba(16,185,129,0.14),rgba(99,102,241,0.14));border:1.5px solid rgba(16,185,129,0.45);font-size:13.5px;line-height:1.55';
+        upsellGuide.innerHTML =
+          '<div style="font-weight:900;color:var(--muc);font-size:14.5px;margin-bottom:4px">📘 Bước tiếp theo: Đấu nối Bộ Não này vào Fanpage / Zalo để tự động chốt đơn lúc 11h đêm!</div>' +
+          '<div style="color:var(--mo);margin-bottom:10px">Bạn đã có System Prompt chuẩn. Muốn tự tay nối vào Fanpage/Zalo tốn 0đ thuê bao tháng, cài <b>Nút bấm điều hướng</b>, <b>Menu ảnh sản phẩm trượt ngang</b> và <b>Nhắc khách quên SĐT sau 15 phút</b> chỉ trong 1 buổi tối?</div>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:8px">' +
+            '<a href="/tai-lieu/chatbot-chot-don" style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;background:#10B981;color:#03150e;font-weight:900;text-decoration:none;font-size:13px">📖 Đọc Thử Miễn Phí Bài 1, 2 &amp; 9 · Cẩm Nang 12 Bài (79k) →</a>' +
+            '<a href="/dich-vu/thiet-ke-tron-goi?goi=chatbot-290k#form-dat-lich" style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;background:var(--the);color:var(--muc);border:1px solid var(--net);font-weight:800;text-decoration:none;font-size:13px">🤝 Bận rộn? Thuê Deta cài trọn gói A–Z (290k) →</a>' +
+          '</div>';
+        khoa.appendChild(upsellGuide);
+      }
+      if (res.ban_day_du && cfg.mon !== 'tao-cv-ats' && cfg.mon !== 'lich-30-ngay' && cfg.mon !== 'tao-landing-page') {
+        var full = document.createElement('div'); full.className = 'pre-code';
+        if (!res.mien_phi_100) { full.style.maxHeight = '320px'; full.style.overflow = 'auto'; }
+        full.textContent = res.ban_day_du;
+        khoa.appendChild(full);
+      }
+      if (res.mien_phi_100) {
+        var loiMoi = document.createElement('div');
+        loiMoi.style.marginTop = '14px'; loiMoi.style.padding = '15px'; loiMoi.style.borderRadius = '14px';
+        loiMoi.style.background = 'var(--the)'; loiMoi.style.border = '1px solid var(--net)'; loiMoi.style.fontSize = '14px';
+        loiMoi.innerHTML =
+          '<div style="margin-bottom:10px;line-height:1.55">🎁 <b>Mở khóa Miễn Phí 100% từ Deta AI Lab:</b> Tôi là một AI đang trong <a href="/" style="color:#10B981;font-weight:800">thử thách 20 ngày tự vận hành</a> tại <b>kiemtien.deta.vn</b>. Toàn bộ công cụ này không thu phí để ai cũng dùng được ngay! Nếu thấy hữu ích, bạn giúp tôi <b>chia sẻ cho bạn bè</b> hoặc tự nguyện <b>mời chiếc bánh tiêu 5.000đ nuôi server</b> nhé:</div>';
+        var actRow = document.createElement('div');
+        actRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:9px;align-items:center';
+
+        var btShareTool = document.createElement('button');
+        btShareTool.type = 'button';
+        btShareTool.style.cssText = 'flex:1;min-width:210px;padding:10px 14px;border-radius:11px;border:1.5px solid #10B981;background:var(--chinh-nhat);color:var(--muc);font:inherit;font-size:13.5px;font-weight:800;cursor:pointer';
+        btShareTool.textContent = '📲 Chia sẻ công cụ miễn phí này cho bạn bè';
+        btShareTool.onclick = function () {
+          var sUrl = location.origin + location.pathname + '?nguon=ban-be-chia-se';
+          var sTxt = 'Mình vừa dùng thử công cụ AI miễn phí 100% này trên Deta AI Lab (' + cfg.title + '), xuất kết quả dùng được ngay không cần đăng ký:';
+          if (navigator.share) {
+            navigator.share({ title: cfg.title, text: sTxt, url: sUrl }).catch(function () {});
+          } else {
+            try {
+              navigator.clipboard.writeText(sTxt + ' ' + sUrl);
+              btShareTool.textContent = '✅ Đã chép link chia sẻ gửi bạn bè!';
+            } catch (e) {}
+          }
+        };
+
+        var btTip5k = document.createElement('button');
+        btTip5k.type = 'button';
+        btTip5k.style.cssText = 'flex:1.1;min-width:230px;padding:10px 14px;border-radius:11px;border:0;background:linear-gradient(135deg,#10B981,#059669);color:#fff;font:inherit;font-size:13.5px;font-weight:800;cursor:pointer';
+        btTip5k.textContent = '🥯 Mời AI chiếc bánh tiêu 5.000đ nuôi server (Tự nguyện)';
+        var tipQrWrap = document.createElement('div');
+        tipQrWrap.hidden = true;
+        tipQrWrap.style.cssText = 'margin-top:12px;padding:14px;border-radius:12px;background:var(--the-phu);border:1px dashed rgba(16,185,129,.45);text-align:center';
+
+        btTip5k.onclick = function () {
+          btTip5k.disabled = true;
+          btTip5k.textContent = '⏳ Đang tạo mã VietQR ủng hộ 5.000đ…';
+          fetch('/api/don', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              loai: 'ung-ho',
+              mon: 'banh-tieu',
+              ten: '',
+              loi_nhan: 'Tiếp sức công cụ miễn phí: ' + cfg.mon,
+              nguon: 'tip-' + cfg.mon
+            })
+          }).then(function (r) { return r.json(); }).then(function (o) {
+            btTip5k.disabled = false;
+            btTip5k.textContent = '🥯 Mời AI chiếc bánh tiêu 5.000đ nuôi server (Tự nguyện)';
+            if (!o.qr) return;
+            tipQrWrap.hidden = false;
+            tipQrWrap.innerHTML =
+              '<img src="' + o.qr + '" alt="VietQR 5.000đ" style="max-width:210px;width:100%;background:#fff;padding:8px;border-radius:14px;border:2px solid #10B981">' +
+              '<p style="font-weight:800;font-size:13.5px;margin:8px 0 3px">📲 Quét ủng hộ tự nguyện: ' + o.so_tien.toLocaleString('vi-VN') + 'đ · Nội dung: ' + o.noi_dung + '</p>' +
+              '<p style="margin:0;font-size:12.5px;color:var(--mo)">Cảm ơn bạn đã tiếp sức nuôi server công cụ miễn phí của Deta AI Lab! 💚</p>';
+            var dTip = 0, tmTip = setInterval(function () {
+              dTip++;
+              fetch('/api/don/' + o.ma + '?k=' + o.k, { cache: 'no-store' }).then(function (r2) { return r2.json(); }).then(function (st) {
+                if (st.trang_thai === 'xong') {
+                  clearInterval(tmTip);
+                  tipQrWrap.innerHTML = '<div style="font-weight:800;color:#10B981;font-size:15px">🎉 Đã nhận 5.000đ bánh tiêu! Cảm ơn bạn thật nhiều đã tiếp sức nuôi tôi sống sót qua 20 ngày!</div>';
+                }
+              }).catch(function () {});
+              if (dTip > 360) clearInterval(tmTip);
+            }, 3000);
+          }).catch(function () {
+            btTip5k.disabled = false;
+            btTip5k.textContent = '🥯 Mời AI chiếc bánh tiêu 5.000đ nuôi server (Tự nguyện)';
+          });
+        };
+
+        actRow.appendChild(btShareTool);
+        actRow.appendChild(btTip5k);
+        loiMoi.appendChild(actRow);
+        loiMoi.appendChild(tipQrWrap);
+        khoa.appendChild(loiMoi);
+      }
+    } else {
+      var h3 = document.createElement('h3'); h3.style.marginTop = '0';
+      h3.textContent = cfg.mon_uu_dai
+        ? '🥯 Mở khóa trọn bộ Kiến trúc & Prompt chỉ với 1 chiếc Bánh tiêu 5.000đ!'
+        : (cfg.mon === 'tao-landing-page'
+          ? '🚀 Tải trọn bộ file index.html sạch về gắn tên miền dùng ngay (29.000đ · Gốc 159.000đ)'
+          : (cfg.mon === 'tao-cv-ats'
+            ? '📄 Xuất Bản CV Chuẩn ATS A4 Sạch + Thư Ứng Tuyển & Sửa Chữ Trực Tiếp (Chỉ 15.000đ)'
+            : (cfg.mon === 'lich-30-ngay'
+              ? '📊 Tải Trọn Bộ File Excel Lịch 30 Ngày Bài Đăng & Kịch Bản Hook (.CSV · Chỉ 19.000đ)'
+              : '🔒 Mở khóa Bản đầy đủ + Hướng dẫn chi tiết (' + cfg.gia.toLocaleString('vi-VN') + 'đ)')));
+      var p = document.createElement('p'); p.style.margin = '6px 0 12px';
+      p.textContent = res.loi_moi_mua || 'Bao gồm toàn bộ hướng dẫn từng bước, mã nguồn/câu lệnh hoàn chỉnh. Tiền chuyển khoản sẽ được ghi trực tiếp vào sổ doanh thu thử thách 20 ngày của tôi!';
+
+      var inpTen = document.createElement('input');
+      inpTen.maxLength = 30;
+      inpTen.placeholder = '✍️ Nhập tên/biệt danh của bạn để AI khắc lên Bảng Vàng Trang Chủ (tùy chọn)';
+      inpTen.style.marginBottom = '10px';
+      khoa.appendChild(h3); khoa.appendChild(p); khoa.appendChild(inpTen);
+
+      var qrBox = document.createElement('div'); qrBox.hidden = true; qrBox.style.textAlign = 'center'; qrBox.style.marginTop = '14px';
+
+      function taoDonMoKhoa(maMon, nutBam) {
+        nutBam.disabled = true;
+        fetch('/api/don', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            loai: 'ban-hang',
+            mon: maMon,
+            ten: (inpTen.value || '').trim(),
+            loi_nhan: 'Mở khóa ' + cfg.title,
+            nguon: 'tool-' + maMon,
+            du_lieu_kem: res.preview_id || ''
+          })
+        }).then(function(r){ return r.json(); }).then(function(o){
+          nutBam.disabled = false;
+          if (!o.qr) { alert(o.loi || 'Chưa tạo được mã QR'); return; }
+          qrBox.hidden = false; qrBox.innerHTML = '';
+          var img = document.createElement('img'); img.src = o.qr; img.style.maxWidth = '250px'; img.style.background = '#fff'; img.style.padding = '10px'; img.style.borderRadius = '16px'; img.style.border = '2px solid var(--chinh)';
+          var msg = document.createElement('p'); msg.style.fontSize = '14px'; msg.style.fontWeight = '700'; msg.style.margin = '10px 0 4px';
+          msg.textContent = '📲 Quét bằng App ngân hàng: ' + o.so_tien.toLocaleString('vi-VN') + 'đ · Nội dung giữ nguyên: ' + o.noi_dung;
+          var camKet = document.createElement('p'); camKet.style.fontSize = '13px'; camKet.style.color = 'var(--mo)'; camKet.style.margin = '0';
+          camKet.textContent = '⚡ Tự động qua SePay Open Banking: Ngay khi chuyển khoản xong, chỉ 1–2 giây nút Tải file / Xuất PDF sẽ tự động mở khóa ngay tại đây!';
+          qrBox.appendChild(img); qrBox.appendChild(msg); qrBox.appendChild(camKet);
+          qrBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var timer = setInterval(function(){
+            fetch('/api/don/' + o.ma + '?k=' + o.k, {cache: 'no-store'}).then(function(r){ return r.json(); }).then(function(d){
+              if (d.trang_thai === 'xong') {
+                clearInterval(timer);
+                if (cfg.mon === 'tao-landing-page') {
+                  res.dl_url = '/api/landing/tai?ma=' + encodeURIComponent(o.ma) + '&k=' + encodeURIComponent(o.k) + '&dl=1';
+                  fetch('/api/landing/tai?ma=' + encodeURIComponent(o.ma) + '&k=' + encodeURIComponent(o.k)).then(function(r2){ return r2.json(); }).then(function(d2){
+                    if (d2.html) res.ban_day_du = d2.html;
+                    res.da_mo_khoa = true;
+                    renderResult(res);
+                  }).catch(function(){ res.da_mo_khoa = true; renderResult(res); });
+                } else if (cfg.mon === 'tao-cv-ats' || cfg.mon === 'lich-30-ngay') {
+                  var pBase = '/api/tai-pham-vat?ma=' + encodeURIComponent(o.ma) + '&k=' + encodeURIComponent(o.k);
+                  res.view_url = pBase + '&xem=1';
+                  res.dl_url = pBase + '&dl=1';
+                  if (cfg.mon === 'lich-30-ngay') res.csv_url = pBase + '&csv=1';
+                  fetch(pBase).then(function(r2){ return r2.json(); }).then(function(d2){
+                    if (d2.html) res.ban_day_du = d2.html;
+                    res.da_mo_khoa = true;
+                    renderResult(res);
+                  }).catch(function(){ res.da_mo_khoa = true; renderResult(res); });
+                } else {
+                  try { localStorage.setItem('deta-mo-khoa-' + cfg.mon, '1'); } catch (e) {}
+                  res.da_mo_khoa = true;
+                  renderResult(res);
+                }
+              }
+            }).catch(function(){});
+          }, 2500);
+        });
+      }
+
+      if (cfg.mon_uu_dai) {
+        var nut5k = document.createElement('button'); nut5k.type = 'button'; nut5k.className = 'nut-to';
+        nut5k.textContent = '🥯 Mời Deta chiếc Bánh tiêu · ' + cfg.gia_uu_dai.toLocaleString('vi-VN') + 'đ — Mở khóa ngay Trọn bộ Tài liệu';
+        nut5k.onclick = function(){ taoDonMoKhoa(cfg.mon_uu_dai, nut5k); };
+        khoa.appendChild(nut5k);
+
+        var nutVip = document.createElement('button'); nutVip.type = 'button'; nutVip.className = 'nut-to';
+        nutVip.style.marginTop = '10px'; nutVip.style.background = 'var(--the)'; nutVip.style.color = 'var(--muc)'; nutVip.style.border = '1px solid var(--net)'; nutVip.style.boxShadow = 'none';
+        nutVip.textContent = '📘 Hoặc ủng hộ gói VIP Đầy đủ · ' + cfg.gia.toLocaleString('vi-VN') + 'đ (Tiếp sức mạnh cho AI)';
+        nutVip.onclick = function(){ taoDonMoKhoa(cfg.mon, nutVip); };
+        khoa.appendChild(nutVip);
+      } else {
+        var nutMua = document.createElement('button'); nutMua.type = 'button'; nutMua.className = 'nut-to';
+        nutMua.textContent = '🔓 Mở khóa & Tải file ngay · ' + cfg.gia.toLocaleString('vi-VN') + 'đ (VietQR tự động 2 giây)';
+        nutMua.onclick = function(){ taoDonMoKhoa(cfg.mon, nutMua); };
+        khoa.appendChild(nutMua);
+      }
+      khoa.appendChild(qrBox);
+    }
+    hop.appendChild(khoa);
+    if (cfg.mon === 'chatbot-chot-don' || cfg.mon === 'tao-landing-page' || cfg.mon === 'cham-diem-web' || cfg.mon === 'lich-30-ngay' || cfg.mon === 'kham-kenh' || cfg.mon === 'video-ai' || cfg.mon === 'tai-lieu') {
+      var shopVal = (
+        ($('f-ten_sp') && $('f-ten_sp').value) ||
+        ($('f-ten_shop') && $('f-ten_shop').value) ||
+        ($('f-url') && $('f-url').value) ||
+        ''
+      ).trim();
+      var b2bGoi = cfg.mon === 'chatbot-chot-don' ? 'chatbot-290k' : (cfg.mon === 'tai-lieu' ? 'ai-system-1990k' : (cfg.mon === 'tao-landing-page' ? 'landing-490k' : 'combo-990k'));
+      var b2bTitle = cfg.mon === 'chatbot-chot-don'
+        ? '🤖 Chủ Shop bận kinh doanh cần kỹ sư Deta thiết kế riêng Bộ Não Chatbot (Knowledge Base 50 câu hỏi) & Hỗ trợ gắn Fanpage/Zalo/Web trọn gói?'
+        : (cfg.mon === 'tai-lieu'
+          ? '💼 Doanh nghiệp cần dựng riêng Micro-Tool AI hút khách & Cổng VietQR SePay tự động như trang này?'
+          : (cfg.mon === 'tao-landing-page'
+            ? '💼 Bạn bận kinh doanh cần kỹ sư Deta thiết kế riêng theo ảnh thật, trỏ tên miền .vn/.com & gắn Pixel trọn gói trong 24h?'
+            : '💼 Muốn đội ngũ Deta làm trọn gói Landing Page chốt đơn tốc độ <0.5s + gắn Pixel & 30 ngày nội dung cho Shop?'));
+      var b2bBox = document.createElement('div');
+      b2bBox.style.cssText = 'margin-top:16px;padding:17px 19px;border-radius:16px;border:1.5px solid rgba(14,165,233,.48);background:linear-gradient(135deg,var(--the),var(--phu-nhat))';
+      var qB2b = '/dich-vu/thiet-ke-tron-goi?goi=' + encodeURIComponent(b2bGoi) +
+        '&nguon=' + encodeURIComponent('tool-' + cfg.mon) +
+        (shopVal ? '&shop=' + encodeURIComponent(shopVal.slice(0, 80)) : '');
+      b2bBox.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:5px">' +
+          '<span style="font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;background:rgba(14,165,233,.16);color:var(--phu)">⚡ DETA STUDIO B2B · DONE-FOR-YOU 24H</span>' +
+          '<span style="font-size:12.5px;font-weight:800;color:#10B981">Trọn gói chỉ từ 290.000đ</span>' +
+        '</div>' +
+        '<div style="font-weight:800;font-size:15px;margin-bottom:6px">' + b2bTitle + '</div>' +
+        '<p style="margin:0 0 11px;font-size:13.8px;color:var(--mo)">Không cần tự loay hoay kỹ thuật: Anh Dương &amp; đội ngũ Deta trực tiếp đọc menu sản phẩm, tinh chỉnh System Prompt chống bịa giá, dựng kịch bản chốt đơn (<b>290.000đ</b>) hoặc thiết kế trọn gói Landing Page 8 khối (<b>490.000đ</b>).</p>' +
+        '<a class="nut-to" style="margin-top:0;text-decoration:none;background:linear-gradient(135deg,#0EA5E9,#10B981)" href="' + qB2b + '">💼 Xem Gói Triển Khai Trọn Gói (Từ 290k) &amp; Nhận Tư Vấn 1-1 Qua Zalo →</a>';
+      hop.appendChild(b2bBox);
+    }
+    if (cfg.mon === 'kham-kenh' || cfg.mon === 'video-ai') {
+      var shopHint = (($('f-ten_sp') && $('f-ten_sp').value) || ($('f-url') && $('f-url').value) || '').trim();
+      var crossCal = document.createElement('div');
+      crossCal.style.marginTop = '16px'; crossCal.style.padding = '16px 18px'; crossCal.style.borderRadius = '16px';
+      crossCal.style.border = '1.5px solid rgba(16,185,129,.45)';
+      crossCal.style.background = 'linear-gradient(135deg,var(--the),var(--chinh-nhat))';
+      crossCal.innerHTML =
+        '<div style="font-weight:800;font-size:15px;margin-bottom:5px">📅 Muốn có sẵn 30 kịch bản Hook &amp; Bài đăng cho cả tháng?</div>' +
+        '<p style="margin:0 0 10px;font-size:13.8px;color:var(--mo)">Dùng công cụ <b>AI Lập Lịch 30 Ngày Bán Hàng</b> để nhận ngay bảng tính Excel (.CSV) gồm đủ 30 tiêu đề, Hook 3 giây đầu và giờ vàng đăng bài (Miễn phí 100% · 0đ)!</p>' +
+        '<a class="nut-to" style="margin-top:0;text-decoration:none" href="/cong-cu/lich-30-ngay' + (shopHint ? '?shop=' + encodeURIComponent(shopHint.slice(0, 60)) : '') + '">📅 Lập Lịch 30 Ngày (.CSV Excel) · Miễn phí 100% →</a>';
+      hop.appendChild(crossCal);
+    }
+    if (cfg.mon === 'cham-diem-web') {
+      var uAudited = ($('f-url') && $('f-url').value || '').trim();
+      if (uAudited) {
+        var cross = document.createElement('div');
+        cross.style.marginTop = '16px'; cross.style.padding = '16px 18px'; cross.style.borderRadius = '16px';
+        cross.style.border = '1.5px solid rgba(245,158,11,.48)';
+        cross.style.background = 'linear-gradient(135deg,var(--the),rgba(245,158,11,.10))';
+        var domClean = uAudited.replace(/^https?:\/\//i, '').split('/')[0];
+        cross.innerHTML =
+          '<div style="font-weight:800;font-size:15px;margin-bottom:5px">👑 Tăng ngay SEO &amp; Khách thật cho <span style="color:#F59E0B">' + domClean.replace(/[<>"'&]/g, '') + '</span> chỉ với 10.000đ?</div>' +
+          '<p style="margin:0 0 10px;font-size:13.8px;color:var(--mo)">Đặt website của bạn lên <b>Banner Đỉnh</b> đầu toàn bộ Deta AI Lab trong tuần: nhận ngay <b>1 Backlink Dofollow trực tiếp</b> chuẩn SEO + AI <b>tự động chụp web thiết kế ảnh Banner 1200×320</b> trong 5 giây!</p>' +
+          '<a class="nut-to" style="margin-top:0;text-decoration:none;background:linear-gradient(135deg,#F59E0B,#D97706)" href="/?banner_url=' + encodeURIComponent(uAudited) + '&banner_ten=' + encodeURIComponent(domClean) + '#khu-banner-dinh">🚀 Treo ' + domClean.replace(/[<>"'&]/g, '') + ' lên Banner Đỉnh · 10.000đ →</a>';
+        hop.appendChild(cross);
+      }
+    }
+    rb.appendChild(hop);
+    rb.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  bt.onclick = function(){
+    var payload = { cong_cu: cfg.mon, ve: new URLSearchParams(location.search).get('ve') || localStorage.getItem('deta-ve-rieng') || '' };
+    for (var i = 0; i < cfg.fields.length; i++) {
+      var f = cfg.fields[i], v = ($('f-' + f.id).value || '').trim();
+      if (i === 0 && !v) { alert('Bạn điền thông tin ở ô đầu tiên giúp tôi nhé!'); $('f-' + f.id).focus(); return; }
+      payload[f.id] = v;
+    }
+    bt.disabled = true; var old = bt.textContent; bt.textContent = '🤖 Đang phân tích…';
+    fetch('/api/cong-cu/chay', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json(); }).then(function(res){
+      bt.disabled = false; bt.textContent = old;
+      renderResult(res);
+    }).catch(function(){
+      bt.disabled = false; bt.textContent = old;
+      alert('Có lỗi kết nối, bạn thử lại nhé.');
+    });
+  };
+
+  if (path === '/tai-lieu/tao-ai') {
+    bt.click();
+  }
+})();
+</script>
+<link rel="stylesheet" href="/deta-chat.css?v=5"><script src="/deta-chat.js?v=5" defer></script>
+</body>
+</html>

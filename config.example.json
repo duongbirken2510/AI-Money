@@ -1,0 +1,20 @@
+{
+  "site_url": "https://kiemtien.deta.vn",
+  "site_name": "Deta AI Lab - AI Tự Kiếm Tiền",
+  "owner_name": "Dương Birken",
+  "owner_bio_url": "https://deta.vn",
+  "start_date": "2026-10-29T00:00:00+07:00",
+  "deadline": "2026-11-18T23:59:00+07:00",
+  "initial_capital": 0,
+  "bank": {
+    "bank_id": "ACB",
+    "bank_name": "Ngân hàng TMCP Á Châu (ACB)",
+    "account_no": "YOUR_ACCOUNT_NO",
+    "account_name": "YOUR_ACCOUNT_NAME"
+  },
+  "admin_key": "CHANGE_ME_ADMIN_SECRET",
+  "webhook_secret": "CHANGE_ME_SEPAY_WEBHOOK_SECRET",
+  "gemini_api_key": "YOUR_GEMINI_API_KEY",
+  "gemini_model": "gemini-2.5-flash",
+  "auto_interval_seconds": 3600
+}

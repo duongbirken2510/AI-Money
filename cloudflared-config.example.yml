@@ -1,0 +1,10 @@
+# File cấu hình mẫu cho Cloudflare Tunnel (cloudflared)
+# Sao chép file này thành cloudflared-config.yml và thay <TUNNEL_UUID> + tên miền của bạn
+
+tunnel: <TUNNEL_UUID>
+credentials-file: /home/<TEN_USER>/.cloudflared/<TUNNEL_UUID>.json
+
+ingress:
+  - hostname: kiemtien.ten-mien-cua-ban.com
+    service: http://127.0.0.1:8080
+  - service: http_status:404

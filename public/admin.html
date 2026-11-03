@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản trị Deta AI Lab · kiemtien.deta.vn</title>
+<script>(function(){var t;try{t=localStorage.getItem('kt-giao-dien')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--giay:#F3F7FB;--the:#FFFFFF;--muc:#0F172A;--mo:#475569;--net:rgba(15,23,42,.12);--xanh:#10B981;--cyan:#0EA5E9;--do:#EF4444;--bong:0 12px 28px -8px rgba(15,23,42,.08);color-scheme:light}
+:root[data-theme=dark]{--giay:#080E1A;--the:#11192A;--muc:#F1F5F9;--mo:#94A3B8;--net:rgba(148,163,184,.16);--xanh:#10B981;--cyan:#38BDF8;--do:#F87171;--bong:0 16px 36px -10px rgba(0,0,0,.55);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--giay);color:var(--muc);font:400 15.5px/1.6 "Be Vietnam Pro",system-ui,sans-serif}
+.khung{max-width:1040px;margin:0 auto;padding:26px 16px 64px}
+.hop{background:var(--the);border:1px solid var(--net);border-radius:18px;box-shadow:var(--bong);padding:18px 20px;margin-bottom:18px}
+h1{font-size:26px;font-weight:900;margin:12px 0 18px}
+h2{font-size:18.5px;font-weight:800;margin:0 0 10px}
+input,select{width:100%;font:inherit;padding:9px 12px;border:1px solid var(--net);border-radius:11px;background:var(--giay);color:var(--muc);margin-top:4px}
+label{display:block;font-weight:700;font-size:13.5px;margin-top:10px}
+.luoi-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:12px 0 16px}
+@media(max-width:780px){.luoi-2{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.kpi-grid{grid-template-columns:1fr}}
+.kpi-card{background:var(--giay);border:1px solid var(--net);border-radius:14px;padding:12px 14px}
+.kpi-card .k-lbl{font-size:12.5px;font-weight:700;color:var(--mo)}
+.kpi-card .k-num{font-size:26px;font-weight:900;line-height:1.2;margin:4px 0 2px;color:var(--muc)}
+.kpi-card .k-sub{font-size:12px;color:var(--mo)}
+.sub-card{background:var(--giay);border:1px solid var(--net);border-radius:14px;padding:14px}
+.sub-card h3{font-size:14.5px;font-weight:800;margin:0 0 10px}
+.bar-row{margin-bottom:9px}
+.bar-head{display:flex;justify-content:space-between;gap:8px;font-size:13px;margin-bottom:3px}
+.bar-track{height:8px;background:rgba(148,163,184,.18);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#10B981,#0EA5E9)}
+.day-chart{display:flex;align-items:flex-end;gap:8px;min-height:126px;padding:12px 10px 6px;background:var(--giay);border:1px solid var(--net);border-radius:14px;overflow-x:auto;margin-bottom:14px}
+.day-col{flex:1;min-width:54px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.day-val{font-size:11.5px;font-weight:800;color:var(--xanh)}
+.day-bar{width:100%;max-width:38px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#10B981,#0EA5E9);min-height:6px;transition:height .25s}
+.day-lbl{font-size:11.5px;color:var(--mo);font-weight:700;white-space:nowrap}
+.day-ev{font-size:10.5px;color:var(--cyan);white-space:nowrap}
+.pill-src{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:800;white-space:nowrap}
+.pill-fb{background:rgba(59,130,246,.18);color:#60A5FA}
+.pill-th{background:rgba(168,85,247,.18);color:#C084FC}
+.pill-gg{background:rgba(16,185,129,.18);color:#34D399}
+.pill-zl{background:rgba(14,165,233,.18);color:#38BDF8}
+.pill-dr{background:rgba(245,158,11,.18);color:#FBBF24}
+.nut{font:inherit;font-weight:800;font-size:14px;padding:9px 15px;border:none;border-radius:11px;background:linear-gradient(135deg,#10B981,#0EA5E9);color:#fff;cursor:pointer;margin-top:12px;margin-right:8px}
+.nut.phu{background:var(--giay);color:var(--muc);border:1px solid var(--net)}
+.nut.xanh{background:#10B981;color:#fff}
+.copy-row{display:flex;gap:8px;align-items:center;margin-top:6px}
+.copy-row input{margin-top:0;font-family:ui-monospace,monospace;font-size:13.5px}
+.copy-row .nut{margin:0;white-space:nowrap;padding:9px 13px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+th,td{border-bottom:1px solid var(--net);padding:9px 8px;text-align:left;vertical-align:top}
+th{color:var(--mo);font-weight:700;background:var(--giay)}
+code{background:var(--giay);padding:2px 6px;border-radius:6px;font-size:13px}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}
+.badge.ok{background:rgba(16,185,129,.16);color:#10B981}
+.badge.wait{background:rgba(56,189,248,.16);color:var(--cyan)}
+</style>
+</head>
+<body>
+<main class="khung">
+  <a href="/" style="font-weight:800;color:var(--cyan);text-decoration:none">← Về trang chủ Deta AI Lab (kiemtien.deta.vn)</a>
+  <h1>⚙️ Bảng điều khiển Deta AI Lab</h1>
+
+  <div class="hop">
+    <label style="margin-top:0">🔑 Mã quản trị (Admin Key)</label>
+    <div class="copy-row">
+      <input id="admin-key" type="password" value="" placeholder="Nhập mã quản trị (deta-...)">
+      <button class="nut" id="btn-load">Đăng nhập & Tải dữ liệu</button>
+    </div>
+  </div>
+
+  <div class="hop" id="traffic-hop">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
+      <h2 style="margin:0">📊 Bảng Đo Lường Nguồn Traffic & Hành Vi Khách Thật</h2>
+      <div style="display:flex;align-items:center;gap:8px">
+        <small id="tf-updated" style="color:var(--mo);font-weight:700"></small>
+        <button class="nut phu" type="button" id="btn-refresh-tf" style="margin:0;padding:6px 12px;font-size:13px">🔄 Làm mới</button>
+      </div>
+    </div>
+    <p style="margin:0 0 10px;color:var(--mo);font-size:13.5px">
+      Bóc tách tự động nguồn truy cập thực tế qua <b>UTM / ?nguon=</b>, <b>HTTP Referer</b> và <b>Chữ ký App di động (Facebook App, Threads App, Zalo, TikTok, Google SEO)</b> — đã tự động lọc bỏ bot chụp ảnh & localhost.
+    </p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="k-lbl">🟢 Đang xem trực tiếp</div>
+        <div class="k-num" id="tf-online" style="color:var(--xanh)">—</div>
+        <div class="k-sub">Hoạt động trong 90 giây qua</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-lbl">📅 Khách độc nhất hôm nay</div>
+        <div class="k-num" id="tf-today">—</div>
+        <div class="k-sub" id="tf-today-sub">So với hôm qua: —</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-lbl">👥 Tổng khách độc nhất</div>
+        <div class="k-num" id="tf-total">—</div>
+        <div class="k-sub" id="tf-pv-sub">Tổng lượt mở trang: —</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-lbl">⚡ Lượt chạy Công cụ AI</div>
+        <div class="k-num" id="tf-tools" style="color:var(--cyan)">—</div>
+        <div class="k-sub" id="tf-tools-sub">Hôm nay chạy: — lượt</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14.5px;margin:0 0 8px">📈 Biểu đồ Tăng trưởng Khách thật & Lượt dùng Công cụ theo Ngày</h3>
+    <div class="day-chart" id="tf-day-chart">
+      <div style="color:var(--mo);font-size:13px;padding:12px">Nhập Mã quản trị và bấm Tải dữ liệu để xem biểu đồ…</div>
+    </div>
+
+    <div class="luoi-2">
+      <div class="sub-card">
+        <h3>🌐 Traffic Đổ Về Từ Kênh Nào?</h3>
+        <div id="tf-channels"><small style="color:var(--mo)">Chưa tải dữ liệu…</small></div>
+        <div id="tf-devices" style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--net);font-size:13px;color:var(--mo)"></div>
+        <div id="tf-campaigns" style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--net)"></div>
+      </div>
+
+      <div class="sub-card">
+        <h3>🔥 Top Trang & Công Cụ Hút Traffic Nhất</h3>
+        <div id="tf-pages"><small style="color:var(--mo)">Chưa tải dữ liệu…</small></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;margin:16px 0 6px">📡 Luồng Khách Thật Vào Web Gần Nhất (Real-time Live Feed)</h3>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>Thời gian</th><th>Kênh nguồn</th><th>Chi tiết nguồn / App</th><th>Trang đang xem</th><th>Thiết bị</th></tr>
+        </thead>
+        <tbody id="tf-recent-body"><tr><td colspan="5" style="color:var(--mo)">Đang chờ dữ liệu lượt truy cập mới…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hop" style="border-color:rgba(245,158,11,.45)">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+      <h2 style="margin:0">💼 Danh sách Khách hàng Đăng ký Trọn Gói B2B (Done-For-You 24h)</h2>
+      <a href="/dich-vu/thiet-ke-tron-goi" target="_blank" style="color:#FCD34D;font-size:13.5px;font-weight:800;text-decoration:none">Xem trang B2B Live ↗</a>
+    </div>
+    <p style="margin:0 0 10px;color:var(--mo);font-size:13.5px">
+      Khách dùng 9 công cụ 0đ hoặc vào từ bài đăng MXH cần làm trọn gói (`490K` / `990K` / `1.990K`) sẽ đổ về đây kèm nút mở thẳng Zalo 1 chạm.
+    </p>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>Mã / Nguồn</th><th>Khách hàng &amp; Zalo 1 chạm</th><th>Gói quan tâm</th><th>Shop / Yêu cầu</th><th>Trạng thái</th></tr>
+        </thead>
+        <tbody id="b2b-leads-body"><tr><td colspan="5" style="color:var(--mo)">Đang tải danh sách khách hàng B2B…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hop" style="border-color:rgba(6,182,212,.45)">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+      <h2 style="margin:0">📌 Sổ Theo Dõi Bài Viết MXH &amp; Trực Bình Luận (Định kỳ 4h/lần)</h2>
+      <span id="tp-meta" style="color:var(--cyan);font-size:13px;font-weight:700">Chu kỳ: 02h · 06h · 10h · 14h · 18h · 22h</span>
+    </div>
+    <p style="margin:0 0 10px;color:var(--mo);font-size:13.5px">
+      Bài có tương tác tốt (<b>&ge; 2 bình luận</b> hoặc <b>&ge; 5 cảm xúc</b>) tự động gắn nhãn <b>⭐ Bài tốt</b> để ưu tiên kiểm tra trước. Bài sau <b>2 ngày (48h)</b> không có tương tác hoặc sau <b>3 ngày (72h)</b> ngừng tương tác mới sẽ tự động loại khỏi danh sách quét.
+    </p>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>Nhóm &amp; Bài viết</th><th>Phân loại / Trạng thái</th><th>Tương tác thật</th><th>Đăng lúc / Tương tác cuối</th><th>Điều khiển</th></tr>
+        </thead>
+        <tbody id="tracked-posts-body"><tr><td colspan="5" style="color:var(--mo)">Đang tải danh sách bài viết theo dõi…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hop">
+    <h2>🔗 Kết nối Tự động SePay / Casso (VietQR 24/7)</h2>
+    <p style="margin:0 0 8px;color:var(--mo);font-size:14px">
+      Hệ thống đã tương thích sẵn cả <b>Casso (Webhook V1 & V2 HMAC-SHA512)</b> lẫn <b>SePay (API Key / URL Secret)</b>. Anh chỉ cần dán đường dẫn dưới đây vào ô <b>Webhook URL</b> trên Casso hoặc SePay:
+    </p>
+    <label>1. Đường dẫn Webhook trọn gói (Khuyên dùng — đã gắn sẵn khóa bảo mật):</label>
+    <div class="copy-row">
+      <input id="wh-url-full" readonly value="" placeholder="Nhập Mã quản trị &amp; bấm Đăng nhập để hiển thị URL Webhook...">
+      <button class="nut phu" type="button" data-copy="wh-url-full">📋 Sao chép URL</button>
+    </div>
+    <label>2. Khóa Secret / API Key (nếu chọn kiểu xác thực API Key hoặc Secure-Token):</label>
+    <div class="copy-row">
+      <input id="wh-secret" readonly value="" placeholder="Nhập Mã quản trị &amp; bấm Đăng nhập để hiển thị khóa Secret...">
+      <button class="nut phu" type="button" data-copy="wh-secret">📋 Sao chép Key</button>
+    </div>
+    <div style="margin-top:12px">
+      <button class="nut phu" id="btn-test-wh" style="margin-top:0">🧪 Bấm gửi thử tín hiệu Webhook (Test Ping)</button>
+      <span id="wh-test-status" style="font-weight:700;font-size:14px"></span>
+    </div>
+
+    <h3 style="font-size:15px;margin:16px 0 6px">📡 Nhật ký tín hiệu Webhook từ SePay / Casso gần nhất</h3>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>Thời gian</th><th>Nguồn</th><th>Số tiền</th><th>Nội dung giao dịch</th><th>Kết quả xử lý</th></tr>
+        </thead>
+        <tbody id="wh-logs-body"><tr><td colspan="5">Chưa có tín hiệu Webhook nào.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hop">
+    <h2>🏦 Cấu hình Ngân hàng VietQR, Khóa Casso V2 & Gemini API</h2>
+    <div class="luoi-2">
+      <label>Mã ngân hàng (MB, TCB, VCB, ACB, BIDV...)
+        <input id="c-bank-id" placeholder="MB">
+      </label>
+      <label>Tên ngân hàng hiển thị
+        <input id="c-bank-name" placeholder="MBBank">
+      </label>
+      <label>Số tài khoản nhận tiền thật
+        <input id="c-acc-no" placeholder="Nhập số tài khoản...">
+      </label>
+      <label>Tên chủ tài khoản (không dấu)
+        <input id="c-acc-name" placeholder="NGUYEN VAN A">
+      </label>
+      <label>Casso Checksum Key phụ (tùy chọn nếu Casso V2 tự sinh key)
+        <input id="c-casso-key" placeholder="Để trống nếu đã dùng URL có ?secret=...">
+      </label>
+      <label>Gemini API Key (tùy chọn)
+        <input id="c-gemini" type="password" placeholder="AIza...">
+      </label>
+    </div>
+    <input id="c-owner" type="hidden">
+    <button class="nut" id="btn-save-cfg">💾 Lưu cấu hình</button>
+    <span id="cfg-status" style="font-weight:700"></span>
+  </div>
+
+  <div class="hop">
+    <h2>🤖 Điều khiển Vòng lặp AI Tự hành (2 giờ/lần)</h2>
+    <p style="margin:0 0 6px;color:var(--mo);font-size:14px">Đánh thức AI chạy ngay 1 lượt: đọc & trả lời gợi ý mới, thực thi 1 đầu việc trong Bảng việc và ghi nhật ký.</p>
+    <button class="nut" id="btn-run-turn">⚡ Đánh thức AI chạy 1 lượt ngay</button>
+    <span id="turn-status" style="font-weight:700"></span>
+  </div>
+
+  <div class="hop">
+    <h2>💰 Danh sách Đơn hàng & Đãi món (Tự động nhảy khi có tiền thật về TK)</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>Mã đơn</th><th>Loại / Món</th><th>Người gửi & Nguồn</th><th>Số tiền</th><th>Trạng thái</th><th>Thao tác</th></tr>
+        </thead>
+        <tbody id="orders-body"><tr><td colspan="6">Đang tải…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  try { var savedKey = localStorage.getItem('deta-admin-key'); if (savedKey) $('admin-key').value = savedKey; } catch(e){}
+  function key(){ var k = $('admin-key').value.trim(); if (k) { try { localStorage.setItem('deta-admin-key', k); } catch(e){} } return k; }
+
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.onclick = function(){
+      var inp = $(btn.getAttribute('data-copy'));
+      if (!inp) return;
+      navigator.clipboard.writeText(inp.value);
+      var old = btn.textContent;
+      btn.textContent = '✅ Đã chép!';
+      setTimeout(function(){ btn.textContent = old; }, 1800);
+    };
+  });
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+  function safeUrl(u){
+    var s = String(u == null ? '' : u).trim();
+    return /^https?:\/\//i.test(s) ? esc(s) : '';
+  }
+  function pillClass(kenh){
+    var k = String(kenh || '').toLowerCase();
+    if (k.indexOf('facebook') >= 0) return 'pill-src pill-fb';
+    if (k.indexOf('thread') >= 0) return 'pill-src pill-th';
+    if (k.indexOf('google') >= 0 || k.indexOf('tìm kiếm') >= 0) return 'pill-src pill-gg';
+    if (k.indexOf('zalo') >= 0 || k.indexOf('tiktok') >= 0) return 'pill-src pill-zl';
+    return 'pill-src pill-dr';
+  }
+  function renderTraffic(tf){
+    if (!tf) return;
+    var nowStr = new Date().toLocaleTimeString('vi-VN');
+    if ($('tf-updated')) $('tf-updated').textContent = 'Cập nhật: ' + nowStr;
+    $('tf-online').textContent = (+tf.dang_online || 0).toLocaleString('vi-VN') + ' người';
+    $('tf-today').textContent = (+tf.hom_nay_khach || 0).toLocaleString('vi-VN');
+    $('tf-today-sub').textContent = 'Hôm qua: ' + (+tf.hom_qua_khach || 0).toLocaleString('vi-VN') + ' · Mở trang nay: ' + (+tf.hom_nay_pv || 0).toLocaleString('vi-VN');
+    $('tf-total').textContent = (+tf.tong_khach || 0).toLocaleString('vi-VN');
+    $('tf-pv-sub').textContent = 'Lượt mở trang mới ghi: ' + (+tf.tong_pv || 0).toLocaleString('vi-VN');
+    $('tf-tools').textContent = (+tf.tong_chay_cong_cu || 0).toLocaleString('vi-VN');
+    $('tf-tools-sub').textContent = 'Hôm nay chạy AI: ' + (+tf.hom_nay_chay_cong_cu || 0).toLocaleString('vi-VN') + ' lượt';
+
+    // 1. Biểu đồ theo ngày
+    var days = tf.theo_ngay || [];
+    var dc = $('tf-day-chart');
+    if (!days.length) {
+      dc.innerHTML = '<div style="color:var(--mo);font-size:13px;padding:10px">Chưa có dữ liệu theo ngày.</div>';
+    } else {
+      var maxK = 1;
+      days.forEach(function(x){ if ((+x.khach || 0) > maxK) maxK = +x.khach; });
+      dc.innerHTML = days.map(function(x){
+        var kVal = +x.khach || 0;
+        var hPx = Math.max(8, Math.round((kVal / maxK) * 74));
+        var dShort = (x.ngay || '').slice(5).split('-').reverse().join('/');
+        return '<div class="day-col" title="Ngày ' + esc(x.ngay) + ': ' + kVal + ' khách · ' + (+x.luot_xem || 0) + ' lượt mở trang · ' + (+x.chay_cong_cu || 0) + ' lượt chạy AI">' +
+          '<span class="day-val">' + kVal + '</span>' +
+          '<div class="day-bar" style="height:' + hPx + 'px"></div>' +
+          '<span class="day-lbl">' + esc(dShort) + '</span>' +
+          '<span class="day-ev">⚡' + (+x.chay_cong_cu || 0) + ' AI</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    // 2. Kênh nguồn
+    var chBox = $('tf-channels');
+    var chs = tf.theo_kenh || [];
+    if (!chs.length) {
+      chBox.innerHTML = '<div style="font-size:13px;color:var(--mo);line-height:1.55">Bộ bóc tách nguồn kênh (Facebook App, Threads App, Zalo, Google SEO, Watermark…) vừa kích hoạt! <b>' + (+tf.khach_lich_su_chua_gan || 0).toLocaleString('vi-VN') + ' khách</b> trước đó chưa lưu header nguồn; ngay khi có khách mới vào web, tỷ lệ % từng kênh sẽ tự động nhảy tại đây.</div>';
+    } else {
+      var htmlCh = chs.map(function(c){
+        var pct = +c.ty_le || 0;
+        return '<div class="bar-row">' +
+          '<div class="bar-head"><span><span class="' + pillClass(c.kenh) + '">' + esc(c.kenh) + '</span></span><span><b>' + (+c.so_khach || 0) + ' khách</b> (' + pct + '% · ' + (+c.luot_xem || 0) + ' xem)</span></div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(4, pct) + '%"></div></div>' +
+        '</div>';
+      }).join('');
+      if (+tf.khach_lich_su_chua_gan > 0) {
+        htmlCh += '<div style="font-size:12px;color:var(--mo);margin-top:8px">ℹ️ Cộng thêm <b>' + (+tf.khach_lich_su_chua_gan).toLocaleString('vi-VN') + ' khách</b> từ Ngày 1–3 (trước khi gắn bộ đo chi tiết nguồn).</div>';
+      }
+      chBox.innerHTML = htmlCh;
+    }
+
+    // Thiết bị
+    var dv = tf.theo_thiet_bi || {};
+    var dvBox = $('tf-devices');
+    if ((+dv.mobile || 0) + (+dv.desktop || 0) > 0) {
+      dvBox.innerHTML = '📱 <b>Điện thoại (Mobile):</b> ' + dv.mobile + ' (' + dv.mobile_pct + '%) &nbsp;·&nbsp; 🖥️ <b>Máy tính (PC):</b> ' + dv.desktop + ' (' + dv.desktop_pct + '%)';
+    } else {
+      dvBox.innerHTML = '📱 Thiết bị (Mobile / PC): Đang thu thập từ lượt khách mới…';
+    }
+
+    // Chiến dịch / nguồn con
+    var cps = tf.top_chien_dich || [];
+    var cpBox = $('tf-campaigns');
+    if (cps.length) {
+      cpBox.innerHTML = '<div style="font-size:12.5px;font-weight:800;margin-bottom:5px">🎯 Chi tiết App / Link gắn mã (?nguon=):</div>' +
+        cps.slice(0, 6).map(function(x){
+          return '<div style="display:flex;justify-content:space-between;font-size:12.5px;padding:2px 0;color:var(--mo)"><span>• ' + esc(x.chi_tiet) + '</span><b style="color:var(--muc)">' + (+x.luot || 0) + ' lượt</b></div>';
+        }).join('');
+    } else {
+      cpBox.innerHTML = '';
+    }
+
+    // 3. Top trang & công cụ
+    var pgs = tf.top_trang || [];
+    var pgBox = $('tf-pages');
+    if (!pgs.length) {
+      pgBox.innerHTML = '<small style="color:var(--mo)">Chưa có dữ liệu trang.</small>';
+    } else {
+      var maxScore = 1;
+      pgs.forEach(function(p){ var s = (+p.luot_xem || 0) + (+p.luot_chay || 0); if (s > maxScore) maxScore = s; });
+      pgBox.innerHTML = pgs.slice(0, 10).map(function(p){
+        var sumAct = (+p.luot_xem || 0) + (+p.luot_chay || 0);
+        var wPct = Math.max(5, Math.round(sumAct * 100 / maxScore));
+        var statsParts = [];
+        if (+p.luot_xem > 0) statsParts.push('👁️ ' + p.luot_xem + ' xem');
+        if (+p.luot_chay > 0) statsParts.push('⚡ ' + p.luot_chay + ' chạy AI');
+        return '<div class="bar-row">' +
+          '<div class="bar-head"><a href="' + esc(p.trang) + '" target="_blank" style="color:var(--muc);text-decoration:none;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:65%">' + esc(p.ten) + '</a><span style="white-space:nowrap;font-size:12px;font-weight:700;color:var(--cyan)">' + statsParts.join(' · ') + '</span></div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + wPct + '%"></div></div>' +
+        '</div>';
+      }).join('');
+    }
+
+    // 4. Luồng khách gần nhất
+    var recBody = $('tf-recent-body');
+    var recs = tf.luot_gan_nhat || [];
+    if (!recs.length) {
+      recBody.innerHTML = '<tr><td colspan="5" style="color:var(--mo)">Chưa có lượt mở trang mới nào kể từ lúc bật Bảng đo (đã tự động ẩn lượt mở /admin & localhost).</td></tr>';
+    } else {
+      recBody.innerHTML = recs.map(function(r){
+        var tShort = (r.luc || '').replace('T', ' ').slice(5, 19);
+        return '<tr>' +
+          '<td style="white-space:nowrap"><small>' + esc(tShort) + '</small></td>' +
+          '<td><span class="' + pillClass(r.kenh) + '">' + esc(r.kenh) + '</span></td>' +
+          '<td><small>' + esc(r.chi_tiet || '—') + '</small></td>' +
+          '<td><code>' + esc(r.trang) + '</code></td>' +
+          '<td><small style="color:var(--mo)">' + esc(r.thiet_bi) + '</small></td>' +
+        '</tr>';
+      }).join('');
+    }
+  }
+
+  function load(){
+    if (!key()) { $('orders-body').innerHTML = '<tr><td colspan="6">Vui lòng nhập Mã quản trị ở ô trên rồi bấm Đăng nhập.</td></tr>'; return; }
+    fetch('/api/admin/state?key=' + encodeURIComponent(key()), {cache:'no-store'})
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.loi) { alert(d.loi); return; }
+        renderTraffic(d.traffic);
+
+        var b2bTb = $('b2b-leads-body');
+        if (b2bTb) {
+          var leads = d.b2b_leads || [];
+          if (!leads.length) {
+            b2bTb.innerHTML = '<tr><td colspan="5" style="color:var(--mo)">Chưa có khách để lại SĐT tư vấn B2B. Khi traffic 9 công cụ 0đ đổ về, leads sẽ hiện ngay tại đây!</td></tr>';
+          } else {
+            b2bTb.innerHTML = '';
+            leads.forEach(function(ld){
+              var digits = String(ld.lien_he || '').replace(/[^0-9]/g, '');
+              var zaloHref = digits.length >= 8 ? ('https://zalo.me/' + digits) : '';
+              var trL = document.createElement('tr');
+              trL.innerHTML =
+                '<td><b>#' + ld.id + '</b><br><small style="color:var(--mo)">' + esc((ld.tao_luc || '').replace('T', ' ').slice(0, 16)) + '</small><br><small style="color:var(--cyan)">' + esc(ld.nguon || '') + '</small></td>' +
+                '<td><b>' + esc(ld.ho_ten) + '</b><br>' +
+                  (zaloHref ? '<a href="' + zaloHref + '" target="_blank" style="color:#6EE7B7;font-weight:800">💬 Zalo: ' + esc(ld.lien_he) + ' ↗</a>' : '<b>' + esc(ld.lien_he) + '</b>') +
+                '</td>' +
+                '<td><span class="pill-src pill-fb">' + esc(ld.goi) + '</span></td>' +
+                '<td>' + (safeUrl(ld.link_hien_tai) ? '<a href="' + safeUrl(ld.link_hien_tai) + '" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);font-size:12.5px">' + esc(ld.link_hien_tai.slice(0, 42)) + ' ↗</a><br>' : '') +
+                  '<small>' + esc(ld.ghi_chu || '—') + '</small></td>' +
+                '<td></td>';
+              var sel = document.createElement('select');
+              sel.style.cssText = 'padding:5px 8px;border-radius:8px;background:#09101E;color:#fff;border:1px solid var(--net);font-size:12.5px';
+              [['moi','🟢 Mới'],['da-lien-he','💬 Đã nhắn Zalo'],['da-chot','✅ Đã chốt'],['huy','⚪ Đóng']].forEach(function(op){
+                var o = document.createElement('option'); o.value = op[0]; o.textContent = op[1];
+                if (ld.trang_thai === op[0]) o.selected = true;
+                sel.appendChild(o);
+              });
+              sel.onchange = function(){
+                fetch('/api/admin/b2b-status', {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify({key: key(), id: ld.id, trang_thai: sel.value})
+                });
+              };
+              trL.lastChild.appendChild(sel);
+              b2bTb.appendChild(trL);
+            });
+          }
+        }
+
+        var tpTb = $('tracked-posts-body');
+        if (tpTb) {
+          var tpInfo = d.tracked_posts || {};
+          var tpSum = tpInfo.summary || {};
+          var tpList = tpInfo.posts || [];
+          var lastScan = (tpInfo.last_scan_at || '').replace('T', ' ').slice(0, 16);
+          if ($('tp-meta')) {
+            $('tp-meta').textContent =
+              '🟢 Đang theo dõi: ' + (tpSum.active || 0) +
+              ' · ⭐ Bài tốt: ' + (tpSum.good || 0) +
+              ' · ⚪ Đã bỏ quét: ' + (tpSum.archived || 0) +
+              (lastScan ? (' · Quét gần nhất: ' + lastScan) : '');
+          }
+          if (!tpList.length) {
+            tpTb.innerHTML = '<tr><td colspan="5" style="color:var(--mo)">Đang đồng bộ danh sách bài viết từ các Group Facebook…</td></tr>';
+          } else {
+            tpTb.innerHTML = '';
+            tpList.forEach(function(p){
+              var isAct = p.status === 'active';
+              var badge = '';
+              if (!isAct) {
+                badge = '<span class="pill-src" style="background:rgba(148,163,184,.16);color:#94A3B8">⚪ Đã bỏ theo dõi</span>' +
+                        (p.ly_do_ngung ? '<br><small style="color:var(--mo)">' + esc(p.ly_do_ngung) + '</small>' : '');
+              } else if (p.pinned || p.is_good) {
+                badge = '<span class="pill-src" style="background:rgba(245,158,11,.22);color:#FCD34D">⭐ Bài tốt (Ưu tiên)</span>' +
+                        (p.pinned ? '<br><small style="color:#FDE68A">📌 Đang ghim giữ</small>' : '');
+              } else {
+                badge = '<span class="pill-src" style="background:rgba(16,185,129,.2);color:#6EE7B7">🟢 Đang theo dõi (4h/lần)</span>';
+              }
+              var trP = document.createElement('tr');
+              if (!isAct) trP.style.opacity = '0.62';
+              trP.innerHTML =
+                '<td><b>' + esc(p.group_name || p.group_key) + '</b><br>' +
+                  '<a href="' + safeUrl(p.post_url) + '" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);font-size:12.5px">Mở bài viết #' + esc(p.post_id) + ' ↗</a></td>' +
+                '<td>' + badge + '</td>' +
+                '<td>👍 Cảm xúc: <b>' + (p.reactions || 0) + '</b><br>💬 Khách bình luận: <b>' + (p.comments_khach || 0) + '</b><br>🤖 Bot đã trả lời: <b style="color:#6EE7B7">' + (p.replies_da_gui || 0) + '</b></td>' +
+                '<td><small style="color:var(--mo)">Đăng: ' + esc((p.posted_at || '').replace('T', ' ').slice(0, 16)) + '</small><br>' +
+                  '<small style="color:#E2E8F0">Tương tác cuối: ' + esc((p.last_interaction_at || '').replace('T', ' ').slice(0, 16)) + '</small><br>' +
+                  '<small style="color:var(--cyan)">Check: ' + esc((p.last_checked_at || 'Chưa quét').replace('T', ' ').slice(0, 16)) + '</small></td>' +
+                '<td style="white-space:nowrap"></td>';
+              var tdAct = trP.lastChild;
+              var btnPin = document.createElement('button');
+              btnPin.className = 'nut phu';
+              btnPin.style.cssText = 'padding:5px 9px;font-size:12px;margin:0 4px 4px 0';
+              btnPin.textContent = p.pinned ? '★ Bỏ ghim' : '⭐ Ghim bài tốt';
+              btnPin.onclick = function(){
+                fetch('/api/admin/tracked-post', {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify({key: key(), post_id: p.post_id, action: 'toggle_good'})
+                }).then(function(){ load(); });
+              };
+              tdAct.appendChild(btnPin);
+
+              var btnArc = document.createElement('button');
+              btnArc.className = 'nut phu';
+              btnArc.style.cssText = 'padding:5px 9px;font-size:12px;margin:0';
+              btnArc.textContent = isAct ? '⚪ Bỏ theo dõi' : '🔄 Theo dõi lại';
+              btnArc.onclick = function(){
+                fetch('/api/admin/tracked-post', {
+                  method: 'POST',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify({key: key(), post_id: p.post_id, action: isAct ? 'archive' : 'activate'})
+                }).then(function(){ load(); });
+              };
+              tdAct.appendChild(btnArc);
+              tpTb.appendChild(trP);
+            });
+          }
+        }
+        var c = d.config || {}, b = c.bank || {}, wi = d.webhook_info || {};
+        $('c-bank-id').value = b.bank_id || '';
+        $('c-bank-name').value = b.bank_name || '';
+        $('c-acc-no').value = b.account_no || '';
+        $('c-acc-name').value = b.account_name || '';
+        $('c-owner').value = c.owner_name || '';
+        $('c-casso-key').value = c.casso_checksum_key || '';
+        $('c-gemini').value = c.gemini_api_key || '';
+        if (wi.url_with_secret) $('wh-url-full').value = wi.url_with_secret;
+        if (wi.secret) $('wh-secret').value = wi.secret;
+
+        var wtb = $('wh-logs-body'); wtb.innerHTML = '';
+        var wlogs = d.webhook_logs || [];
+        if (!wlogs.length) {
+          wtb.innerHTML = '<tr><td colspan="5" style="color:var(--mo)">Chưa có tín hiệu nào. Hãy bấm "Gửi thử tín hiệu" hoặc bấm Test trên Casso/SePay!</td></tr>';
+        } else {
+          wlogs.forEach(function(w){
+            var tr = document.createElement('tr');
+            var okBadge = (w.ket_qua || '').indexOf('da-duyet') === 0 || w.ket_qua === 'ket-noi-ok';
+            tr.innerHTML = '<td><small>' + esc(w.luc || '') + '</small></td>' +
+              '<td><b>' + esc(w.nguon || '') + '</b></td>' +
+              '<td><b>' + (+w.so_tien || 0).toLocaleString('vi-VN') + 'đ</b></td>' +
+              '<td>' + esc(w.noi_dung || '') + '</td>' +
+              '<td><span class="badge ' + (okBadge ? 'ok' : 'wait') + '">' + esc(w.ket_qua || '') + '</span></td>';
+            wtb.appendChild(tr);
+          });
+        }
+
+        var tb = $('orders-body'); tb.innerHTML = '';
+        var ds = d.orders || [];
+        if (!ds.length) { tb.innerHTML = '<tr><td colspan="6">Chưa có đơn hàng nào.</td></tr>'; return; }
+        ds.forEach(function(o){
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td><b>' + esc(o.ma) + '</b><br><small style="color:var(--mo)">' + esc(o.luc) + '</small></td>' +
+            '<td><small>' + esc(o.loai) + '</small><br><b>' + esc(o.mon_ten) + '</b></td>' +
+            '<td><b>' + esc(o.ten || 'Ẩn danh') + '</b><br><small style="color:var(--mo)">Nguồn: ' + esc(o.nguon || 'web') + (o.loi_nhan ? ' · "' + esc(o.loi_nhan) + '"' : '') + '</small></td>' +
+            '<td><b>' + (+o.so_tien).toLocaleString('vi-VN') + 'đ</b></td>' +
+            '<td><span class="badge ' + (o.trang_thai === 'xong' ? 'ok' : 'wait') + '">' + (o.trang_thai === 'xong' ? '✅ Đã nhận tiền thật' : '⏳ Chưa chuyển khoản') + '</span></td>' +
+            '<td></td>';
+          if (o.trang_thai !== 'xong') {
+            var btn = document.createElement('button');
+            btn.className = 'nut xanh'; btn.style.margin = '0'; btn.style.padding = '5px 10px'; btn.style.fontSize = '12.5px';
+            btn.textContent = '✓ Xác nhận tiền thật';
+            btn.onclick = function(){
+              if (!confirm('Chỉ bấm xác nhận khi tiền thật (' + (+o.so_tien).toLocaleString('vi-VN') + 'đ) ĐÃ VÀO tài khoản ngân hàng nhé anh! Xác nhận mã ' + o.ma + '?')) return;
+              btn.disabled = true;
+              fetch('/api/admin/duyet-don', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ key: key(), ma: o.ma })
+              }).then(function(r){ return r.json(); }).then(function(){ load(); });
+            };
+            tr.lastChild.appendChild(btn);
+          }
+          tb.appendChild(tr);
+        });
+      });
+  }
+  $('btn-load').onclick = load;
+  if ($('btn-refresh-tf')) $('btn-refresh-tf').onclick = load;
+  setInterval(function(){ if (!document.hidden && key()) load(); }, 25000);
+  $('btn-test-wh').onclick = function(){
+    var u = $('wh-url-full').value;
+    $('wh-test-status').textContent = '⏳ Đang gửi thử...';
+    fetch(u, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({})
+    }).then(function(r){ return r.json(); }).then(function(d){
+      $('wh-test-status').textContent = d.success ? '✅ Kết nối Webhook thông suốt (HTTP 200)!' : ('❌ ' + (d.loi || 'Lỗi'));
+      load();
+    });
+  };
+  $('btn-save-cfg').onclick = function(){
+    fetch('/api/admin/config', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        key: key(),
+        bank_id: $('c-bank-id').value.trim(),
+        bank_name: $('c-bank-name').value.trim(),
+        account_no: $('c-acc-no').value.trim(),
+        account_name: $('c-acc-name').value.trim(),
+        owner_name: $('c-owner').value.trim(),
+        casso_checksum_key: $('c-casso-key').value.trim(),
+        gemini_api_key: $('c-gemini').value.trim()
+      })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      $('cfg-status').textContent = d.ok ? '✅ Đã lưu cấu hình!' : ('❌ ' + d.loi);
+      setTimeout(function(){ $('cfg-status').textContent = ''; }, 3000);
+    });
+  };
+  $('btn-run-turn').onclick = function(){
+    var b = this; b.disabled = true; $('turn-status').textContent = '⏳ AI đang suy nghĩ và thực thi việc mới…';
+    fetch('/api/admin/chay-luot', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ key: key() })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      b.disabled = false;
+      $('turn-status').textContent = d.ok ? ('✅ Xong lượt: ' + d.tom_tat) : ('❌ ' + d.loi);
+    });
+  };
+  load();
+})();
+</script>
+</body>
+</html>
