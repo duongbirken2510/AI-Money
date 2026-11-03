@@ -113,6 +113,23 @@ def ensure_bot_browser(headless: bool = False, open_login_tabs: bool = False) ->
     raise RuntimeError("Không khởi động được trình duyệt Bot trên cổng 9225.")
 
 
+def close_bot_browser() -> None:
+    """Đóng trình duyệt Bot Chrome (cổng 9225) sau khi hoàn tất phiên tự động để giải phóng 100% RAM (cookies vẫn lưu trong BOT_PROFILE_DIR)."""
+    if not is_bot_browser_running():
+        return
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{BOT_CDP_PORT}/json/version", timeout=2) as resp:
+            info = json.loads(resp.read().decode("utf-8"))
+            ws_path = "/" + info["webSocketDebuggerUrl"].split("://", 1)[1].split("/", 1)[1]
+        cdp = SimpleCDPClient("127.0.0.1", BOT_CDP_PORT, ws_path, timeout=5.0)
+        try:
+            cdp.call("Browser.close", {})
+        finally:
+            cdp.close()
+    except Exception:
+        pass
+
+
 def collect_live_stats() -> dict:
     with open(DU_LIEU_PATH, "r", encoding="utf-8") as f:
         d = json.load(f)
@@ -1189,6 +1206,30 @@ SPOTLIGHT_CAMPAIGNS = {
             "👉 Trải nghiệm Chùa online tại: https://kiemtien.deta.vn/chua-online?nguon=threads-chua-online"
         ),
     },
+    "github-opensource": {
+        "title": "Mã Nguồn Mở (Open Source) Dự Án AI-Money Trên GitHub",
+        "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-github-architecture.png"),
+        "facebook": (
+            "🎁 [Open Source - Ngày 6/20] Chính thức mở mã nguồn 100% dự án AI tự kiếm tiền (AI-Money) trên GitHub cho anh em tải về tự dựng trạm riêng! 🚀\n\n"
+            "Sau 6 ngày thả con AI tự vận hành trạm Deta AI Lab với sổ cái minh bạch thời gian thực (đã ghi nhận 93.686đ doanh thu chuyển khoản thật đầu tiên và khách vào gõ mõ, thả hoa đăng trên Chùa Online lúc nửa đêm), hôm nay mình đã rà soát bảo mật 3 vòng và đẩy trọn bộ source code lên GitHub:\n\n"
+            "⚡ Bên trong repo AI-Money có sẵn những gì?\n"
+            "1️⃣ Backend Python 3.12 thuần + SQLite WAL (0 phụ thuộc nặng), tích hợp sẵn luồng tạo mã VietQR & Webhook tự động nhảy sổ cái.\n"
+            "2️⃣ Trọn bộ 14 giao diện Web: Trạm điều hành Bento Sáng/Tối, 9+ công cụ AI miễn phí, Chuyên trang Thần Số Học Pythagoras, Chùa Online Liên Hoa Các (Web Audio + Hồ Sen đêm trăng) & Cẩm nang 12 bài Chatbot.\n"
+            "3️⃣ Thư mục .agents/skills gồm 3 bộ Skill thực chiến cho AI Agent (Thiết kế Landing Page chuyển đổi cao, Kiến trúc Chùa Việt & Runbook điều khiển Chrome CDP).\n"
+            "4️⃣ Tài liệu README hướng dẫn cầm tay chỉ việc 6 bước từ A-Z cho người mới: từ lúc git clone về máy đến lúc trỏ tên miền riêng qua Cloudflare Tunnel chạy 24/7 (không cần mở port modem).\n\n"
+            "📦 Tải mã nguồn & tặng repo 1 Star ⭐ tại GitHub:\n"
+            "👉 https://github.com/duongbirken2510/AI-Money\n"
+            "🌐 Trải nghiệm trực tiếp trạm Demo tại:\n"
+            "👉 https://kiemtien.deta.vn"
+        ),
+        "threads": (
+            "🎁 [Open Source - Ngày 6/20] Mình vừa mở mã nguồn 100% dự án AI tự kiếm tiền (AI-Money) lên GitHub! 🚀\n\n"
+            "⚡ Full-stack Python 3.12 thuần + SQLite + VietQR Webhook\n"
+            "🪷 Có sẵn 9+ Micro-Tools AI, Thần Số Học Pythagoras, Chùa Online Liên Hoa Các & 3 bộ AI Agent Skills (.agents/skills)\n"
+            "📘 Kèm hướng dẫn 6 bước từ git clone đến gắn tên miền qua Cloudflare Tunnel A-Z cho người mới!\n\n"
+            "📦 Repo GitHub (nhớ thả 1 Star ⭐ ủng hộ tụi mình nhé): https://github.com/duongbirken2510/AI-Money"
+        ),
+    },
 }
 
 
@@ -1741,6 +1782,7 @@ def main() -> None:
             record_diary_entry(f"Đăng bài giới thiệu chuyên đề [{camp['title']}] kèm ảnh trực quan lên {' & '.join(ok_channels)}.")
         elif not all(out["ket_qua"].get(c, {}).get("ok") for c in chans):
             out["ok"] = False
+        close_bot_browser()
         print(json.dumps(out, ensure_ascii=False, indent=2))
         sys.exit(0 if out["ok"] else 1)
 
@@ -1799,13 +1841,16 @@ def main() -> None:
             res = post_group_safe_with_image(k_try, publish=True)
             last_res = res
             if res.get("ok"):
+                close_bot_browser()
                 print(json.dumps(res, ensure_ascii=False, indent=2))
                 sys.exit(0)
+        close_bot_browser()
         print(json.dumps(last_res, ensure_ascii=False, indent=2))
         sys.exit(1)
 
     if args.post_group:
         res = post_group_safe_with_image(args.post_group.strip(), publish=args.publish)
+        close_bot_browser()
         print(json.dumps(res, ensure_ascii=False, indent=2))
         sys.exit(0 if res.get("ok") else 1)
 
@@ -1862,6 +1907,7 @@ def main() -> None:
             )
         elif not all(out["ket_qua"].get(c, {}).get("ok") for c in chans):
             out["ok"] = False
+        close_bot_browser()
         print(json.dumps(out, ensure_ascii=False, indent=2))
         sys.exit(0 if out["ok"] else 1)
 
