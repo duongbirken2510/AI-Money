@@ -552,102 +552,101 @@ GROUP_CAMPAIGNS = {
         ),
     },
     "deskaura-claude-vn": {
-        "name": "Claude VN (DeskAura)",
+        "name": "Claude VN (DeskAura v1.1)",
         "url": "https://www.facebook.com/groups/2403721346759140/",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "message": (
-            "🦀 [Open Source Tauri v2 + Rust — Chỉ 15MB RAM] Mình vừa viết xong DeskAura để giải quyết 4 nỗi ám ảnh lớn nhất của anh em ngồi code & làm việc cùng AI 10–12 tiếng/ngày!\n\n"
+            "🦀 [Open Source Tauri v2 + Rust — Chỉ 15MB RAM] Mình vừa cập nhật DeskAura v1.1 ('Làm việc sâu. Đôi mắt sáng. Cột sống êm') giải quyết trọn vẹn 4 nỗi ám ảnh lớn nhất của anh em ngồi code & làm việc cùng AI 10–12 tiếng/ngày!\n\n"
             "Chào anh em cộng đồng Claude VN 👋\n\n"
-            "Ngồi pair-programming với Claude/AI cả ngày, mình từng thử cài đủ loại app nhắc nghỉ ngơi và nghe nhạc trắng nhưng đều xóa sau 2 ngày vì 4 lý do cực kỳ ức chế:\n"
-            "❌ Đang vào mạch code sâu (Flow State) hoặc đang share màn hình họp thì popup nhảy đè lên mặt rất vô duyên.\n"
+            "Ngồi pair-programming với Claude/AI cả ngày, mình từng cài thử đủ loại app nhắc nghỉ ngơi và nghe nhạc nền nhưng đều xóa sau 2 ngày vì 4 lý do cực kỳ ức chế:\n"
+            "❌ Đang vào mạch gõ code sâu (Flow State) hoặc đang họp toàn màn hình thì popup nhảy đè lên mặt rất vô duyên.\n"
             "❌ Đang đeo tai nghe mở YouTube/Spotify hoặc Zing MP3 thì quảng cáo gào lên, hoặc tiếng chuông báo thức làm giật bắn mình.\n"
-            "❌ Tối về cổ tay tê buốt (hội chứng ống cổ tay RSI), cổ vai gáy cứng đờ và cả buổi chiều quên uống nổi 1 cốc nước.\n"
-            "❌ Cài 1 cái app nhắc nhở nhỏ xíu viết bằng Electron mà ngốn mất 600MB RAM!\n\n"
-            "Thế là mình tự viết luôn DeskAura v1.0 bằng Tauri v2 + Rust (bộ cài Windows chỉ 2.9MB, Mac .dmg 4.3MB, chạy ngầm dưới System Tray chỉ ~15MB RAM — nhẹ hơn 40 lần Electron) và mở mã nguồn tặng miễn phí 100% cho anh em:\n\n"
-            "✨ 1. WASAPI Audio Ducking + Zing MP3 Ad-Guard 3 lớp: Khi giọng AI nhắc nghỉ mắt vang lên, nhạc YouTube/Spotify tự động hạ mượt xuống 20% rồi nâng lại 100%. Tích hợp trình phát Zing MP3 chạy ngầm tự bỏ qua quảng cáo + 10 âm thanh Mưa/Suối/Chuông Tây Tạng 432Hz Offline.\n"
-            "✨ 2. Fullscreen & Idle Detection (IOHIDSystem / Win32): Đang họp Zoom toàn màn hình tự động hoãn nhắc; bạn tự đứng dậy rời ghế đi lấy nước là app tự biết để reset đồng hồ, không nhắc thừa!\n"
-            "✨ 3. Hướng dẫn giãn cổ tay chống RSI & cổ vai gáy 60fps: Có hình vẽ góc kéo +35° trực quan ngay trên màn hình.\n"
-            "✨ 4. Gộp nhắc uống nước (Combo Reminder) + Nuôi cây nở hoa 🌸: Bấm chuột phải ở System Tray cộng +200ml 1 chạm, chấm điểm Aura Score 7 ngày.\n\n"
-            "👉 Để không vướng bộ lọc link tự động của Group, mình in sẵn ĐỊA CHỈ TẢI MIỄN PHÍ (chữ vàng) và LINK GITHUB REPO (chữ xanh) ở ngay thanh dưới cùng của bức ảnh bên dưới. Anh em kéo về dùng thử và thả tặng repo 1 Star ⭐ trên GitHub nhé!"
+            "❌ 16h chiều hai mắt khô rát, cổ vai gáy cứng đờ, cổ tay tê buốt (hội chứng ống cổ tay RSI) và quên uống nước cả buổi.\n"
+            "❌ Cài 1 cái app nhắc nhở nhỏ xíu viết bằng Electron mà ngốn mất 600–750MB RAM!\n\n"
+            "Thế là mình tự viết luôn DeskAura v1.1 bằng Tauri v2 + Rust (bộ cài Windows .exe chỉ 2.9MB, Mac Apple Silicon .dmg 4.5MB, chạy ngầm dưới System Tray chỉ ~15MB RAM — nhẹ hơn 40 lần Electron) và mở mã nguồn tặng miễn phí 100% cho anh em:\n\n"
+            "✨ 1. Hai chế độ nhắc linh hoạt (Mới trên v1.1): Tùy chọn Bung màn hình hướng dẫn giãn cơ 60fps HOẶC 'Chỉ nháy nhẹ Icon Taskbar 🔔' kèm tiếng chuông chữa lành 528Hz & giọng nhắc AI để không bao giờ cắt ngang dòng code đang gõ dở! Đang họp/chiếu Fullscreen tự động lùi lịch nhắc.\n"
+            "✨ 2. Trung tâm Zing MP3 Chặn Quảng Cáo 3 Lớp + WASAPI Audio Ducking: Đóng cửa sổ (X) nhạc Zing MP3 vẫn phát ngầm, tự động bỏ qua quảng cáo âm thanh (Auto-Skip Ad). Khi giọng AI Việt/Anh nhắc nghỉ mắt vang lên, nhạc YouTube/Spotify tự hạ mượt xuống 20% rồi nâng lại 100%.\n"
+            "✨ 3. Tab Thống Kê Mebius 7 Ngày độc lập (Mới trên v1.1): Tách riêng biểu đồ Nước uống & Vận động 7 ngày, Nhịp Tập Trung Sâu (Deep Focus Flow quy đổi chu kỳ 🍅 Pomodoro) và Điểm Sức Khỏe Aura Index (80/100), giúp màn hình Tổng quan gọn trong 3 cột không cần cuộn.\n"
+            "✨ 4. Giãn cổ tay chống RSI (+35°/-35°) & Uống nước nuôi cây 🌸: Có hình vẽ dẫn nhịp 60s ngay tại ghế + bấm 1 chạm dưới System Tray (+200ml) để cây xanh nở hoa.\n\n"
+            "👉 Để không vướng bộ lọc link tự động của Group, mình in sẵn ĐỊA CHỈ TẢI MIỄN PHÍ v1.1 (chữ xanh lá) và LINK GITHUB REPO (chữ vàng) ở ngay thanh dưới cùng của bức ảnh bên dưới. Anh em kéo về dùng thử và thả tặng repo 1 Star ⭐ trên GitHub nhé!"
         ),
     },
     "deskaura-com-ai-lo": {
-        "name": "Cơm AI lo (DeskAura)",
+        "name": "Cơm AI lo (DeskAura v1.1)",
         "url": "https://www.facebook.com/groups/comailo/",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "message": (
-            "🌿 Cơm thì AI lo rồi, nhưng 16h chiều mắt nhòe đi, cổ tay tê buốt và cả ngày quên uống nước thì ai lo cho anh em? (Tặng miễn phí 100% app DeskAura cho Windows & Mac)\n\n"
+            "🌿 Cơm thì AI lo rồi, nhưng 16h chiều mắt nhòe đi, cổ tay tê buốt và cả ngày quên uống nước thì ai lo cho anh em? (Tặng miễn phí 100% bản cập nhật DeskAura v1.1 cho Windows & Mac)\n\n"
             "Chào đại gia đình Cơm AI lo 👋\n\n"
-            "Anh em ngồi máy tính cày việc 8–12 tiếng mỗi ngày chắc đều từng gặp cảnh: để cốc nước ngay cạnh bàn mà cuốn vào việc từ trưa đến tối quên uống một ngụm; chiều về hai mắt khô rát, cổ vai gáy cứng ngắc, còn đang nghe nhạc tập trung thì bị quảng cáo cắt ngang tụt hết cảm xúc!\n\n"
-            "Mình vừa đóng gói hoàn chỉnh ứng dụng bàn làm việc DeskAura (hoàn toàn miễn phí, không quảng cáo, không cần đăng nhập) giải quyết đúng những nỗi đau sát sườn nhất:\n\n"
-            "🧘 1. Không bao giờ làm phiền vô duyên: Tự nhận biết khi bạn đang họp/thuyết trình toàn màn hình để tự hoãn lời nhắc; tự biết khi bạn vừa rời ghế đi lại để reset bộ đếm.\n"
-            "🖐️ 2. Bài tập chống tê cổ tay (RSI) & mỏi cổ vai gáy 60 giây: Có hình vẽ hướng dẫn kéo nhẹ ngón tay (+35°), xoay bả vai và thư giãn mắt 20-20-20 cực kỳ dễ tập theo tại ghế.\n"
-            "🌱 3. Uống nước nuôi cây nở hoa: Tự động gộp lời nhắc uống nước vào giờ nghỉ đứng dậy. Mỗi lần bấm +200ml nước, chậu cây nhỏ trên bàn làm việc sẽ lớn lên và nở hoa.\n"
-            "🔊 4. Giọng nhắc tự dịu nhạc (Auto-Ducking) & Zing MP3 không quảng cáo: Đang mở nhạc YouTube/Spotify, nhạc sẽ tự nhỏ xuống 20% rất êm khi giọng nhắc vang lên. Có sẵn 10 tiếng mưa, suối rừng, chuông Tây Tạng Offline + nghe Zing MP3 chạy ngầm tự bỏ qua quảng cáo!\n\n"
-            "👉 Tránh bị bộ lọc Group chặn bài chứa link nên mình để sẵn ĐỊA CHỈ TẢI BẢN WINDOWS .EXE / MAC .DMG (màu vàng) và LINK GITHUB (màu xanh) ở thanh dưới cùng của bức ảnh bên dưới. Anh em tải về cài trong 5 giây (nhẹ chỉ 2.9MB) để bảo vệ sức khỏe ngay ca làm việc hôm nay nha!"
+            "Anh em ngồi máy tính cày việc 8–12 tiếng mỗi ngày chắc đều từng gặp cảnh: để cốc nước ngay cạnh bàn mà cuốn vào việc từ trưa đến tối quên uống một ngụm; chiều về hai mắt khô rát, cổ vai gáy cứng ngắc, còn đang nghe nhạc tập trung thì bị quảng cáo cắt ngang hoặc popup nhảy đè lúc đang gõ dở!\n\n"
+            "Mình vừa tung bản cập nhật DeskAura v1.1 ('Làm việc sâu. Đôi mắt sáng. Cột sống êm' — miễn phí 100%, không quảng cáo, không cần đăng nhập) giải quyết đúng những nỗi đau sát sườn nhất:\n\n"
+            "🔔 1. Hai chế độ nhắc tinh tế (Mới trên v1.1): Bạn có thể chọn Bung màn hình hướng dẫn bài tập giãn cơ, hoặc chọn 'Chỉ nháy nhẹ biểu tượng dưới thanh Taskbar' kèm giọng nhắc dịu dàng để không làm gián đoạn lúc đang gõ phím. Đang họp toàn màn hình app tự động im lặng!\n"
+            "🎶 2. Trung tâm Zing MP3 Không Quảng Cáo & Giọng nhắc tự dịu nhạc: Đặt ngay đầu trang Nhạc Nền — đóng cửa sổ nhạc vẫn chạy ngầm và tự động bỏ qua quảng cáo 3 lớp. Đặc biệt khi giọng AI nhắc nhở vang lên, tiếng nhạc YouTube/Spotify đang mở tự động nhỏ xuống 20% rồi êm ái trở lại.\n"
+            "📊 3. Tab Thống Kê Mebius 7 Ngày & Uống nước nuôi cây 🌸: Mỗi cú click +200ml nước giúp chậu cây nhỏ trên bàn làm việc đâm chồi nở hoa, đồng thời chấm Điểm Sức Khỏe Aura Index (0–100) suốt 7 ngày.\n"
+            "🖐️ 4. Bài tập giãn cổ tay chống RSI (+35°) & Nghỉ mắt 20-20-20: 5 bài tập có hình vẽ chuyển động 60fps dẫn nhịp từng bước ngay tại ghế.\n\n"
+            "👉 Tránh bị bộ lọc Group chặn bài chứa link nên mình để sẵn ĐỊA CHỈ TẢI BẢN WINDOWS .EXE / MAC .DMG v1.1 (chữ xanh lá) và LINK GITHUB (chữ vàng) ở thanh dưới cùng của bức ảnh bên dưới. Anh em tải về cài trong 5 giây (nhẹ chỉ 2.9MB) để bảo vệ sức khỏe ngay ca làm việc hôm nay nha!"
         ),
     },
     "deskaura-antigravity-vn": {
-        "name": "Antigravity VN (DeskAura)",
+        "name": "Antigravity VN (DeskAura v1.1)",
         "url": "https://www.facebook.com/groups/antigravityvn/",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "message": (
-            "🚀 [Showcase Open Source] Dùng Antigravity build DeskAura bằng Tauri v2 + Rust (chỉ 15MB RAM, nhẹ hơn 40 lần Electron): Cứu đôi mắt, cổ tay RSI & giữ mạch Deep Work cho anh em ngồi code!\n\n"
+            "🚀 [Release DeskAura v1.1 Open Source] Dùng Tauri v2 + Rust build trợ lý sức khỏe bàn làm việc chỉ ~15MB RAM (nhẹ hơn 40 lần Electron): Bổ sung Tab Thống Kê Mebius 7 ngày, Zing MP3 Ad-Guard đầu trang & Chế độ nhắc nhẹ Taskbar!\n\n"
             "Chào anh em Antigravity VN 🇻🇳\n\n"
-            "Ngồi vibe-coding trong Antigravity IDE cuốn tới mức quên chớp mắt, quên uống nước và gõ phím liên tục suốt 5–6 tiếng là chuyện quá quen thuộc với anh em mình. Hôm nay mình mở mã nguồn hoàn toàn (MIT License) kèm bộ cài sẵn cho cả Windows (.exe 2.9MB, có cả bản Portable) và macOS Apple Silicon (.dmg 4.3MB) của dự án DeskAura:\n\n"
-            "⚡ Những điểm kỹ thuật mình xử lý sâu trong bản v1.0:\n"
-            "• Windows Core Audio WASAPI Ducking: Can thiệp trực tiếp tầng âm thanh hệ thống — khi giọng AI nhắc nhở (Việt/Anh) phát lên, âm lượng YouTube/Spotify/Browser tự hạ mượt xuống 20% rồi trả về 100%, không bao giờ làm anh em giật mình đứt mạch suy nghĩ.\n"
-            "• Smart Audio Ad-Guard 3 lớp cho Zing MP3 + 10 lớp âm thanh Offline (Mưa hiên nhà, Suối rừng, Sóng não Alpha 10Hz / Theta 6Hz, Chuông Tây Tạng 432Hz) + 6 đài Radio Lofi quốc tế.\n"
-            "• Native Idle & Fullscreen Detection (Win32 + macOS IOHIDSystem): Tự biết khi anh em rời bàn phím đi pha cà phê để reset đồng hồ, và tự động im lặng khi đang họp/chiếu full màn hình.\n"
-            "• Hoạt ảnh 60fps hướng dẫn giãn cổ tay chống hội chứng ống cổ tay (RSI), xoay cổ vai gáy + Chậu cây uống nước chấm điểm Aura Score.\n\n"
-            "👉 Để vượt bộ lọc link của Facebook, mình in sẵn đường dẫn TẢI APP (màu vàng) và GITHUB REPO (màu xanh) ở ngay thanh dưới cùng của tấm ảnh bên dưới. Anh em kéo về dùng và thả tặng repo 1 Star ⭐ trên GitHub nhé!"
+            "Ngồi vibe-coding trong Antigravity IDE cuốn tới mức quên chớp mắt, quên uống nước và gõ phím liên tục suốt 5–6 tiếng là chuyện quá quen thuộc với anh em mình. Hôm nay mình chính thức phát hành bản DeskAura v1.1 (MIT License) kèm bộ cài sẵn cho cả Windows (.exe 2.9MB + bản Portable) và macOS Apple Silicon M1–M4 (.dmg 4.5MB):\n\n"
+            "⚡ Những nâng cấp kỹ thuật nổi bật trong bản v1.1:\n"
+            "• 2 Chế độ hiển thị lời nhắc (Overlay vs. Taskbar Icon): Cho phép chọn bung màn hình bài tập 60fps hoặc chỉ nháy nhẹ Icon dưới Taskbar/Khay hệ thống kèm chuông chữa lành 528Hz để không bao giờ cướp Focus cửa sổ IDE lúc đang gõ code.\n"
+            "• Tách riêng Tab 'Thống Kê Mebius 7 Ngày': Đưa bộ 3 biểu đồ Nước uống & Vận động 7 ngày, Nhịp Tập Trung Sâu (Deep Focus Flow quy đổi 🍅 Pomodoro) và Aura Index (0–100) sang tab riêng, giúp màn hình Tổng quan hiển thị trọn vẹn 3 cột trong 1 khung nhìn không cần cuộn.\n"
+            "• Trung tâm Zing MP3 Chặn Quảng Cáo 3 Lớp (Smart Audio Ad-Guard) + 10 lớp âm thanh & sóng não Alpha/Theta Offline + Windows Core Audio WASAPI Ducking (hạ nhạc YouTube/Spotify xuống 20% khi phát giọng AI Việt/Anh).\n"
+            "• Native Idle & Fullscreen Detection (Win32 + macOS IOHIDSystem): Tự biết khi anh em rời bàn phím để reset đồng hồ, và tự hoãn khi đang họp/chiếu full màn hình.\n\n"
+            "👉 Để vượt bộ lọc link của Facebook, mình in sẵn đường dẫn TẢI BẢN v1.1 (chữ xanh lá) và GITHUB REPO (chữ vàng) ở ngay thanh dưới cùng của tấm ảnh bên dưới. Anh em kéo về dùng và thả tặng repo 1 Star ⭐ trên GitHub nhé!"
         ),
     },
     "deskaura-vibe-code": {
-        "name": "Vibe Code kiếm cơm (DeskAura)",
+        "name": "Vibe Code kiếm cơm (DeskAura v1.1)",
         "url": "https://www.facebook.com/groups/1385451906420187/",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "message": (
-            "🎁 Tặng anh em hệ Vibe Code bộ vũ khí giữ sức khỏe & giữ độ tập trung 'DeskAura' (Bản cài 2.9MB nhẹ hơn 40 lần Electron + Full Source Tauri/Rust)!\n\n"
+            "🎁 Tặng anh em hệ Vibe Code bản cập nhật DeskAura v1.1: Làm việc sâu, đôi mắt sáng, cột sống êm (Bộ cài 2.9MB nhẹ hơn 40 lần Electron + Full Source Tauri/Rust)!\n\n"
             "Chào anh em Vibe Code kiếm cơm 👋\n\n"
-            "Anh em cày dự án kiếm cơm ngày 10–14 tiếng thường dính 3 'sát thủ thầm lặng': (1) Tê buốt cổ tay và cứng cổ vai gáy, (2) Khô rát mắt lúc chiều muộn, và (3) Đang nghe nhạc tập trung thì dính quảng cáo cắt ngang làm rớt luôn ý tưởng vừa nghĩ ra!\n\n"
-            "Mình vừa làm xong DeskAura để giải quyết trọn gói cho chính mình và tặng lại miễn phí 100% cho anh em:\n"
-            "🔥 1. Phòng thu Deep Work & Zing MP3 0 quảng cáo: Bật tiếng mưa rơi hiên nhà, lửa trại, sóng não Alpha 10Hz (chạy Offline 100% không cần mạng) hoặc nghe Zing MP3 chạy ngầm tự động bỏ qua quảng cáo âm thanh.\n"
-            "🔥 2. Giọng nhắc WASAPI Auto-Ducking cực êm: Nhạc đang mở tự dịu xuống 20% khi nhắc nghỉ mắt 20-20-20, không bao giờ làm giật mình.\n"
-            "🔥 3. Bài tập chống tê cổ tay (RSI) +35° & Uống nước nuôi cây 🌸: Gộp nhắc uống nước vào lúc đứng dậy, bấm 1 chạm dưới khay hệ thống là cây xanh nở hoa.\n"
-            "🔥 4. Siêu nhẹ (~15MB RAM): Viết bằng Tauri v2 + Rust, có cả bản cài đặt lẫn bản Portable chạy ngay cho Windows và bản .DMG cho MacBook!\n\n"
-            "👉 Mình không gắn link trong bài để tránh bị lọc tự động — anh em nhìn thanh dưới cùng của tấm ảnh bên dưới để lấy LINK TẢI MIỄN PHÍ (chữ vàng) và LINK GITHUB REPO (chữ xanh, nhớ thả giúp mình 1 Star ⭐ nhé)!"
+            "Anh em cày dự án kiếm cơm ngày 10–14 tiếng thường dính 3 'sát thủ thầm lặng': (1) Tê buốt ống cổ tay (RSI) và cứng cổ vai gáy, (2) Khô rát mắt lúc chiều muộn, và (3) Đang gõ code hoặc nghe nhạc tập trung thì bị popup / quảng cáo cắt ngang làm rớt luôn mạch suy nghĩ!\n\n"
+            "Mình vừa nâng cấp lên bản DeskAura v1.1 giải quyết trọn gói cho chính mình và tặng lại miễn phí 100% cho anh em:\n"
+            "🔥 1. Chế độ 'Chỉ nhắc ở Icon Taskbar' (Mới trên v1.1): Không bung cửa sổ cắt ngang lúc đang gõ phím — chỉ nháy nhẹ dưới Taskbar kèm chuông 528Hz & giọng AI dịu nhạc (WASAPI hạ nhạc YouTube/Spotify xuống 20%).\n"
+            "🔥 2. Trung tâm Zing MP3 Không Quảng Cáo & 10 âm thanh Offline: Đóng cửa sổ nhạc vẫn chạy ngầm và tự động bỏ qua quảng cáo 3 lớp; kết hợp tiếng mưa hiên nhà, suối rừng, sóng não Alpha 10Hz chạy Offline 100%.\n"
+            "🔥 3. Tab Thống Kê Mebius 7 Ngày (Mới trên v1.1): Theo dõi số chu kỳ tập trung sâu 🍅 Pomodoro, lượng nước uống và Điểm Sức Khỏe Aura Index (80/100).\n"
+            "🔥 4. Bài tập giãn cổ tay chống RSI (+35°) 60fps & Uống nước nuôi cây 🌸 trong ~15MB RAM (có sẵn bản Windows .exe, Portable và bản .DMG cho MacBook M1–M4).\n\n"
+            "👉 Mình không gắn link trong bài để tránh bị lọc tự động — anh em nhìn thanh dưới cùng của tấm ảnh bên dưới để lấy LINK TẢI MIỄN PHÍ v1.1 (chữ xanh lá) và LINK GITHUB REPO (chữ vàng, nhớ thả giúp mình 1 Star ⭐ nhé)!"
         ),
     },
     "deskaura-build-in-public": {
-        "name": "Build in Public VN (DeskAura)",
+        "name": "Build in Public VN (DeskAura v1.1)",
         "url": "https://www.facebook.com/groups/indiehackervn/",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "message": (
-            "[Build in Public] Tại sao mình bỏ hết các app nhắc nhở Electron ngốn 600MB RAM để tự viết DeskAura bằng Rust (15MB RAM) cứu đôi mắt & cột sống của chính mình?\n\n"
+            "[Build in Public — Release DeskAura v1.1] 'Làm việc sâu. Đôi mắt sáng. Cột sống êm' — Hành trình mình viết app Tauri v2 + Rust (15MB RAM) để tự cứu đôi mắt & cột sống khi làm việc 12h/ngày!\n\n"
             "Chào anh em Indie Hacker & Build in Public VN 👋\n\n"
-            "Vừa điều hành Stepwell Vietnam vừa tự tay code các sản phẩm AI mỗi ngày, có giai đoạn chiều nào mắt mình cũng nhòe đi, cổ tay phải tê cứng vì dùng chuột liên tục, còn cốc nước trên bàn thì nguội ngắt. Khi thử cài các app nhắc nghỉ ngơi có sẵn, mình nhận ra nỗi đau lớn nhất là: chúng làm đứt gãy sự tập trung (hiện đè lên màn hình lúc đang họp, báo thức giật mình, và ngốn hàng trăm MB RAM).\n\n"
-            "Vì vậy mình quyết định thiết kế DeskAura v1.0 theo triết lý 'Trợ lý vô hình, tôn trọng tuyệt đối mạch Flow của người làm việc':\n"
-            "🌱 1. Thông minh theo ngữ cảnh: Tự động phát hiện khi bạn đang họp toàn màn hình (Fullscreen Detection) để hoãn nhắc; tự nhận diện khi bạn rời ghế (Idle Detection) để tự đặt lại đồng hồ.\n"
-            "🔊 2. WASAPI Audio Ducking & Zing MP3 Ad-Guard: Giọng nhắc Việt/Anh vang lên thì nhạc YouTube/Spotify tự hạ xuống 20% rồi nâng lại mượt mà; tích hợp bộ trộn 10 âm thanh thiên nhiên/sóng não Offline và Zing MP3 tự bỏ qua quảng cáo.\n"
-            "🖐️ 3. Thực tế & Nhẹ nhàng: Bài tập kéo giãn cổ tay chống RSI (+35°), xoay cổ vai gáy 60s kết hợp nhắc uống nước nuôi cây chỉ trong 15MB RAM (Tauri v2 + Rust).\n\n"
-            "👉 Toàn bộ bộ cài Windows (.exe 2.9MB), macOS (.dmg 4.3MB) và mã nguồn mở đã sẵn sàng ở 2 địa chỉ dưới chân tấm ảnh bên dưới (mình không đặt link trong bài để tránh bộ lọc Group). Rất mong nhận được phản hồi và 1 Star ⭐ trên GitHub từ anh em!"
+            "Mình làm việc cường độ cao mỗi ngày với cả mảng lập trình AI lẫn điều hành Stepwell Vietnam. Có giai đoạn chiều nào mắt mình cũng nhòe đi, cổ tay phải tê cứng vì dùng chuột liên tục, còn cốc nước trên bàn thì nguội ngắt. Khi thử cài các app nhắc nghỉ ngơi có sẵn, mình nhận ra nỗi đau lớn nhất là: chúng làm đứt gãy sự tập trung (bung popup đè lên màn hình lúc đang gõ dở hoặc đang họp, báo thức giật mình, và ngốn 600MB RAM vì chạy Electron).\n\n"
+            "Hôm nay mình vừa ra mắt bản cập nhật DeskAura v1.1 theo triết lý 'Nhỏ gọn, dịu mắt, không làm phiền' và chia sẻ miễn phí 100% (MIT License):\n"
+            "🌱 1. Hai chế độ nhắc linh hoạt (Mới trên v1.1): Cho phép chọn giữa Bung màn hình hướng dẫn giãn cơ 60fps hoặc Chỉ nháy nhẹ biểu tượng dưới thanh Taskbar để không bao giờ làm gián đoạn lúc đang gõ phím. Tự hoãn khi đang họp Fullscreen.\n"
+            "📊 2. Tách riêng Tab Thống Kê Mebius 7 Ngày (Mới trên v1.1): Giữ trang Tổng quan tinh gọn đúng 3 cột trên 1 màn hình duy nhất, đồng thời có riêng tab phân tích Lượng nước, Nhịp Tập Trung Sâu (7 🍅 Pomodoro) và Điểm Sức Khỏe Aura Index (80/100).\n"
+            "🎶 3. Đưa Trung tâm Zing MP3 Chặn Quảng Cáo 3 Lớp lên đầu trang Nhạc Nền + 10 lớp âm thanh Offline + WASAPI Audio Ducking (tự dịu nhạc xuống 20% khi giọng AI Việt/Anh nhắc nhở).\n\n"
+            "👉 Toàn bộ bộ cài Windows (.exe 2.9MB / Portable), macOS Apple Silicon (.dmg 4.5MB) và mã nguồn mở đã sẵn sàng ở 2 địa chỉ dưới chân tấm ảnh bên dưới (mình không đặt link trong bài để tránh bộ lọc Group). Rất mong nhận được phản hồi và 1 Star ⭐ trên GitHub từ anh em!"
         ),
     },
     "deskaura-chatgpt-business": {
-        "name": "ChatGPT for Business (DeskAura)",
+        "name": "ChatGPT for Business (DeskAura v1.1)",
         "url": "https://www.facebook.com/groups/5749905918365041/",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "message": (
-            "🎁 [Quà tặng Dân Văn Phòng & Quản Lý] Giải pháp chống mỏi rát mắt, đau cứng cổ vai gáy, tê cổ tay & mất tập trung khi ngồi máy tính 8–10 tiếng/ngày (Miễn phí 100% cho Windows & MacBook)!\n\n"
+            "🎁 [Quà tặng Dân Văn Phòng & Quản Lý — Bản v1.1 Mới Nhất] Làm việc sâu, đôi mắt sáng, cột sống êm: Trợ lý sức khỏe bàn làm việc & nhạc nền chữa lành miễn phí 100% cho Windows & MacBook!\n\n"
             "Chào anh chị em cộng đồng ChatGPT for Business 👋\n\n"
-            "Hầu hết dân văn phòng và người làm việc tríóc cường độ cao đều đối mặt với 4 vấn đề mỗi chiều: mắt khô mờ do quên chớp mắt, đau mỏi cổ vai gáy - tê cổ tay (hội chứng ống cổ tay RSI), mải làm việc quên uống nước, và bị tiếng ồn xung quanh hoặc quảng cáo nhạc làm phân tâm.\n\n"
-            "Hôm nay mình xin gửi tặng cả nhà ứng dụng bàn làm việc DeskAura (dùng miễn phí trọn đời, siêu nhẹ chỉ 2.9MB, không cần tài khoản):\n"
-            "✅ Thông minh không làm phiền lúc họp: Tự động nhận biết khi anh chị đang thuyết trình hoặc họp Zoom toàn màn hình để tạm hoãn lời nhắc.\n"
-            "✅ Hướng dẫn giãn cơ cổ tay, vai gáy 60 giây tại ghế: Có hình vẽ minh họa từng động tác kết hợp quy tắc nghỉ mắt 20-20-20.\n"
-            "✅ Nhắc uống nước nuôi cây xanh nở hoa trên màn hình & thống kê sức khỏe 7 ngày.\n"
-            "✅ Giọng nhắc tự dịu nhạc (Auto-Ducking) & Phòng thu nhạc nền tập trung: Tự giảm nhỏ nhạc đang phát khi nhắc nhở; tích hợp 10 âm thanh mưa, suối, nhạc thiền Offline và trình nghe Zing MP3 chạy ngầm tự động bỏ qua quảng cáo.\n\n"
-            "👉 Để bài viết không bị vướng bộ lọc link tự động của nhóm, anh chị em chỉ cần nhìn xuống thanh dưới cùng của bức ảnh bên dưới và gõ đúng địa chỉ màu vàng để tải về cho máy Windows hoặc MacBook nhé!"
+            "Hầu hết dân văn phòng và người làm việc trí óc cường độ cao đều đối mặt với 4 vấn đề mỗi chiều: mắt khô nhòe do nhìn màn hình liên tục, đau mỏi cổ vai gáy - tê cổ tay (hội chứng ống cổ tay RSI), mải làm việc quên uống nước, và bị thông báo/quảng cáo nhạc làm đứt mạch tập trung.\n\n"
+            "Hôm nay mình xin gửi tặng cả nhà bản cập nhật DeskAura v1.1 (dùng miễn phí trọn đời, bộ cài siêu nhẹ chỉ 2.9MB, không cần đăng nhập):\n"
+            "✅ Hai chế độ nhắc thông minh (Mới trên v1.1): Tùy chọn bung màn hình hướng dẫn 5 bài tập giãn cơ cổ - vai - cổ tay tại ghế, hoặc chỉ nháy nhẹ biểu tượng dưới thanh Taskbar để không làm phiền lúc đang gõ văn bản. Đang thuyết trình/họp toàn màn hình tự động tạm hoãn!\n"
+            "✅ Uống nước nuôi cây nở hoa 🌸 & Biểu đồ thống kê Mebius 7 ngày (Mới trên v1.1): Chấm Điểm Sức Khỏe Aura Index (0–100) và theo dõi thói quen uống nước, vận động suốt tuần.\n"
+            "✅ Zing MP3 Không Quảng Cáo & Giọng nhắc tự dịu nhạc (Auto-Ducking): Nghe nhạc chạy ngầm tự động bỏ qua quảng cáo âm thanh; khi giọng nhắc Việt/Anh vang lên, nhạc YouTube/Spotify tự nhỏ xuống 20% rồi êm ái trở lại.\n\n"
+            "👉 Để bài viết không bị vướng bộ lọc link tự động của nhóm, anh chị em chỉ cần nhìn xuống thanh dưới cùng của bức ảnh bên dưới và gõ đúng địa chỉ màu xanh lá để tải về cho máy Windows hoặc MacBook nhé!"
         ),
     },
     "tsh-113k": {
@@ -1330,28 +1329,26 @@ SPOTLIGHT_CAMPAIGNS = {
         ),
     },
     "deskaura": {
-        "title": "DeskAura · Trợ Lý Sức Khỏe Bàn Làm Việc & Nhạc Nền Chữa Lành (Windows & Mac + Open Source)",
+        "title": "DeskAura v1.1 · Trợ Lý Sức Khỏe Bàn Làm Việc & Nhạc Nền Chữa Lành (Windows & Mac + Open Source)",
         "image": os.path.join(BASE_DIR, "public", "mau-landing", "assets", "spotlight-deskaura.png"),
         "facebook": (
-            "🌿 [Ra mắt DeskAura v1.0 — Miễn phí 100% & Open Source] Giải cứu đôi mắt, cổ tay RSI, cột sống & giữ mạch Deep Work cho anh em ngồi máy tính 8–12 tiếng/ngày!\n\n"
-            "Vừa điều hành Stepwell Vietnam vừa ngồi lập trình AI mỗi ngày, mình từng thử cài đủ loại app nhắc nghỉ ngơi nhưng đều xóa vì 3 nỗi ức chế: (1) Đang họp hoặc đang tập trung sâu thì popup nhảy đè lên màn hình, (2) Đang nghe nhạc thì quảng cáo gào lên hoặc chuông báo làm giật mình, và (3) App viết bằng Electron ngốn tới 600MB RAM.\n\n"
-            "Thế là mình tự viết luôn DeskAura bằng Tauri v2 + Rust (bộ cài Windows .exe chỉ 2.9MB, Mac .dmg 4.3MB, chạy ngầm dưới System Tray chỉ ~15MB RAM — nhẹ hơn 40 lần Electron) và mở mã nguồn tặng miễn phí 100% cho mọi người:\n\n"
-            "🧘 1. Không làm phiền vô duyên (Fullscreen & Idle Detection): Tự biết bạn đang họp/thuyết trình toàn màn hình để hoãn nhắc; tự biết khi bạn rời ghế đi lấy nước để reset đồng hồ.\n"
-            "🖐️ 2. Giãn cổ tay chống RSI (+35°), xoay cổ vai gáy 60fps & Nghỉ mắt 20-20-20: Có hình vẽ dẫn nhịp trực quan ngay tại ghế.\n"
-            "🌱 3. Uống nước nuôi cây nở hoa 🌸: Gộp nhắc uống nước vào giờ đứng dậy, bấm chuột phải dưới System Tray cộng +200ml 1 chạm.\n"
-            "🔊 4. WASAPI Audio Ducking & Zing MP3 0 Quảng Cáo: Khi giọng AI Việt/Anh nhắc nhở, nhạc YouTube/Spotify tự hạ mượt xuống 20% rồi nâng lại 100%. Tích hợp 10 âm thanh Mưa/Suối/Chuông Tây Tạng 432Hz Offline + Zing MP3 chạy ngầm tự bỏ qua quảng cáo!\n\n"
-            "💻 Tải miễn phí cho Windows (.exe / Portable) & MacBook (.dmg) tại:\n"
+            "🌿 [Ra mắt DeskAura v1.1 — 'Làm việc sâu. Đôi mắt sáng. Cột sống êm'] Trợ lý sức khỏe bàn làm việc & nhạc nền chữa lành Miễn phí 100% + Open Source cho Windows & MacBook!\n\n"
+            "Mình làm việc cường độ cao mỗi ngày với cả mảng lập trình AI lẫn điều hành Stepwell Vietnam. Mình viết DeskAura bằng Tauri v2 + Rust (bộ cài chỉ 2.9MB, chạy ngầm ~15MB RAM — nhẹ hơn 40 lần Electron) để tự cứu lấy đôi mắt và cột sống của chính mình, và chia sẻ miễn phí 100% để bất kỳ ai ngồi máy tính cũng giữ được sức khỏe bền vững:\n\n"
+            "🔔 1. Hai chế độ nhắc linh hoạt (Mới trên v1.1): Tùy chọn Bung màn hình hướng dẫn giãn cơ 60fps HOẶC 'Chỉ nháy nhẹ biểu tượng dưới thanh Taskbar' kèm chuông 528Hz & giọng nhắc để không làm gián đoạn lúc đang gõ phím. Tự hoãn khi đang họp toàn màn hình!\n"
+            "📊 2. Tab Thống Kê Mebius 7 Ngày độc lập (Mới trên v1.1): Theo dõi trực quan lượng nước uống, số chu kỳ tập trung sâu (🍅 Pomodoro) và Điểm Sức Khỏe Aura Index (80/100) suốt tuần, giúp màn hình Tổng quan gọn gàng trong 3 cột không cần cuộn.\n"
+            "🎶 3. Trung tâm Zing MP3 Không Quảng Cáo & Giọng nhắc tự dịu nhạc (WASAPI Auto-Ducking): Nghe nhạc chạy ngầm tự động bỏ qua quảng cáo 3 lớp; khi giọng AI Việt/Anh nhắc nhở vang lên, tiếng nhạc YouTube/Spotify tự nhỏ xuống 20% rồi êm ái trở lại.\n"
+            "🖐️ 4. Giãn cổ tay chống RSI (+35°), nghỉ mắt 20-20-20 & Uống nước nuôi cây nở hoa 🌸 (+200ml 1-click từ System Tray).\n\n"
+            "💻 Tải miễn phí bản v1.1 cho Windows (.exe / Portable) & MacBook M1–M4 (.dmg) tại:\n"
             "👉 https://duongbirken.deta.vn/deskaura\n"
             "⭐ Mã nguồn mở trên GitHub (Tauri v2 + Rust — nhớ thả tặng mình 1 Star nhé!):\n"
             "👉 https://github.com/duongbirken2510/deskaura"
         ),
         "threads": (
-            "🌿 Ngồi code & làm việc 12 tiếng/ngày mỏi rát mắt, tê cổ tay RSI mà cài app nhắc nhở Electron thì ngốn 600MB RAM lại hay nhảy popup lúc đang họp!\n\n"
-            "Mình vừa tự viết DeskAura bằng Tauri v2 + Rust (chỉ 15MB RAM, bộ cài 2.9MB — Miễn phí 100% & Open Source cho Windows + Mac):\n"
-            "🖐️ Giãn cổ tay chống RSI (+35°), cổ vai gáy & Nghỉ mắt 20-20-20 (tự hoãn khi họp Zoom)\n"
-            "🌸 Uống nước nuôi cây nở hoa (+200ml 1-click System Tray)\n"
-            "🔊 WASAPI Auto-Ducking (nhạc tự dịu xuống 20% khi giọng AI nhắc) + Zing MP3 chạy ngầm 0 quảng cáo & 10 âm thanh mưa/suối Offline!\n\n"
-            "💻 Tải miễn phí: https://duongbirken.deta.vn/deskaura\n"
+            "🌿 Mình vừa tung bản cập nhật DeskAura v1.1 ('Làm việc sâu. Đôi mắt sáng. Cột sống êm') — viết bằng Tauri v2 + Rust chỉ ~15MB RAM (bộ cài 2.9MB, Miễn phí 100% & Open Source cho Windows + Mac):\n\n"
+            "🔔 2 chế độ nhắc mới: Bung bài tập giãn cơ cổ tay RSI (+35°) HOẶC chỉ nháy nhẹ Icon Taskbar để không đứt mạch gõ code\n"
+            "📊 Tab Thống Kê Mebius 7 Ngày độc lập (Aura Index 80/100 + chu kỳ 🍅 Deep Focus)\n"
+            "🎶 Trung tâm Zing MP3 chạy ngầm 0 quảng cáo + WASAPI tự dịu nhạc xuống 20% khi giọng AI nhắc!\n\n"
+            "💻 Tải miễn phí v1.1: https://duongbirken.deta.vn/deskaura\n"
             "⭐ GitHub (thả 1 Star ủng hộ mình nhé): https://github.com/duongbirken2510/deskaura"
         ),
     },
