@@ -2191,12 +2191,23 @@ class DetaHandler(BaseHTTPRequestHandler):
         self._is_head = True
         self.do_GET()
 
+    def do_OPTIONS(self) -> None:
+        self.send_response(204)
+        self._send_security_headers()
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+
     def _send_security_headers(self) -> None:
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "SAMEORIGIN")
         self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
         self.send_header("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()")
         self.send_header("Cross-Origin-Opener-Policy", "same-origin-allow-popups")
+        origin = (self.headers.get("Origin") or "").strip()
+        if origin in ("https://duongbirken.deta.vn", "https://kiemtien.deta.vn") or origin.startswith("http://localhost:"):
+            self.send_header("Access-Control-Allow-Origin", origin)
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
     def send_json(self, data: dict, status: int = 200) -> None:
         raw = json.dumps(data, ensure_ascii=False).encode("utf-8")
@@ -3547,6 +3558,24 @@ class DetaHandler(BaseHTTPRequestHandler):
                         approved.append(auto_ma)
 
                 ket_qua = f"da-duyet:{','.join(matched_here)}" if matched_here else "khong-khop-ma-deta"
+                if not matched_here and re.search(r"(AURA|DB)[0-9A-Z]{4,10}", upper_compact):
+                    try:
+                        wh_sec = (cfg.get("webhook_secret") or "").strip()
+                        fwd_url = f"https://duongbirken.deta.vn/api/sepay/webhook?secret={urllib.parse.quote(wh_sec)}"
+                        fwd_req = urllib.request.Request(
+                            fwd_url,
+                            data=(raw_body or json.dumps(body)).encode("utf-8"),
+                            headers={
+                                "Content-Type": "application/json; charset=utf-8",
+                                "Authorization": f"Apikey {wh_sec}",
+                                "User-Agent": "DetaAI-Webhook-Bridge/1.0",
+                            },
+                            method="POST",
+                        )
+                        urllib.request.urlopen(fwd_req, timeout=6).read()
+                        ket_qua = "da-chuyen-tiep:duongbirken.deta.vn"
+                    except Exception:
+                        ket_qua = "loi-chuyen-tiep:duongbirken.deta.vn"
                 with DB_LOCK:
                     conn = sqlite3.connect(DB_PATH)
                     conn.execute(
